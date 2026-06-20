@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>HerSkill · 全场景AI陪伴系统</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    /* Yooni 配色体系 */
+    --cool-gray: #99A0AC;
+    --cool-gray-light: #B8BFC9;
+    --cool-gray-soft: #D4D8DE;
+    --shiraz: #431C1E;
+    --shiraz-deep: #2E1215;
+    --shiraz-soft: #6B3A3E;
+    --pink: #D6D1C9;
+    --pink-light: #E8E4DC;
+    --pink-warm: #CEC7BC;
+
+    /* 背景色 */
+    --cream: #F3F1EE;
+    --cream-warm: #EBE8E3;
+    --cream-pure: #FAF9F7;
+
+    /* 文字色 */
+    --text: #2C2826;
+    --text-soft: #5A5550;
+    --text-muted: #89857E;
+    --text-faint: #B5B2AA;
+
+    /* 功能色 */
+    --accent: var(--cool-gray);
+    --line: #DDD8D0;
+    --line-soft: #E8E4DD;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Serif SC', serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 2;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: linear-gradient(165deg, var(--cream-pure) 0%, var(--cream-warm) 50%, #E8EAEC 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 12%;
+    left: 8%;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--cool-gray-soft);
+    opacity: 0.45;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    right: 10%;
+    width: 56px;
+    height: 56px;
+    background: var(--pink-light);
+    opacity: 0.5;
+  }
+
+  .hero .brand-mark {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    font-weight: 400;
+  }
+
+  .hero h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 14px;
+    margin-bottom: 18px;
+    z-index: 1;
+    padding-left: 14px;
+  }
+
+  .hero .subtitle {
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    letter-spacing: 5px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .hero .slogan-main {
+    font-size: 1.6rem;
+    color: var(--text);
+    font-weight: 500;
+    letter-spacing: 8px;
+    padding-left: 8px;
+    margin-bottom: 10px;
+  }
+
+  .hero .slogan-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    font-weight: 400;
+    line-height: 2.4;
+    margin-bottom: 48px;
+  }
+
+  .hero .price-tag {
+    padding: 18px 44px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.55);
+  }
+
+  .hero .price-tag .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    font-weight: 400;
+  }
+
+  .hero .price-tag .price {
+    font-size: 1.8rem;
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+
+  /* ===== Section通用 ===== */
+  .section {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 96px 24px;
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 22px;
+    letter-spacing: 8px;
+    font-weight: 600;
+    padding-left: 8px;
+  }
+
+  .section-desc {
+    text-align: center;
+    color: var(--text-soft);
+    font-size: 0.92rem;
+    margin-bottom: 60px;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    line-height: 2.4;
+  }
+
+  .divider {
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 48px;
+    opacity: 0.5;
+  }
+
+  /* ===== 几何图标 ===== */
+  .geo-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; vertical-align: middle; }
+
+  /* ===== 两大支柱 ===== */
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  .pillar {
+    background: var(--cream-pure);
+    padding: 48px 36px;
+    position: relative;
+    border: 1px solid var(--line-soft);
+  }
+
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .pillar.work::before { background: var(--cool-gray); }
+  .pillar.energy::before { background: var(--shiraz); }
+
+  .pillar-num {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+
+  .pillar h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: 3px;
+  }
+
+  .pillar .pillar-quote {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 30px;
+    padding-left: 16px;
+    border-left: 2px solid var(--cool-gray);
+    font-style: normal;
+    line-height: 2.2;
+  }
+
+  .pillar.energy .pillar-quote {
+    border-left-color: var(--shiraz-soft);
+  }
+
+  .pillar ul { list-style: none; }
+
+  .pillar li {
+    padding: 10px 0;
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--line-soft);
+    line-height: 2;
+  }
+
+  .pillar li:last-child { border-bottom: none; }
+
+  .pillar li .tag {
+    display: inline-block;
+    font-size: 0.66rem;
+    padding: 2px 10px;
+    margin-left: 8px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+  }
+
+  .tag-custom { background: var(--cool-gray-light); color: #5A6068; }
+  .tag-standard { background: var(--pink-light); color: #7A7068; }
+
+  .pillar-note {
+    margin-top: 20px;
+    padding: 16px 18px;
+    background: var(--cream);
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    line-height: 2.2;
+    border-left: 2px solid var(--cool-gray);
+  }
+
+  /* ===== 名人养生对标 ===== */
+  .celebs-section {
+    background: linear-gradient(to bottom, var(--cream) 0%, var(--cream-warm) 100%);
+    padding: 96px 24px;
+  }
+
+  .celebs-section .section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .celebs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+  }
+
+  .celeb-card {
+    background: var(--cream-pure);
+    border: 1px solid var(--line-soft);
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    position: relative;
+  }
+
+  .celeb-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(153,160,172,0.1);
+  }
+
+  .celeb-header {
+    padding: 26px 20px 22px;
+    text-align: center;
+    color: var(--cream-pure);
+    position: relative;
+  }
+
+  .celeb-header h4 {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+    font-weight: 600;
+    letter-spacing: 3px;
+  }
+
+  .celeb-header .heat {
+    font-size: 0.7rem;
+    opacity: 0.88;
+    letter-spacing: 1.5px;
+    font-weight: 300;
+  }
+
+  .celeb-body { padding: 20px 22px; }
+
+  .celeb-body .style-label {
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+
+  .celeb-body .desc {
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    line-height: 2;
+  }
+
+  /* ===== 七脉轮皂 ===== */
+  .chakras-section {
+    background: var(--cream-pure);
+    padding: 96px 24px;
+  }
+
+  .chakras-section .section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .chakras {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+  }
+
+  .chakra-card {
+    background: var(--cream);
+    padding: 28px 20px 24px;
+    text-align: center;
+    border: 1px solid var(--line-soft);
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .chakra-card:hover { transform: translateY(-2px); }
+
+  .chakra-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  /* 七脉轮色条 */
+  .chakra-1::before { background: #8B6E4E; }
+  .chakra-2::before { background: #C4886E; }
+  .chakra-3::before { background: #D4A862; }
+  .chakra-4::before { background: var(--cool-gray); }
+  .chakra-5::before { background: #7A9EB8; }
+  .chakra-6::before { background: #8A7CA8; }
+  .chakra-7::before { background: var(--shiraz-soft); }
+
+  .chakra-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+  }
+
+  .chakra-card h5 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+
+  .chakra-card .position {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  .chakra-card .oil {
+    font-size: 0.76rem;
+    color: var(--text-soft);
+    line-height: 2;
+  }
+
+  /* ===== 一天时间线（核心新模块）===== */
+  .day-section {
+    background: var(--cream-warm);
+    padding: 96px 24px;
+  }
+
+  .day-section .section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .day-intro {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .day-intro p {
+    color: var(--text-soft);
+    font-size: 0.92rem;
+    line-height: 2.4;
+  }
+
+  .day-case {
+    background: var(--cream-pure);
+    border: 1px solid var(--line-soft);
+    margin-bottom: 52px;
+    overflow: hidden;
+  }
+
+  .day-case-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 32px 36px;
+    border-bottom: 1px solid var(--line-soft);
+    background: linear-gradient(to right, var(--cream), var(--cream-pure));
+  }
+
+  .day-avatar {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+
+  .day-case-header-info h4 {
+    font-size: 1.15rem;
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .day-case-header-info .meta {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* 时间线 */
+  .timeline {
+    padding: 8px 0;
+  }
+
+  .timeline-item {
+    display: flex;
+    padding: 24px 36px;
+    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+    transition: background 0.2s ease;
+  }
+
+  .timeline-item:hover {
+    background: rgba(153,160,172,0.04);
+  }
+
+  .timeline-item:last-child { border-bottom: none; }
+
+  .timeline-time {
+    width: 80px;
+    flex-shrink: 0;
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding-top: 2px;
+  }
+
+  .timeline-body {
+    flex: 1;
+  }
+
+  .timeline-body .event-title {
+    font-size: 0.92rem;
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .timeline-body .event-desc {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    line-height: 2;
+  }
+
+  .timeline-body .event-skill {
+    display: inline-block;
+    font-size: 0.66rem;
+    padding: 2px 10px;
+    margin-top: 8px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border-radius: 2px;
+  }
+
+  .skill-work { background: var(--cool-gray-light); color: #4A5058; }
+  .skill-energy { background: var(--pink-light); color: #6A6058; }
+  .skill-healing { background: rgba(67,28,30,0.08); color: var(--shiraz-soft); }
+
+  /* 时间段分隔标签 */
+  .timeline-period {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 36px 8px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .timeline-period .period-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line-soft);
+  }
+
+  /* 对比卡片 */
+  .day-summary {
+    margin: 0 36px 28px;
+    padding: 22px 24px;
+    background: var(--cream);
+    border-left: 3px solid var(--cool-gray);
+    display: flex;
+    gap: 32px;
+  }
+
+  .day-summary-col {
+    flex: 1;
+  }
+
+  .day-summary-col .label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .day-summary-col .value {
+    font-size: 0.84rem;
+    color: var(--text-soft);
+    line-height: 2;
+  }
+
+  .day-summary-col .value strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .day-disclaimer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px 28px;
+    background: var(--cream-pure);
+    border: 1px solid var(--line-soft);
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    line-height: 2.4;
+  }
+
+  .day-disclaimer strong { color: var(--text); }
+
+  /* ===== 定价 ===== */
+  .pricing-section {
+    background: var(--cream-pure);
+    padding: 96px 24px;
+  }
+
+  .pricing-section .section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .pricing {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  .price-card {
+    background: var(--cream);
+    padding: 40px 28px;
+    text-align: center;
+    border: 1px solid var(--line-soft);
+    position: relative;
+  }
+
+  .price-card.featured {
+    border: 2px solid var(--cool-gray);
+  }
+
+  .price-card.featured::before {
+    content: '核心产品';
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cool-gray);
+    color: #fff;
+    font-size: 0.66rem;
+    padding: 5px 18px;
+    letter-spacing: 3px;
+    font-weight: 500;
+  }
+
+  .price-card .price-name {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+  }
+
+  .price-card .price-amount {
+    font-size: 1.75rem;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+
+  .price-card .price-desc {
+    font-size: 0.76rem;
+    color: var(--text-soft);
+    line-height: 2.2;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    background: var(--shiraz-deep);
+    color: var(--cool-gray-light);
+    text-align: center;
+    padding: 56px 20px;
+  }
+
+  footer .footer-slogan {
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+    letter-spacing: 8px;
+    font-weight: 500;
+    padding-left: 8px;
+    color: #fff;
+  }
+
+  footer .footer-sub {
+    font-size: 0.8rem;
+    color: var(--cool-gray-soft);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  footer .footer-info {
+    font-size: 0.72rem;
+    opacity: 0.35;
+    letter-spacing: 1.5px;
+    font-weight: 300;
+  }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    .pillars, .pricing { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.6rem; letter-spacing: 10px; }
+    .hero .slogan-main { font-size: 1.25rem; letter-spacing: 5px; }
+    .section { padding: 64px 20px; }
+    .demo-section, .celebs-section, .chakras-section, .pricing-section, .day-section { padding: 64px 20px; }
+    .timeline-item { padding: 20px 20px; flex-direction: column; gap: 4px; }
+    .timeline-time { width: auto; }
+    .day-case-header { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .day-summary { flex-direction: column; gap: 16px; margin: 0 20px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<div class="hero">
+  <div class="brand-mark">HERSKILL</div>
+  <h1>HerSkill</h1>
+  <div class="subtitle">全场景AI陪伴系统 · 女性高管专属</div>
+
+  <div class="slogan-main">她的人生，有她自己的生活方式</div>
+  <div class="slogan-sub">一个懂你的系统，一种属于你的生活方式</div>
+
+  <div class="price-tag">
+    <div class="label">一次性买断 · 终身使用</div>
+    <div class="price">¥19,800</div>
+  </div>
+</div>
+
+<!-- ===== 产品是什么 ===== -->
+<div class="section">
+  <div class="section-label">ABOUT</div>
+  <div class="section-title">这是什么</div>
+  <div class="divider"></div>
+  <div class="section-desc">
+    HerSkill 不是一个工具，不是一门课程，而是为你量身定制的 AI 陪伴系统。<br>
+    它同时做两件事：让你的工作效能拉到最高，让你的身体和心灵被好好照顾。<br>
+    每一个 HerSkill 都是独一无二的——因为你的工作、你的身体、你的生活方式，和任何人都不一样。
+  </div>
+</div>
+
+<!-- ===== 两大支柱 ===== -->
+<div class="section" style="padding-top: 0;">
+  <div class="section-label">CORE VALUE</div>
+  <div class="section-title">两大价值支柱</div>
+  <div class="divider"></div>
+
+  <div class="pillars">
+    <div class="pillar work">
+      <div class="pillar-num">01 / 工作效能</div>
+      <h3>工作效能提升系统</h3>
+      <div class="pillar-quote">"不是让你做得更多，而是让你只做有价值的事"</div>
+      <ul>
+        <li>晨间信息雷达 — 每天6:30推送，3分钟读完 <span class="tag tag-standard">标准配置</span></li>
+        <li>高效工作方式 — 按你的工作流完全定制 <span class="tag tag-custom">完全定制</span></li>
+        <li>审批智能筛选 — 低价值审批自动处理 <span class="tag tag-custom">按需定制</span></li>
+        <li>项目风险预警 — 延期前7天提前预警 <span class="tag tag-custom">按需定制</span></li>
+        <li>内容创作 / 评估报告 / 品牌舆情… <span class="tag tag-custom">按需定制</span></li>
+      </ul>
+      <div class="pillar-note">
+        以上为示例。实际交付内容 100% 根据你的工作诊断结果定制——做内容的人和分析投资的人，她们的 Agent 完全不一样。
+      </div>
+    </div>
+
+    <div class="pillar energy">
+      <div class="pillar-num">02 / 能量成长</div>
+      <h3>能量成长与生活方式养成</h3>
+      <div class="pillar-quote">"选一个你欣赏的女性，过她那样的生活"</div>
+      <ul>
+        <li>名人养生对标 — 选一位你崇拜的女性，过她那样的日子 <span class="tag tag-custom">定制选择</span></li>
+        <li>科技养生引擎 — 联动手环数据，量化健康管理 <span class="tag tag-standard">标准配置</span></li>
+        <li>运动健身智能安排 — 根据日程+身体状态推荐运动 <span class="tag tag-standard">标准配置</span></li>
+        <li>七脉轮+精油芳疗疗愈 — 情绪检测+精油皂+疗愈音乐 <span class="tag tag-custom">深度定制</span></li>
+        <li>个人成长阅读陪伴 — 高管书单+知识内化+读书复盘 <span class="tag tag-custom">定制方向</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 名人养生对标 ===== -->
+<div class="celebs-section">
+  <div class="section">
+    <div class="section-label">BENCHMARK</div>
+    <div class="section-title">名人养生对标体系</div>
+    <div class="divider"></div>
+    <div class="section-desc">选一位你欣赏的女性，HerSkill 帮你把她的生活方式变成你的日常</div>
+
+    <div class="celebs">
+      <div class="celeb-card">
+        <div class="celeb-header" style="background: linear-gradient(135deg, #5A6570, var(--cool-gray));">
+          <h4>章小蕙</h4>
+          <div class="heat">小红书一姐</div>
+        </div>
+        <div class="celeb-body">
+          <div class="style-label">港式名媛养生</div>
+          <div class="desc">名媛生活方式 + 中高端美妆护肤 + 精致饮食 + 港式养生哲学</div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="celeb-header" style="background: linear-gradient(135deg, var(--shiraz-soft), var(--shiraz));">
+          <h4>舒淇</h4>
+          <div class="heat">持续高热度</div>
+        </div>
+        <div class="celeb-body">
+          <div class="style-label">港式冻龄</div>
+          <div class="desc">懒人护肤法 + 松弛冻龄哲学 + 不抗老反而更美</div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="celeb-header" style="background: linear-gradient(135deg, #5A5550, #7A7570);">
+          <h4>陈良玲</h4>
+          <div class="heat">佳士得拍卖官</div>
+        </div>
+        <div class="celeb-body">
+          <div class="style-label">拍卖女神养生</div>
+          <div class="desc">东方美学养生 + 高压场合从容管理 + 旗袍体态保养</div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="celeb-header" style="background: linear-gradient(135deg, var(--cool-gray), var(--cool-gray-light));">
+          <h4>Kendall Jenner</h4>
+          <div class="heat">全球最高收入模特</div>
+        </div>
+        <div class="celeb-body">
+          <div class="style-label">超模养生</div>
+          <div class="desc">高级体态管理 + 时尚圈饮食法 + 自律晨间routine</div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="celeb-header" style="background: linear-gradient(135deg, var(--shiraz), var(--shiraz-soft));">
+          <h4>Kylie Jenner</h4>
+          <div class="heat">卡戴珊家族</div>
+        </div>
+        <div class="celeb-body">
+          <div class="style-label">名媛商业养生</div>
+          <div class="desc">美容帝国 + 产后恢复 + 高端护肤 + 商业女性养生</div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="celeb-header" style="background: linear-gradient(135deg, #6A7570, var(--cool-gray-light));">
+          <h4>孙芸芸</h4>
+          <div class="heat">台湾名媛</div>
+        </div>
+        <div class="celeb-body">
+          <div class="style-label">名媛精致养生</div>
+          <div class="desc">轻断食 + 排毒果汁 + 高端护肤程序 + 精致生活节奏</div>
+        </div>
+      </div>
+
+      <div class="celeb-card">
+        <div class="celeb-header" style="background: linear-gradient(135deg, #2A2825, #4A4845);">
+          <h4>Bryan Johnson</h4>
+          <div class="heat">科技养生标杆</div>
+        </div>
+        <div class="celeb-body">
+          <div class="style-label">科技养生</div>
+          <div class="desc">量化身体数据 + 精准补剂 + 睡眠优化 + 饮食协议</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 七脉轮精油皂 ===== -->
+<div class="chakras-section">
+  <div class="section">
+    <div class="section-label">HEALING</div>
+    <div class="section-title">七脉轮 × 精油芳疗疗愈</div>
+    <div class="divider"></div>
+    <div class="section-desc">息壤定制精油冷制皂 · 七款对应七脉轮 · 每日情绪检测自动匹配</div>
+
+    <div class="chakras">
+      <div class="chakra-card chakra-1">
+        <div class="chakra-dot" style="background: #8B6E4E;"></div>
+        <h5>海底轮</h5>
+        <div class="position">脊椎底部 · 安全感</div>
+        <div class="oil">生姜 + 雪松 + 广藿香</div>
+      </div>
+      <div class="chakra-card chakra-2">
+        <div class="chakra-dot" style="background: #C4886E;"></div>
+        <h5>脐轮</h5>
+        <div class="position">下腹 · 喜悦感</div>
+        <div class="oil">依兰 + 茉莉 + 快乐鼠尾草</div>
+      </div>
+      <div class="chakra-card chakra-3">
+        <div class="chakra-dot" style="background: #D4A862;"></div>
+        <h5>太阳轮</h5>
+        <div class="position">胃部 · 自信力</div>
+        <div class="oil">柠檬草 + 马郁兰 + 八角茴香</div>
+      </div>
+      <div class="chakra-card chakra-4">
+        <div class="chakra-dot" style="background: var(--cool-gray);"></div>
+        <h5>心轮</h5>
+        <div class="position">胸腔 · 爱与慈悲</div>
+        <div class="oil">大马士革玫瑰 + 橙花 + 佛手柑</div>
+      </div>
+      <div class="chakra-card chakra-5">
+        <div class="chakra-dot" style="background: #7A9EB8;"></div>
+        <h5>喉轮</h5>
+        <div class="position">喉咙 · 沟通力</div>
+        <div class="oil">尤加利 + 茶树 + 罗马洋甘菊</div>
+      </div>
+      <div class="chakra-card chakra-6">
+        <div class="chakra-dot" style="background: #8A7CA8;"></div>
+        <h5>眉心轮</h5>
+        <div class="position">眉心 · 直觉智慧</div>
+        <div class="oil">薄荷 + 迷迭香 + 野橘</div>
+      </div>
+      <div class="chakra-card chakra-7">
+        <div class="chakra-dot" style="background: var(--shiraz-soft);"></div>
+        <h5>顶轮</h5>
+        <div class="position">头顶 · 灵性连接</div>
+        <div class="oil">薰衣草 + 乳香 + 檀香</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 拥有HerSkill的一天 ===== -->
+<div class="day-section">
+  <div class="section">
+    <div class="section-label">A DAY WITH HERSKILL</div>
+    <div class="section-title">拥有 HerSkill 的一天</div>
+    <div class="divider"></div>
+    <div class="day-intro">
+      <p>不是功能列表，而是一个真实的生活方式。<br>以下是三位用户在 HerSkill 陪伴下度过的一天 ——<br>每一天都不同，因为每个人的工作、身体和生活都不一样。</p>
+    </div>
+
+    <!-- ========== LULU 的一天 ========== -->
+    <div class="day-case">
+      <div class="day-case-header">
+        <div class="day-avatar" style="background: linear-gradient(135deg, var(--cool-gray), var(--cool-gray-light));">L</div>
+        <div class="day-case-header-info">
+          <h4>Lulu 的一天</h4>
+          <div class="meta">37岁 · 品牌主理人/内容创业者 · 章小蕙对标 + 心轮疗愈</div>
+        </div>
+      </div>
+
+      <div class="timeline">
+
+        <!-- 晨间唤醒 -->
+        <div class="timeline-period"><span>MORNING</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">05:40</div>
+          <div class="timeline-body">
+            <div class="event-title">顶轮开启 · 静心唤醒</div>
+            <div class="event-desc">HerSkill 根据昨晚睡眠质量推送今日能量状态评估，播放 15 分钟薰衣草+乳香檀香引导冥想，从顶轮开始一天的能量打开。</div>
+            <span class="event-skill skill-healing">七脉轮疗愈</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">06:00</div>
+          <div class="timeline-body">
+            <div class="event-title">晨间信息雷达</div>
+            <div class="event-desc">3 分钟读完：① AI 行业新动态对内容创作的 3 个影响点 ② 小红书昨夜 #女性高管 热门笔记拆解 ③ Louis Modern 品牌被 2 位 KOL 提及，情感正面 ④ 今日日程概览。</div>
+            <span class="event-skill skill-work">信息雷达</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">06:20</div>
+          <div class="timeline-body">
+            <div class="event-title">章小蕙式晨间护肤</div>
+            <div class="event-desc">HerSkill 提醒今日护肤流程：根据天气湿度推荐精华搭配，同步播放章小蕙同款轻音乐歌单。护肤期间语音播报今日最重要的 3 件事。</div>
+            <span class="event-skill skill-energy">名人养生对标</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">06:50</div>
+          <div class="timeline-body">
+            <div class="event-title">心轮疗愈 · 晨间仪式</div>
+            <div class="event-desc">使用息壤心轮精油冷制皂（大马士革玫瑰+橙花+佛手柑），配合 20 分钟疗愈音乐。HerSkill 记录情绪状态，本周心轮平衡度已达 78%。</div>
+            <span class="event-skill skill-healing">精油芳疗</span>
+          </div>
+        </div>
+
+        <!-- 工作时段 -->
+        <div class="timeline-period"><span>WORK</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">08:00</div>
+          <div class="timeline-body">
+            <div class="event-title">深度工作 · 内容创作</div>
+            <div class="event-desc">HerSkill 自动进入"深度保护模式"，日历屏蔽低优先级会议。AI 协助完成选题→大纲→初稿→标题 AB 测试全链路，效率提升约 3 倍。</div>
+            <span class="event-skill skill-work">内容创作加速器</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">10:30</div>
+          <div class="timeline-body">
+            <div class="event-title">品牌舆情 & 客户追踪</div>
+            <div class="event-desc">全网提及监测自动汇总，情感分析显示正向趋势；客户交付仪表盘更新：3 个项目进度正常，1 个需要今天跟进。</div>
+            <span class="event-skill skill-work">品牌舆情监测</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">11:00</div>
+          <div class="timeline-body">
+            <div class="event-title">客户访谈准备</div>
+            <div class="event-desc">HerSkill 已生成访谈提纲 + 对方背景资料摘要 + 上次沟通要点回顾。Lulu 只需要看一遍，带着清晰的框架走进会议室。</div>
+            <span class="event-skill skill-work">客户管理</span>
+          </div>
+        </div>
+
+        <!-- 下午 -->
+        <div class="timeline-period"><span>AFTERNOON</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">13:00</div>
+          <div class="timeline-body">
+            <div class="event-title">午休 · 能量补给</div>
+            <div class="event-desc">根据上午的工作强度，HerSkill 推荐 20 分钟午休 + 章小蕙式清淡午餐建议。手环数据显示 HRV 偏低，下午已自动减少高认知任务密度。</div>
+            <span class="event-skill skill-energy">科技养生</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">14:00</div>
+          <div class="timeline-body">
+            <div class="event-title">拍摄日 · IP 内容产出</div>
+            <div class="event-desc">今日是拍摄日，HerSkill 提前准备好了拍摄脚本、灯光参考图和穿搭建议。拍完后 AI 辅助快速剪辑，2 小时内出可发布版本。</div>
+            <span class="event-skill skill-work">IP 日程管理</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">17:00</div>
+          <div class="timeline-body">
+            <div class="event-title">团队协作 & 报告输出</div>
+            <div class="event-desc">用 HerSkill 快速生成月度运营报告框架，数据可视化一键完成。团队成员收到的是结构化分工清单而非一封长邮件。</div>
+            <span class="event-skill skill-work">报告生成器</span>
+          </div>
+        </div>
+
+        <!-- 晚上 -->
+        <div class="timeline-period"><span>EVENING</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">19:00</div>
+          <div class="timeline-body">
+            <div class="event-title">运动 & 放松</div>
+            <div class="event-desc">根据日程和身体状态，HerSkill 安排 30 分钟瑜伽 + 拉伸。今日久坐时间较长，增加了肩颈放松的专项动作。</div>
+            <span class="event-skill skill-energy">智能运动安排</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">20:00</div>
+          <div class="timeline-body">
+            <div class="event-title">阅读陪伴 · 知识内化</div>
+            <div class="event-desc">本周共读书目《纳瓦尔宝典》第 3 章。读完后 HerSkill 发起 3 个追问，帮助 Lulu 将书中观点转化为明天可以用的内容素材。</div>
+            <span class="event-skill skill-energy">阅读陪伴</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">21:30</div>
+          <div class="timeline-body">
+            <div class="event-title">一日复盘 & 明日预告</div>
+            <div class="event-desc">今日节省 12.5 小时等效工时，心轮平衡度 78%，睡眠质量预测良好。明日有 2 场重要会议 + 1 次拍摄，已提前生成准备清单。</div>
+            <span class="event-skill skill-work">每日复盘</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="day-summary">
+        <div class="day-summary-col">
+          <div class="label">没有 HerSkill 的 Lulu</div>
+          <div class="value">早上醒来刷手机半小时才起来 · 信息碎片化到处找素材 · 客户资料临开会才翻 · 报告写到深夜 · 运动总是没时间 · 书买了从来没翻开</div>
+        </div>
+        <div class="day-summary-col">
+          <div class="label">有了 HerSkill 的 Lulu</div>
+          <div class="value"><strong>05:40 自然醒来，从顶轮冥想开始</strong> · 3 分钟掌握全天关键信息 · 客户访谈有备而来 · 报告 30 分钟搞定 · 运动阅读都不落下 · <strong>23:00 前安心入睡</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== LYNN 的一天 ========== -->
+    <div class="day-case">
+      <div class="day-case-header">
+        <div class="day-avatar" style="background: linear-gradient(135deg, var(--shiraz), var(--shiraz-soft));">Ly</div>
+        <div class="day-case-header-info">
+          <h4>Lynn 的一天</h4>
+          <div class="meta">42岁 · 集团总经理/投资并购 · 陈良玲对标 + 太阳轮疗愈</div>
+        </div>
+      </div>
+
+      <div class="timeline">
+
+        <div class="timeline-period"><span>MORNING</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">06:00</div>
+          <div class="timeline-body">
+            <div class="event-title">太阳轮激活 · 力量唤醒</div>
+            <div class="event-desc">HerSkill 推送 15 分钟柠檬草+马郁兰精油皂使用指引 + 正念呼吸练习，激活太阳轮的自信与决策力。今日有董事会汇报，特别加强了太阳轮的疗愈强度。</div>
+            <span class="event-skill skill-healing">七脉轮疗愈</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">06:30</div>
+          <div class="timeline-body">
+            <div class="event-title">金融晨报雷达</div>
+            <div class="event-desc">① 央行新规对并购融资的 3 个影响点（附应对建议）② 同行业 2 笔重大交易，可能影响估值基准 ③ 目标公司最新财务异常信号 ④ 今日会议材料检查提醒。</div>
+            <span class="event-skill skill-work">金融信息雷达</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">07:00</div>
+          <div class="timeline-body">
+            <div class="event-title">陈良玲式东方晨间体态</div>
+            <div class="event-desc">旗袍体态保养练习 15 分钟：颈部拉伸 + 肩背挺拔训练。陈良玲在拍卖场上的从容气场，来自每天清晨这 15 分钟的积累。</div>
+            <span class="event-skill skill-energy">名人养生对标</span>
+          </div>
+        </div>
+
+        <div class="timeline-period"><span>WORK</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">08:30</div>
+          <div class="timeline-body">
+            <div class="event-title">审批流智能筛选</div>
+            <div class="event-desc">今日 14 条待审批，HerSkill 按 AI 分级：11 条常规自动批注意见、3 条异常项高亮置顶。Lynn 只花了 8 分钟处理完所有审批。</div>
+            <span class="event-skill skill-work">审批筛选器</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">09:30</div>
+          <div class="timeline-body">
+            <div class="event-title">项目风险预警响应</div>
+            <div class="event-desc">XX 项目进度偏差达 18%，HerSkill 提前 7 天预警并生成了 3 套应对方案。Lynn 选择方案 B，已自动发送给项目经理并预约了下午的跟进会议。</div>
+            <span class="event-skill skill-work">风险预警</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">11:00</div>
+          <div class="timeline-body">
+            <div class="event-title">并购评估报告</div>
+            <div class="event-desc">输入目标公司名称后，HerSkill 在 20 分钟内输出完整结构化报告：财务分析 + 尽调要点 + 风险矩阵 + 估值区间 + 交易条款建议。以前这需要一个分析师做 2 天。</div>
+            <span class="event-skill skill-work">评估报告生成器</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">12:00</div>
+          <div class="timeline-body">
+            <div class="event-title">董事会议案预演</div>
+            <div class="event-desc">HerSkill 扮演"最难搞的董事"角色，向 Lynn 提出 5 个尖锐问题。演练一轮后，Lynn 对下午的汇报信心倍增。</div>
+            <span class="event-skill skill-work">会议模拟</span>
+          </div>
+        </div>
+
+        <div class="timeline-period"><span>AFTERNOON</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">13:30</div>
+          <div class="timeline-body">
+            <div class="event-title">午休 · 久坐干预</div>
+            <div class="event-desc">华为手环联动显示上午久坐超 90 分钟，HerSkill 推送站立提醒 + 5 分钟颈椎放松动作。午休推荐陈良玲式的清淡汤品菜单。</div>
+            <span class="event-skill skill-energy">科技养生</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">14:30</div>
+          <div class="timeline-body">
+            <div class="event-title">董事会正式汇报</div>
+            <div class="event-desc">全程从容。HerSkill 在 iPad 上实时提供数据支持，任何董事临时提问都能 3 秒找到答案。</div>
+            <span class="event-skill skill-work">实时决策辅助</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">16:30</div>
+          <div class="timeline-body">
+            <div class="event-title">会议纪要 & 决策追踪</div>
+            <div class="event-desc">董事会结束后 10 分钟，HerSkill 已输出结构化会议纪要 + 5 条待决策事项 + 责任人分配 + deadline 设定。无需人工整理。</div>
+            <span class="event-skill skill-work">会议决策追踪</span>
+          </div>
+        </div>
+
+        <div class="timeline-period"><span>EVENING</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">19:00</div>
+          <div class="timeline-body">
+            <div class="event-title">普拉提 / 快走</div>
+            <div class="event-desc">今日会议密集，HerSkill 安排 30 分钟高强度普拉提释放压力。运动后心率恢复速度比上周快了 12%。</div>
+            <span class="event-skill skill-energy">智能运动安排</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">20:30</div>
+          <div class="timeline-body">
+            <div class="event-title">阅读 · 《原则》</div>
+            <div class="event-desc">读到第 7 章"决策原则"。HerSkill 引导将 Ray Dalio 的决策框架与今天的并购案例结合，生成了 Lynn 自己的投资决策检查清单 v1.0。</div>
+            <span class="event-skill skill-energy">阅读陪伴</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">22:00</div>
+          <div class="timeline-body">
+            <div class="event-title">一日复盘 & 睡前准备</div>
+            <div class="event-desc">今日节省 14.2 小时等效工时，太阳轮平衡度 65%（比上周提升 8%），董事会反馈积极。明日行程：3 场内部评审 + 1 场外部尽调。</div>
+            <span class="event-skill skill-work">每日复盘</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="day-summary">
+        <div class="day-summary-col">
+          <div class="label">没有 HerSkill 的 Lynn</div>
+                   <div class="value">早起第一件事回邮件 · 审批堆成山逐条看 · 项目出了问题才知道 · 报告让团队熬两夜 · 开会靠临场发挥 · 回家累到不想动</div>
+        </div>
+        <div class="day-summary-col">
+          <div class="label">有了 HerSkill 的 Lynn</div>
+          <div class="value"><strong>06:00 从太阳轮正念开始</strong> · 审批 8 分钟搞定 · 项目风险提前一周发现 · 报告 20 分钟出稿 · 董事会从容应对 · <strong>22:00 前完成一切，还有时间读书</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SOPHIE 的一天 ========== -->
+    <div class="day-case">
+      <div class="day-case-header">
+        <div class="day-avatar" style="background: linear-gradient(135deg, #6A7A70, #8A9A90);">S</div>
+        <div class="day-case-header-info">
+          <h4>Sophie 的一天</h4>
+          <div class="meta">35岁 · 大厂总监/准备创业 · Kendall Jenner对标 + 脐轮疗愈</div>
+        </div>
+      </div>
+
+      <div class="timeline">
+
+        <div class="timeline-period"><span>MORNING</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">06:00</div>
+          <div class="timeline-body">
+            <div class="event-title">Kendall 式晨间 Routine</div>
+            <div class="event-desc">跟随 Kendall Jenner 的自律晨间节奏：冷水洗脸 → 10 分钟空腹瑜伽 → 高蛋白早餐。HerSkill 根据 Sophie 的体测数据微调了 Kendall 的食谱，更适合亚洲人体质。</div>
+            <span class="event-skill skill-energy">名人养生对标</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">06:45</div>
+          <div class="timeline-body">
+            <div class="event-title">创业动态雷达</div>
+            <div class="event-desc">① 赛道内 2 家新公司获融资，估值逻辑分析 ② 大厂竞品组织架构调整信号 ③ 创业者社群热议的 3 个话题 ④ 今天要联系的投资人背景速查。</div>
+            <span class="event-skill skill-work">创业情报雷达</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">07:10</div>
+          <div class="timeline-body">
+            <div class="event-title">脐轮疗愈 · 创造力唤醒</div>
+            <div class="event-desc">使用依兰+茉莉+快乐鼠尾草精油皂，配合 15 分钟创造力冥想。今天是周三，脐轮能量偏低，HerSkill 加长了疗愈时间并调整了音乐频率。</div>
+            <span class="event-skill skill-healing">精油芳疗</span>
+          </div>
+        </div>
+
+        <div class="timeline-period"><span>WORK</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">09:00</div>
+          <div class="timeline-body">
+            <div class="event-title">深度工作（保护时段）</div>
+            <div class="event-desc">HerSkill 自动锁定周三上午为"深度工作时间"，拒绝所有非紧急会议请求。Sophie 用这段时间完成了 BP 第 3 章的核心内容撰写。</div>
+            <span class="event-skill skill-work">深度工作保护器</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">11:00</div>
+          <div class="timeline-body">
+            <div class="event-title">时间审计报告</div>
+            <div class="event-desc">每周三固定出时间审计：上周深度工作时间仅占 28%，会议占 45%。HerSkill 建议保护周三/周五上午 + 将 3 个例行 1v1 合并为群聊。Sophie 一键采纳。</div>
+            <span class="event-skill skill-work">时间审计</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">13:00</div>
+          <div class="timeline-body">
+            <div class="event-title">HRV 压力评估 & 调整</div>
+            <div class="event-desc">Apple Watch 显示 HRV 连续 3 天低于阈值，HerSkill 将下午的 2 个会议改为异步文档沟通，并在 16:00 强制插入了一次呼吸练习。</div>
+            <span class="event-skill skill-energy">科技养生</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">15:00</div>
+          <div class="timeline-body">
+            <div class="event-title">创业准备 · BP & 融资</div>
+            <div class="event-desc">BP 大纲迭代 v2.3 + 竞品对比表更新 + 本周要触达的 5 位投资人话术准备。HerSkill 还帮 Sophie 模拟了一场投资人 Q&A，发现了 2 个漏洞。</div>
+            <span class="event-skill skill-work">创业准备助手</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">17:30</div>
+          <div class="timeline-body">
+            <div class="event-title">离职过渡管理</div>
+            <div class="event-desc">交接清单自动更新：本周需完成 3 项核心交接 + 人脉关系梳理 + 竞业协议风险点提示。每项都有截止日期和责任人标记。</div>
+            <span class="event-skill skill-work">离职过渡管理</span>
+          </div>
+        </div>
+
+        <div class="timeline-period"><span>EVENING</span><div class="period-line"></div></div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">18:30</div>
+          <div class="timeline-body">
+            <div class="event-title">Kendall 晚间 Stretching</div>
+            <div class="event-desc">加班日的精简版：20 分钟全身拉伸 + Kendall 同款睡前护肤流程。虽然今天很忙，但这个仪式感不能少。</div>
+            <span class="event-skill skill-energy">名人养生对标</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">20:00</div>
+          <div class="timeline-body">
+            <div class="event-title">阅读 · 《从0到1》</div>
+            <div class="event-desc">读到垄断章节。HerSkill 将 Peter Thiel 的垄断理论与 Sophie 的赛道选择结合，生成了一份"护城河自查清单"，直接可以用在下个月的 BP 里。</div>
+            <span class="event-skill skill-energy">阅读陪伴</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">22:00</div>
+          <div class="timeline-body">
+            <div class="event-title">一日复盘</div>
+            <div class="event-desc">今日节省 10.8 小时等效工时，脐轮平衡度 82%，深度工作时间占比提升至 38%。明日：1 场融资路演彩排 + 交接项 #2 完成 + Kendall routine 不能跳过。</div>
+            <span class="event-skill skill-work">每日复盘</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="day-summary">
+        <div class="day-summary-col">
+          <div class="label">没有 HerSkill 的 Sophie</div>
+          <div class="value">闹钟响了三次才起床 · 刷手机刷掉一个小时 · 深度工作时间被切碎 · BP 写了两周还在第一章 · 总说"下周开始运动" · 创业计划永远在"准备中"</div>
+        </div>
+        <div class="day-summary-col">
+          <div class="label">有了 HerSkill 的 Sophie</div>
+          <div class="value"><strong>06:00 跟着 Kendall 的节奏自然醒来</strong> · 深度工作被严格保护 · BP 每天推进一个 chapter · 时间黑洞被逐一堵上 · <strong>离职+创业并行不慌乱</strong> · 身体和精神都在变好</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-disclaimer">
+      以上三位用户的一天完全不同——因为她们的行业、职位、身体状况和人生阶段都不一样。<br>
+      <strong>你的 HerSkill 会根据你的诊断结果定制，和上面任何一位都不一样。这是属于你自己的生活方式。</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 定价 ===== -->
+<div class="pricing-section">
+  <div class="section">
+    <div class="section-label">PRICING</div>
+    <div class="section-title">定价</div>
+    <div class="divider"></div>
+
+    <div class="pricing">
+      <div class="price-card featured">
+        <div class="price-name">全场景AI陪伴系统</div>
+        <div class="price-amount">¥19,800</div>
+        <div class="price-desc">一次性买断<br>含系统定制 + 首月陪跑<br>工作效能 + 能量成长 全模块</div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">高管俱乐部</div>
+        <div class="price-amount">¥9,800<span style="font-size:0.8em;">/年</span></div>
+        <div class="price-desc">年费另付<br>群内陪跑 + 月度复盘<br>社群资源 + 优先体验新Skill</div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">增量Skill定制</div>
+        <div class="price-amount">¥5,800<span style="font-size:0.8em;">/个</span></div>
+        <div class="price-desc">按需购买<br>使用过程中发现新需求<br>单独定制新Skill</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="footer-slogan">她的人生，有她自己的生活方式</div>
+  <div class="footer-sub">一个懂你的系统，一种属于你的生活方式</div>
+  <div class="footer-info">HerSkill 全场景AI陪伴系统 · 女性高管专属 · ¥19,800一次性买断</div>
+</footer>
+
+</body>
+</html>
