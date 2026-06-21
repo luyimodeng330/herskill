@@ -245,7 +245,7 @@
     gap: 24px;
     margin-top: 40px;
   }
-  @media (max-width: 750px) {
+  @media (max-width: 768px) {
     .theory-grid { grid-template-columns: 1fr; }
   }
   .theory-card {
@@ -285,7 +285,7 @@
     margin-top: 48px;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     .dual-track { grid-template-columns: 1fr; }
   }
 
@@ -454,7 +454,7 @@
     margin-top: 48px;
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 768px) {
     .pricing-grid { grid-template-columns: 1fr; }
   }
 
@@ -770,121 +770,137 @@
     font-weight: 500;
   }
 
-  /* ===== 响应式 ===== */
-  @media (max-width: 650px) {
-    .hero h1 { letter-spacing: 6px; font-size: 2.2rem; }
-    .hero .slogan-box { flex-direction: column; gap: 8px; padding: 16px 28px; }
-    .hero .slogan-box .slogan { font-size: 1.3rem; letter-spacing: 4px; }
-    .framework-tag { flex-wrap: wrap; justify-content: center; }
-    .funnel-step { flex-direction: column; gap: 16px; align-items: flex-start; }
-    .step-num-circle { width: 40px; height: 40px; font-size: 0.8rem; }
-    .tl-row { grid-template-columns: 70px 1fr; }
-    .tl-milestone { display: none; }
-    .case-header { flex-direction: column; }
-    .case-result { text-align: left; }
-    .case-tabs { gap: 8px; }
-    .case-tab { padding: 8px 16px; font-size: 0.7rem; }
-  }
+  /* 750px和800px的旧断点由768px统一接管 */
 
-/* ===== 全面移动端适配 ===== */
+/* ===== 全面移动端适配（重写版） ===== */
 @media (max-width: 768px) {
-  body { font-size: 14px; }
-  
-  /* Hero */
-  .hero { padding: 40px 16px; }
-  .hero h1 { font-size: 1.8rem !important; letter-spacing: 4px !important; }
-  .hero .slogan-box { flex-direction: column; gap: 6px; padding: 14px 20px; }
-  .hero .slogan-box .slogan { font-size: 1.1rem; letter-spacing: 3px; }
-  .hero .framework-tag { flex-wrap: wrap; justify-content: center; gap: 8px; }
-  .hero .framework-tag span { padding: 4px 12px; font-size: 0.62rem; }
-  .hero .hero-circle { width: 80px; height: 80px; }
-  .hero .hero-circle-inner { width: 56px; height: 56px; }
-  
-  /* Section 通用 */
-  .section { padding: 40px 16px !important; }
-  .section-header { padding: 0 0 24px 0; }
-  .section-tag { font-size: 0.6rem; padding: 4px 14px; }
-  .section-title { font-size: 1.4rem; }
-  .section-subtitle { font-size: 0.82rem; padding: 0 8px; }
-  .section-divider { width: 28px; margin: 0 auto 24px; }
-  
-  /* 理论底座 */
-  .theory-grid { grid-template-columns: 1fr; gap: 12px; }
-  .theory-card { padding: 24px 18px; }
-  .theory-card .tc-name { font-size: 1.3rem; }
-  .theory-card .tc-full { font-size: 0.78rem; }
-  .theory-card .tc-desc { font-size: 0.78rem; }
-  
-  /* 双轨体系 */
-  .dual-track { grid-template-columns: 1fr; gap: 16px; }
-  .track-card { padding: 28px 18px; }
-  .track-card .track-name { font-size: 1.1rem; }
-  .track-card .track-badge { font-size: 0.58rem; padding: 3px 10px; }
-  .track-card .track-diff-list li { font-size: 0.76rem; }
-  .track-card .track-flow { font-size: 0.72rem; gap: 6px; }
-  .track-card .track-flow span { padding: 4px 8px; }
-  .track-card .track-time { font-size: 0.68rem; }
-  
-  /* 6步增长闭环 */
-  .funnel-step { flex-direction: column; gap: 12px; align-items: flex-start; }
-  .step-num-circle { width: 36px; height: 36px; font-size: 0.75rem; }
-  .step-content { padding-left: 0; }
-  .step-content .step-title { font-size: 1rem; }
-  .step-content .step-desc { font-size: 0.78rem; }
-  
-  /* 案例区 */
-  .case-tabs { gap: 4px; flex-wrap: wrap; justify-content: center; }
-  .case-tab { padding: 6px 12px; font-size: 0.68rem; }
-  .case-panel { padding: 20px 14px; }
-  .case-panel .case-target { font-size: 0.76rem; padding: 14px; }
-  .case-panel .case-flow { gap: 12px; }
-  .case-panel .case-flow .cf-step { font-size: 0.7rem; padding: 4px 8px; }
-  .case-panel .case-data { gap: 12px; }
-  .case-panel .case-data .cd-item { padding: 14px 10px; }
-  .case-panel .case-data .cd-num { font-size: 1.4rem; }
-  .case-panel .case-data .cd-label { font-size: 0.62rem; }
-  .case-panel .case-summary { font-size: 0.78rem; padding: 14px; }
-  
-  /* 定价 */
-  .pricing-grid { grid-template-columns: 1fr; gap: 12px; }
-  .price-card { padding: 28px 20px; }
-  .price-card .price-name { font-size: 1.05rem; }
-  .price-card .price-amount { font-size: 1.7rem; }
-  .price-card .price-desc { font-size: 0.76rem; }
-  
-  /* 时间线 */
-  .tl-container { padding: 0; }
-  .tl-row { grid-template-columns: 60px 1fr; gap: 12px; padding: 14px 0; }
-  .tl-week { font-size: 0.7rem; }
-  .tl-content .tl-phase { font-size: 0.76rem; }
-  .tl-content .tl-tasks { font-size: 0.72rem; }
-  .tl-content .tl-output { font-size: 0.68rem; padding: 6px 10px; }
-  
-  /* CTA */
-  .cta-section { padding: 40px 16px; }
-  .cta-title { font-size: 1.3rem; }
-  .cta-desc { font-size: 0.82rem; }
-  .cta-btn { padding: 12px 32px; font-size: 0.82rem; }
-  
-  /* Footer */
-  footer { padding: 28px 16px; }
-  footer p { font-size: 0.68rem; }
-  footer .cooperate-line { font-size: 0.66rem; padding: 0 8px; }
-  
-  /* 预约按钮 */
-  .book-btn-wrap { padding: 16px 0; }
-  .book-btn { padding: 10px 28px; font-size: 13px; }
-  
-  /* 交叉导航 */
-  .cross-nav { padding: 20px 14px; }
-  .cross-nav .cn-link { padding: 7px 14px; font-size: 11.5px; }
+  /* 全局：压缩行高、字号 */
+  body { font-size: 13px !important; line-height: 1.65 !important; }
+
+  /* ===== Hero ===== */
+  .hero { min-height: auto !important; padding: 36px 16px 28px !important; }
+  .hero .brand-mark { font-size: 0.58rem !important; letter-spacing: 4px !important; margin-bottom: 16px !important; }
+  .hero h1 { font-size: 1.7rem !important; letter-spacing: 4px !important; margin-bottom: 10px !important; }
+  .hero .subtitle { font-size: 0.72rem !important; letter-spacing: 3px !important; margin-bottom: 20px !important; }
+  .hero .slogan-box { flex-direction: column !important; gap: 4px !important; padding: 12px 20px !important; margin-bottom: 20px !important; }
+  .hero .slogan-box .slogan { font-size: 1.05rem !important; letter-spacing: 3px !important; }
+  .hero .slogan-box .slogan-en { font-size: 0.62rem !important; }
+  .hero .framework-tag { gap: 6px !important; }
+  .hero .framework-tag .tag { font-size: 0.58rem !important; padding: 4px 10px !important; letter-spacing: 1px !important; }
+  .hero .scroll-hint { display: none !important; }
+  .hero::before, .hero::after { display: none !important; }
+
+  /* ===== Section 通用 ===== */
+  .section, .section-alt { padding: 28px 14px !important; max-width: 100% !important; }
+  .section-label { font-size: 0.56rem !important; letter-spacing: 3px !important; margin-bottom: 8px !important; }
+  .section-title { font-size: 1.2rem !important; letter-spacing: 4px !important; margin-bottom: 10px !important; }
+  .section-desc { font-size: 0.72rem !important; margin-bottom: 20px !important; line-height: 1.7 !important; letter-spacing: 0.5px !important; }
+  .divider { width: 24px !important; margin: 0 auto 18px !important; }
+
+  /* ===== 心法 ===== */
+  .credo-section { padding: 24px 16px !important; }
+  .credo-section .credo-text { font-size: 0.92rem !important; line-height: 1.8 !important; letter-spacing: 1px !important; }
+
+  /* ===== 理论底座 ===== */
+  .theory-grid { grid-template-columns: 1fr !important; gap: 10px !important; margin-top: 16px !important; }
+  .theory-card { padding: 18px 14px !important; }
+  .theory-card .theory-icon { font-size: 1.1rem !important; margin-bottom: 8px !important; }
+  .theory-card h4 { font-size: 0.92rem !important; letter-spacing: 2px !important; margin-bottom: 6px !important; }
+  .theory-card p { font-size: 0.72rem !important; line-height: 1.7 !important; }
+
+  /* ===== 什么是 MarketCraft（内联grid覆盖） ===== */
+  .section-alt > div[style*="grid"] { grid-template-columns: 1fr !important; gap: 10px !important; margin-top: 16px !important; }
+  .section-alt > div[style*="grid"] > div { padding: 18px 14px !important; }
+  .section-alt > div[style*="grid"] > div > div:first-child { font-size: 1.1rem !important; margin-bottom: 6px !important; }
+  .section-alt > div[style*="grid"] > div > div:last-child { font-size: 0.68rem !important; line-height: 1.6 !important; }
+  .section-alt > p[style*="text-align:center"] { margin-top: 16px !important; font-size: 0.72rem !important; line-height: 1.8 !important; }
+
+  /* ===== 双轨体系 ===== */
+  .dual-track { grid-template-columns: 1fr !important; gap: 12px !important; margin-top: 16px !important; }
+  .track-card { padding: 20px 14px !important; }
+  .track-card .track-header { margin-bottom: 14px !important; }
+  .track-card .track-name { font-size: 1rem !important; letter-spacing: 2px !important; }
+  .track-card .track-badge { font-size: 0.55rem !important; padding: 3px 8px !important; }
+  .track-card .track-subtitle { font-size: 0.7rem !important; margin-bottom: 12px !important; }
+  .track-diff-list li { padding: 6px 0 !important; font-size: 0.72rem !important; gap: 6px !important; line-height: 1.6 !important; }
+  .track-diff-list li .diff-label { min-width: 64px !important; font-size: 0.68rem !important; }
+
+  /* ===== 6步闭环 ===== */
+  .funnel-section { padding: 28px 14px !important; }
+  .funnel-container { max-width: 100% !important; }
+  .funnel-step { flex-direction: row !important; gap: 12px !important; padding: 14px 0 !important; }
+  .step-num-circle { width: 32px !important; height: 32px !important; font-size: 0.72rem !important; }
+  .funnel-step:not(:last-child) .step-num-circle::after { top: 38px !important; height: calc(100% + 6px) !important; }
+  .step-content h4 { font-size: 0.88rem !important; letter-spacing: 1px !important; margin-bottom: 3px !important; }
+  .step-content .step-subtitle { font-size: 0.66rem !important; letter-spacing: 1px !important; margin-bottom: 6px !important; }
+  .step-content p { font-size: 0.7rem !important; line-height: 1.65 !important; }
+  .step-tags { gap: 5px !important; margin-top: 8px !important; }
+  .step-tags .stag { font-size: 0.6rem !important; padding: 2px 8px !important; letter-spacing: 0.5px !important; }
+
+  /* ===== 定价 ===== */
+  .pricing-grid { grid-template-columns: 1fr !important; gap: 10px !important; margin-top: 16px !important; }
+  .price-card { padding: 22px 16px !important; }
+  .price-tier { font-size: 0.58rem !important; letter-spacing: 2px !important; margin-bottom: 8px !important; }
+  .price-name { font-size: 1rem !important; letter-spacing: 2px !important; margin-bottom: 12px !important; }
+  .price-amount { font-size: 1.5rem !important; margin-bottom: 4px !important; }
+  .price-note { font-size: 0.68rem !important; margin-bottom: 14px !important; }
+  .price-features { margin-bottom: 14px !important; }
+  .price-features li { font-size: 0.72rem !important; padding: 5px 0 !important; padding-left: 18px !important; line-height: 1.5 !important; }
+  .price-deliver { font-size: 0.66rem !important; padding-top: 10px !important; }
+
+  /* ===== 案例展示 ===== */
+  .case-section .section { padding: 0 14px !important; }
+  .case-tabs { gap: 4px !important; margin-bottom: 18px !important; }
+  .case-tab { padding: 5px 10px !important; font-size: 0.64rem !important; letter-spacing: 1px !important; }
+  .case-panel { max-width: 100% !important; }
+  .case-header { margin-bottom: 14px !important; gap: 8px !important; flex-direction: column !important; }
+  .case-title-area h3 { font-size: 1rem !important; letter-spacing: 2px !important; margin-bottom: 4px !important; }
+  .case-title-area .case-client { font-size: 0.68rem !important; letter-spacing: 1px !important; }
+  .case-result { text-align: left !important; }
+  .case-result .result-num { font-size: 1.4rem !important; }
+  .case-result .result-label { font-size: 0.64rem !important; }
+  .case-steps { padding: 16px 14px !important; }
+  .case-step-item { gap: 10px !important; padding: 10px 0 !important; }
+  .cs-num { width: 22px !important; height: 22px !important; font-size: 0.62rem !important; }
+  .cs-content h5 { font-size: 0.76rem !important; letter-spacing: 1px !important; margin-bottom: 3px !important; }
+  .cs-content p { font-size: 0.7rem !important; line-height: 1.65 !important; }
+  .case-quote { margin-top: 14px !important; padding: 14px 16px !important; font-size: 0.74rem !important; line-height: 1.7 !important; }
+
+  /* ===== 时间线 ===== */
+  .timeline-section .section { padding: 0 14px !important; }
+  .timeline { max-width: 100% !important; }
+  .tl-row { grid-template-columns: 48px 1fr !important; gap: 8px !important; padding: 8px 0 !important; font-size: 0.7rem !important; line-height: 1.5 !important; }
+  .tl-week { font-size: 0.62rem !important; letter-spacing: 0.5px !important; }
+  .tl-task { font-size: 0.68rem !important; letter-spacing: 0 !important; line-height: 1.5 !important; }
+  .tl-milestone { display: none !important; }
+
+  /* ===== CTA ===== */
+  .cta-section { padding: 28px 16px !important; }
+  .cta-section .cta-title { font-size: 1.15rem !important; letter-spacing: 3px !important; margin-bottom: 8px !important; }
+  .cta-section .cta-desc { font-size: 0.72rem !important; letter-spacing: 1px !important; margin-bottom: 18px !important; }
+  .cta-section .cta-btn { padding: 10px 28px !important; font-size: 0.78rem !important; letter-spacing: 2px !important; }
+
+  /* ===== Footer ===== */
+  footer { padding: 20px 14px !important; font-size: 0.64rem !important; line-height: 1.8 !important; letter-spacing: 0.5px !important; }
+  footer .cooperate-line { margin-top: 8px !important; padding-top: 10px !important; font-size: 0.62rem !important; line-height: 1.7 !important; }
+
+  /* ===== 预约按钮 ===== */
+  .book-btn-wrap { padding: 12px 0 !important; }
+  .book-btn { padding: 9px 24px !important; font-size: 12px !important; }
+
+  /* ===== 交叉导航 ===== */
+  .cross-nav { padding: 16px 12px !important; }
+  .cross-nav .cn-title { font-size: 11px !important; margin-bottom: 10px !important; }
+  .cross-nav .cn-links { gap: 6px !important; }
+  .cross-nav .cn-link { padding: 6px 12px !important; font-size: 11px !important; }
 }
 
 /* 超小屏幕 */
 @media (max-width: 380px) {
-  .hero h1 { font-size: 1.5rem !important; }
-  .section-title { font-size: 1.2rem; }
-  .case-tab { padding: 5px 8px; font-size: 0.62rem; }
+  .hero h1 { font-size: 1.4rem !important; }
+  .section-title { font-size: 1.05rem !important; }
+  .case-tab { padding: 4px 7px !important; font-size: 0.58rem !important; }
+  .step-tags .stag { font-size: 0.56rem !important; }
 }
 
 </style>
