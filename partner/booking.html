@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>预约咨询 · MarketCraft × HerSkill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --shiraz: #431C1E; --shiraz-deep: #2E1215; --shiraz-soft: #6B3A3E;
+  --cool-gray: #99A0AC; --cool-gray-soft: #D4D8DE;
+  --pink-warm: #CEC7BC; --pink-light: #E8E4DC;
+  --cream: #F3F1EE; --cream-warm: #EBE8E3; --cream-pure: #FAF9F7;
+  --text: #2C2826; --text-soft: #5A5550; --text-muted: #89857E; --text-faint: #B5B2AA;
+  --line: #DDD8D0; --line-soft: #E8E4DD;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body { font-family: 'Noto Serif SC', -apple-system, serif; font-weight:400; background: var(--cream-pure); min-height:100vh; color:var(--text); line-height:1.55; font-size:13px; -webkit-font-smoothing:antialiased; }
+
+.topbar { background: var(--shiraz-deep); color: var(--cool-gray); padding:0 14px; height:46px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+.topbar .logo { font-size:13px; font-weight:500; letter-spacing:1px; }
+.topbar .logo span { color: var(--pink-warm); }
+.topbar .back-btn { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:var(--cool-gray); padding:4px 10px; border-radius:4px; font-family:inherit; font-size:11px; cursor:pointer; text-decoration:none; }
+
+.booking-page { max-width:480px; margin:0 auto; padding:24px 16px 40px; }
+
+.booking-header { text-align:center; margin-bottom:24px; }
+.booking-header h1 { font-size:20px; font-weight:600; color:var(--text); margin-bottom:6px; }
+.booking-header p { font-size:12px; color:var(--text-muted); }
+
+.form-card { background:var(--cream-pure); border-radius:13px; box-shadow:0 3px 16px rgba(153,160,172,0.09); border:1px solid var(--line-soft); padding:22px 18px; }
+
+.form-group { margin-bottom:16px; }
+.form-group label { display:block; font-size:12px; color:var(--text-soft); margin-bottom:5px; }
+.form-group label .req { color:var(--shiraz); }
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:6px;
+  font-family:inherit; font-size:13px; background:var(--cream); color:var(--text);
+  appearance:none; -webkit-appearance:none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline:none; border-color:var(--cool-gray); background:var(--cream-pure);
+}
+.form-group textarea { resize:vertical; min-height:70px; line-height:1.6; }
+
+.product-pick { display:flex; gap:8px; }
+.product-pick .pp-option { flex:1; padding:11px 8px; border:1.5px solid var(--line); border-radius:7px; text-align:center; cursor:pointer; font-size:12px; color:var(--text-muted); transition:all 0.2s; background:var(--cream); }
+.product-pick .pp-option.active { border-color:var(--shiraz-soft); background:var(--cream-pure); color:var(--shiraz); font-weight:500; }
+.product-pick .pp-option .pp-name { font-size:13px; font-weight:500; margin-bottom:2px; }
+.product-pick .pp-option .pp-desc { font-size:10px; color:var(--text-faint); }
+.product-pick .pp-option.active .pp-desc { color:var(--shiraz-soft); }
+
+.btn-submit { width:100%; background:var(--shiraz); color:var(--cream-pure); border:none; padding:13px; border-radius:7px; font-family:inherit; font-size:14px; font-weight:500; cursor:pointer; margin-top:6px; letter-spacing:1px; }
+.btn-submit:active { background:var(--shiraz-deep); }
+.btn-submit:disabled { opacity:0.5; }
+
+.success-card { text-align:center; padding:40px 20px; display:none; }
+.success-card.show { display:block; }
+.success-card .sc-icon { width:56px; height:56px; border-radius:50%; background:var(--pink-light); margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--shiraz-soft); }
+.success-card h2 { font-size:18px; font-weight:600; color:var(--text); margin-bottom:8px; }
+.success-card p { font-size:12px; color:var(--text-muted); line-height:1.8; margin-bottom:20px; }
+.success-card .sc-back { display:inline-block; padding:9px 22px; background:var(--shiraz); color:var(--cream-pure); border-radius:6px; font-size:13px; text-decoration:none; }
+
+.cross-nav { margin-top:28px; padding:20px 14px; text-align:center; border-top:1px solid var(--line-soft); }
+.cross-nav .cn-title { font-size:11px; color:var(--text-faint); margin-bottom:10px; }
+.cross-nav .cn-links { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+.cross-nav .cn-link { display:inline-block; padding:7px 14px; border-radius:5px; font-size:11.5px; text-decoration:none; font-family:inherit; }
+.cross-nav .cn-link-primary { background:var(--shiraz); color:var(--cream-pure); }
+.cross-nav .cn-link-secondary { background:transparent; color:var(--shiraz-soft); border:1px solid var(--line); }
+
+.toast { position:fixed; bottom:max(24px, env(safe-area-inset-bottom, 24px)); left:50%; transform:translateX(-50%) translateY(80px); background:var(--shiraz-deep); color:var(--cream-pure); padding:9px 20px; border-radius:6px; font-size:12px; opacity:0; transition:all 0.3s; z-index:999; white-space:nowrap; pointer-events:none; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">MarketCraft × <span>HerSkill</span></div>
+  <a href="/herskill/" class="back-btn">← 返回</a>
+</div>
+
+<div class="booking-page">
+
+  <div id="formWrap">
+    <div class="booking-header">
+      <h1>预约咨询</h1>
+      <p>留下您的信息，我们会在 24 小时内联系您</p>
+    </div>
+
+    <div class="form-card">
+      <div class="form-group">
+        <label>感兴趣的产品 <span class="req">*</span></label>
+        <div class="product-pick">
+          <div class="pp-option active" id="pick-hs" onclick="pickProduct('herskill')">
+            <div class="pp-name">HerSkill</div>
+            <div class="pp-desc">AI 员工系统 ¥19,800</div>
+          </div>
+          <div class="pp-option" id="pick-mc" onclick="pickProduct('marketcraft')">
+            <div class="pp-name">MarketCraft</div>
+            <div class="pp-desc">增长策略系统 ¥5-15万</div>
+          </div>
+        </div>
+        <input type="hidden" id="fProduct" value="herskill">
+      </div>
+
+      <div class="form-group">
+        <label>姓名 <span class="req">*</span></label>
+        <input type="text" id="fName" placeholder="请输入您的姓名">
+      </div>
+
+      <div class="form-group">
+        <label>手机号 <span class="req">*</span></label>
+        <input type="tel" id="fPhone" placeholder="请输入手机号">
+      </div>
+
+      <div class="form-group">
+        <label>公司名称</label>
+        <input type="text" id="fCompany" placeholder="选填">
+      </div>
+
+      <div class="form-group">
+        <label>主要诉求</label>
+        <textarea id="fNeed" placeholder="简要描述您的需求，例如：团队效率提升、品牌增长突破、出海营销等"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>推荐码（选填）</label>
+        <input type="text" id="fReferral" placeholder="如有合伙人推荐请填写">
+      </div>
+
+      <button class="btn-submit" id="submitBtn" onclick="submitBooking()">提交预约</button>
+    </div>
+  </div>
+
+  <div class="success-card" id="successCard">
+    <div class="sc-icon">✓</div>
+    <h2>预约成功</h2>
+    <p>我们已收到您的咨询请求<br>会在 24 小时内与您联系<br>请保持手机畅通</p>
+    <a href="/herskill/" class="sc-back">返回首页</a>
+  </div>
+
+  <div class="cross-nav">
+    <div class="cn-title">了解更多</div>
+    <div class="cn-links">
+      <a href="/herskill/" class="cn-link cn-link-primary">HerSkill AI 系统</a>
+      <a href="/herskill/marketcraft/" class="cn-link cn-link-secondary">MarketCraft 增长系统</a>
+      <a href="/herskill/partner/" class="cn-link cn-link-secondary">成为合伙人</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SB_URL = "https://uxyznvizccouzcqcgozk.supabase.co/rest/v1";
+const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4eXpudml6Y2NvdXpjcWNnb3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwMzkzNjYsImV4cCI6MjA5NzYxNTM2Nn0.rHUXmwZhh1X8icD_GkQft5NFhrjR1SMXoeMr3U_WqGc";
+
+let selectedProduct = 'herskill';
+
+function pickProduct(p) {
+  selectedProduct = p;
+  document.getElementById('fProduct').value = p;
+  document.getElementById('pick-hs').classList.toggle('active', p === 'herskill');
+  document.getElementById('pick-mc').classList.toggle('active', p === 'marketcraft');
+}
+
+async function submitBooking() {
+  const name = document.getElementById('fName').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+  if (!name) { showToast('请输入姓名'); return; }
+  if (!phone) { showToast('请输入手机号'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = '提交中…';
+
+  const data = {
+    name: name,
+    phone: phone,
+    company: document.getElementById('fCompany').value.trim() || null,
+    product: selectedProduct,
+    need: document.getElementById('fNeed').value.trim() || null,
+    referral_code: document.getElementById('fReferral').value.trim() || null,
+    status: 'new'
+  };
+
+  try {
+    const resp = await fetch(SB_URL + '/bookings', {
+      method: 'POST',
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+      body: JSON.stringify(data)
+    });
+    if (!resp.ok) throw new Error(resp.status);
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('successCard').classList.add('show');
+  } catch (e) {
+    showToast('提交失败，请稍后重试');
+    btn.disabled = false; btn.textContent = '提交预约';
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// 从 URL 参数获取推荐码
+const params = new URLSearchParams(window.location.search);
+const ref = params.get('ref');
+if (ref) document.getElementById('fReferral').value = ref;
+// 从 URL 参数获取产品
+const prod = params.get('product');
+if (prod === 'marketcraft') pickProduct('marketcraft');
+else if (prod === 'herskill') pickProduct('herskill');
+</script>
+</body>
+</html>
