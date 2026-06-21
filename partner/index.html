@@ -2,23 +2,22 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>合伙人门户 · MarketCraft × HerSkill</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ===== HerSkill 配色系统 ===== */
 :root {
-  --cool-gray: #99A0AC;
-  --cool-gray-light: #B8BFC9;
-  --cool-gray-soft: #D4D8DE;
   --shiraz: #431C1E;
   --shiraz-deep: #2E1215;
   --shiraz-soft: #6B3A3E;
-  --pink: #D6D1C9;
-  --pink-light: #E8E4DC;
+  --cool-gray: #99A0AC;
+  --cool-gray-light: #B8BFC9;
+  --cool-gray-soft: #D4D8DE;
   --pink-warm: #CEC7BC;
+  --pink-light: #E8E4DC;
   --cream: #F3F1EE;
   --cream-warm: #EBE8E3;
   --cream-pure: #FAF9F7;
@@ -28,66 +27,71 @@
   --text-faint: #B5B2AA;
   --line: #DDD8D0;
   --line-soft: #E8E4DD;
-  --accent: var(--cool-gray);
   --radius: 10px;
   --shadow: 0 1px 8px rgba(153,160,172,0.08);
-  --shadow-lg: 0 6px 24px rgba(153,160,172,0.10);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'Noto Serif SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', serif;
   font-weight: 400;
-  background: linear-gradient(165deg, var(--cream-pure) 0%, var(--cream-warm) 50%, #E8EAEC 100%);
+  background: var(--cream-pure);
   min-height: 100vh;
   color: var(--text);
-  line-height: 1.65;
+  line-height: 1.6;
   font-size: 14px;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ===== 顶部导航 ===== */
 .topbar {
   background: var(--shiraz-deep);
   color: var(--cool-gray-light);
-  padding: 0 32px;
-  height: 52px;
+  padding: 0 16px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 1px 12px rgba(46,18,21,0.15);
+  box-shadow: 0 1px 8px rgba(46,18,21,0.12);
 }
 .topbar .logo {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 65vw;
 }
 .topbar .logo span { color: var(--pink-warm); }
 .topbar .nav-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
+  flex-shrink: 0;
 }
 .topbar .nav-right .user-name {
   font-size: 12px;
-  opacity: 0.75;
+  opacity: 0.7;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .topbar .nav-right .logout-btn {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
   color: var(--cool-gray-light);
-  padding: 4px 14px;
+  padding: 4px 10px;
   border-radius: 4px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11px;
   transition: all 0.2s;
-}
-.topbar .nav-right .logout-btn:hover {
-  background: rgba(255,255,255,0.12);
 }
 
 /* ===== 登录/注册页 ===== */
@@ -96,48 +100,48 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 16px;
+  padding: 24px 14px;
 }
 .auth-card {
   background: var(--cream-pure);
-  border-radius: 16px;
-  box-shadow: var(--shadow-lg);
-  max-width: 420px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(153,160,172,0.10);
   width: 100%;
+  max-width: 400px;
   overflow: hidden;
   border: 1px solid var(--line-soft);
 }
 .auth-header {
   background: linear-gradient(135deg, var(--shiraz-deep), var(--shiraz-soft));
   color: var(--cream-pure);
-  padding: 32px 32px 26px;
+  padding: 28px 20px 22px;
   text-align: center;
 }
 .auth-header .brand {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: 2px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .auth-header .brand span { color: var(--pink-warm); }
 .auth-header .subtitle {
-  font-size: 12px;
-  opacity: 0.7;
+  font-size: 11px;
+  opacity: 0.65;
   letter-spacing: 0.5px;
 }
 .auth-body {
-  padding: 28px 32px 32px;
+  padding: 22px 20px 24px;
 }
 .auth-tabs {
   display: flex;
   gap: 0;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
   border-bottom: 1px solid var(--line);
 }
 .auth-tab {
   flex: 1;
   text-align: center;
-  padding: 10px 0;
+  padding: 9px 0;
   cursor: pointer;
   font-size: 13px;
   font-weight: 400;
@@ -151,28 +155,28 @@ body {
   border-bottom-color: var(--shiraz-soft);
   font-weight: 500;
 }
-.form-group {
-  margin-bottom: 16px;
-}
+.form-group { margin-bottom: 14px; }
 .form-group label {
   display: block;
   font-size: 12px;
   font-weight: 400;
   color: var(--text-soft);
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 9px 13px;
+  padding: 10px 12px;
   border: 1px solid var(--line);
   border-radius: 6px;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   transition: border 0.2s;
   background: var(--cream);
   color: var(--text);
+  appearance: none;
+  -webkit-appearance: none;
 }
 .form-group input:focus,
 .form-group select:focus {
@@ -190,84 +194,73 @@ body {
   background: var(--shiraz);
   color: var(--cream-pure);
   border: none;
-  padding: 11px;
+  padding: 12px;
   border-radius: 6px;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
   margin-top: 4px;
   letter-spacing: 1px;
 }
-.btn-primary:hover {
-  background: var(--shiraz-deep);
-  transform: translateY(-1px);
-  box-shadow: 0 3px 12px rgba(67,28,30,0.2);
-}
+.btn-primary:active { background: var(--shiraz-deep); }
 .auth-footer {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 16px;
   font-size: 11px;
   color: var(--text-faint);
-  letter-spacing: 0.5px;
 }
-.auth-footer .highlight {
-  color: var(--shiraz-soft);
-  font-weight: 500;
-}
+.auth-footer .highlight { color: var(--shiraz-soft); font-weight: 500; }
 
-/* DEMO登录提示 */
 .demo-hint {
   background: var(--pink-light);
   border: 1px solid var(--pink-warm);
   border-radius: 6px;
-  padding: 10px 14px;
-  margin-bottom: 20px;
+  padding: 9px 12px;
+  margin-bottom: 16px;
   font-size: 12px;
   color: var(--text-soft);
   line-height: 1.6;
 }
 .demo-hint strong { color: var(--shiraz); }
 
-/* ===== Dashboard 布局 ===== */
+/* ===== Dashboard ===== */
 .dashboard {
   display: none;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 24px 20px 48px;
+  padding: 16px 14px 40px;
 }
 .dashboard.active { display: block; }
 
 .welcome-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 .welcome-bar h1 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   color: var(--text);
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 .welcome-bar h1 .name { color: var(--shiraz-soft); }
 .welcome-bar .date {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
+  margin-top: 2px;
 }
 
-/* ===== 统计卡片 ===== */
+/* ===== 统计卡片（移动端 2x2） ===== */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 28px;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
 }
 .stat-card {
   background: var(--cream-pure);
-  border-radius: var(--radius);
-  padding: 18px 20px;
+  border-radius: 8px;
+  padding: 14px 14px 12px;
   box-shadow: var(--shadow);
   border: 1px solid var(--line-soft);
   position: relative;
@@ -288,103 +281,106 @@ body {
 .stat-card .stat-label {
   font-size: 11px;
   color: var(--text-muted);
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
+  margin-bottom: 4px;
 }
 .stat-card .stat-value {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--text);
+  line-height: 1.2;
 }
 .stat-card .stat-value .unit {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   color: var(--text-muted);
-  margin-left: 3px;
+  margin-left: 2px;
 }
 .stat-card .stat-trend {
-  font-size: 11px;
-  margin-top: 4px;
+  font-size: 10px;
+  margin-top: 3px;
   color: var(--cool-gray);
 }
 
 /* ===== 推荐码区 ===== */
 .section-title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   letter-spacing: 0.5px;
 }
 .section-title::before {
   content: '';
   width: 3px;
-  height: 14px;
+  height: 13px;
   background: var(--shiraz-soft);
   border-radius: 2px;
+  flex-shrink: 0;
 }
 
 .referral-box {
   background: linear-gradient(135deg, var(--shiraz-deep), var(--shiraz-soft));
-  border-radius: var(--radius);
-  padding: 22px 26px;
+  border-radius: 8px;
+  padding: 18px 16px;
   color: var(--cream-pure);
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: var(--shadow-lg);
+  margin-bottom: 22px;
+  box-shadow: 0 4px 16px rgba(67,28,30,0.12);
 }
 .referral-left .label {
   font-size: 11px;
   opacity: 0.6;
   margin-bottom: 4px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 .referral-left .code {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: 3px;
   color: var(--pink-warm);
   margin-bottom: 6px;
 }
 .referral-left .link {
-  font-size: 11px;
-  opacity: 0.65;
+  font-size: 10px;
+  opacity: 0.6;
   word-break: break-all;
+  line-height: 1.4;
 }
-.referral-right {
+.referral-btns {
   display: flex;
-  gap: 10px;
-  flex-shrink: 0;
+  gap: 8px;
+  margin-top: 14px;
 }
 .btn-copy {
+  flex: 1;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.15);
   color: var(--cream-pure);
-  padding: 7px 16px;
+  padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   font-family: inherit;
   font-size: 12px;
   transition: all 0.2s;
+  text-align: center;
 }
-.btn-copy:hover {
-  background: rgba(255,255,255,0.15);
-}
+.btn-copy:active { background: rgba(255,255,255,0.18); }
 
 /* ===== Tab 切换 ===== */
 .tab-bar {
   display: flex;
   gap: 0;
   border-bottom: 1px solid var(--line);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.tab-bar::-webkit-scrollbar { display: none; }
 .tab-btn {
-  padding: 9px 18px;
+  padding: 9px 14px;
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
@@ -395,6 +391,8 @@ body {
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .tab-btn.active {
   color: var(--shiraz);
@@ -404,9 +402,17 @@ body {
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-/* ===== 数据表格 ===== */
+/* ===== 数据表格（移动端卡片化） ===== */
+.data-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -14px;
+  padding: 0 14px;
+  scrollbar-width: thin;
+}
 .data-table {
   width: 100%;
+  min-width: 640px;
   background: var(--cream-pure);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -419,7 +425,7 @@ body {
 }
 .data-table th {
   background: var(--cream);
-  padding: 10px 16px;
+  padding: 9px 12px;
   text-align: left;
   font-size: 11px;
   font-weight: 500;
@@ -429,21 +435,22 @@ body {
   letter-spacing: 0.3px;
 }
 .data-table td {
-  padding: 11px 16px;
-  font-size: 12.5px;
+  padding: 10px 12px;
+  font-size: 12px;
   border-bottom: 1px solid var(--line-soft);
   color: var(--text-soft);
 }
 .data-table tr:last-child td { border-bottom: none; }
-.data-table tr:hover td { background: var(--cream); }
+.data-table tr:active { background: var(--cream); }
 
 /* 状态标签 */
 .status-tag {
   display: inline-block;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
   font-weight: 400;
+  white-space: nowrap;
 }
 .status-pending { background: var(--pink-light); color: var(--text-soft); }
 .status-following { background: var(--cool-gray-soft); color: #4A5058; }
@@ -451,53 +458,52 @@ body {
 .status-paid { background: #E8E0D8; color: var(--shiraz); }
 .status-settled { background: var(--cool-gray-light); color: #4A5058; }
 
-/* 产品标签 */
 .product-tag {
   display: inline-block;
-  padding: 2px 8px;
+  padding: 1px 7px;
   border-radius: 3px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 400;
+  white-space: nowrap;
 }
 .tag-herskill { background: var(--cool-gray-soft); color: #4A5058; }
 .tag-marketcraft { background: var(--pink-light); color: var(--shiraz-soft); }
 
-/* 佣金金额 */
-.amount { font-weight: 500; color: var(--shiraz); }
+.amount { font-weight: 500; color: var(--shiraz); font-size: 12px; }
 
-/* ===== 里程碑 ===== */
+/* ===== 里程碑（移动端单列） ===== */
 .milestones {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 .milestone-card {
   background: var(--cream-pure);
   border-radius: var(--radius);
-  padding: 18px 20px;
+  padding: 16px;
   box-shadow: var(--shadow);
   border: 1px solid var(--line-soft);
   display: flex;
-  gap: 16px;
+  gap: 14px;
   align-items: flex-start;
 }
 .milestone-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 17px;
+  font-size: 15px;
   flex-shrink: 0;
 }
 .ms-icon-1 { background: var(--pink-light); }
 .ms-icon-2 { background: var(--cool-gray-soft); }
 .ms-icon-3 { background: rgba(67,28,30,0.06); }
 .ms-icon-4 { background: #E8E0D8; }
-.milestone-info { flex: 1; }
+.milestone-info { flex: 1; min-width: 0; }
 .milestone-info .ms-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--text);
   margin-bottom: 2px;
@@ -506,27 +512,27 @@ body {
   font-size: 12px;
   color: var(--shiraz-soft);
   font-weight: 500;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .milestone-info .ms-desc {
   font-size: 11px;
   color: var(--text-muted);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .milestone-info .ms-progress {
-  height: 5px;
+  height: 4px;
   background: var(--cream-warm);
-  border-radius: 3px;
+  border-radius: 2px;
   overflow: hidden;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 .milestone-info .ms-progress .bar {
   height: 100%;
-  border-radius: 3px;
+  border-radius: 2px;
   transition: width 0.6s ease;
 }
 .milestone-info .ms-status {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-muted);
 }
 .milestone-info .ms-status.achieved { color: var(--cool-gray); font-weight: 500; }
@@ -534,13 +540,13 @@ body {
 /* ===== 产品信息卡 ===== */
 .product-info-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 .product-info-card {
   background: var(--cream-pure);
   border-radius: var(--radius);
-  padding: 22px 24px;
+  padding: 18px 16px;
   box-shadow: var(--shadow);
   border: 1px solid var(--line-soft);
   border-top: 3px solid;
@@ -551,16 +557,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .pi-header .pi-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text);
   letter-spacing: 0.5px;
 }
 .pi-header .pi-price {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--shiraz);
 }
@@ -570,47 +576,68 @@ body {
   justify-content: space-between;
   padding: 7px 0;
   border-bottom: 1px solid var(--line-soft);
-  font-size: 12.5px;
+  font-size: 12px;
 }
 .pi-info-row:last-child { border-bottom: none; }
 .pi-info-row .label { color: var(--text-muted); }
 .pi-info-row .value { font-weight: 400; color: var(--text-soft); }
-.pi-info-row .value.commission { color: var(--shiraz); font-size: 15px; font-weight: 500; }
+.pi-info-row .value.commission { color: var(--shiraz); font-size: 14px; font-weight: 500; }
 
-/* ===== 响应式 ===== */
-@media (max-width: 768px) {
-  .topbar { padding: 0 14px; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .welcome-bar { flex-direction: column; gap: 6px; align-items: flex-start; }
-  .referral-box { flex-direction: column; gap: 16px; text-align: center; }
-  .referral-left .code { font-size: 22px; }
-  .milestones { grid-template-columns: 1fr; }
-  .product-info-grid { grid-template-columns: 1fr; }
-  .data-table { overflow-x: auto; }
-  .data-table table { min-width: 550px; }
-  .tab-btn { padding: 8px 12px; font-size: 12px; }
+/* ===== 通用说明块 ===== */
+.note-block {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--cream-pure);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line-soft);
+  font-size: 12px;
+  color: var(--text-soft);
+  line-height: 1.8;
 }
+.note-block strong { color: var(--text); font-weight: 500; }
 
-/* Toast */
+/* ===== Toast ===== */
 .toast {
   position: fixed;
-  bottom: 32px;
+  bottom: max(24px, env(safe-area-inset-bottom, 24px));
   left: 50%;
   transform: translateX(-50%) translateY(80px);
   background: var(--shiraz-deep);
   color: var(--cream-pure);
-  padding: 10px 26px;
+  padding: 10px 22px;
   border-radius: 6px;
   font-size: 12px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 4px 16px rgba(46,18,21,0.2);
   opacity: 0;
   transition: all 0.3s;
   z-index: 999;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  pointer-events: none;
 }
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* ===== 桌面端修复 ===== */
+@media (min-width: 769px) {
+  .topbar { padding: 0 32px; height: 52px; }
+  .topbar .logo { font-size: 15px; max-width: none; }
+  .topbar .nav-right .user-name { max-width: none; }
+  .dashboard { padding: 24px 24px 48px; }
+  .welcome-bar { margin-bottom: 24px; }
+  .welcome-bar h1 { font-size: 20px; }
+  .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .stat-card { padding: 18px 20px; }
+  .stat-card .stat-value { font-size: 24px; }
+  .referral-box { padding: 22px 26px; display: flex; align-items: center; justify-content: space-between; }
+  .referral-btns { margin-top: 0; flex-shrink: 0; }
+  .milestones { grid-template-columns: repeat(2, 1fr); }
+  .product-info-grid { grid-template-columns: repeat(2, 1fr); }
+  .data-table-wrap { margin: 0; padding: 0; }
+  .data-table { min-width: auto; }
 }
 </style>
 </head>
@@ -618,7 +645,7 @@ body {
 
 <!-- ===== 顶部导航 ===== -->
 <div class="topbar" id="topbar" style="display:none;">
-  <div class="logo">MarketCraft × <span>HerSkill</span> · 合伙人门户</div>
+  <div class="logo">MarketCraft × <span>HerSkill</span> · 合伙人</div>
   <div class="nav-right">
     <span class="user-name" id="navUserName"></span>
     <button class="logout-btn" onclick="logout()">退出</button>
@@ -630,18 +657,17 @@ body {
   <div class="auth-card">
     <div class="auth-header">
       <div class="brand">合伙人 <span>门户</span></div>
-      <div class="subtitle">MarketCraft × HerSkill · 产品推荐合伙人计划</div>
+      <div class="subtitle">MarketCraft × HerSkill 推荐合伙人计划</div>
     </div>
     <div class="auth-body">
       <div class="demo-hint">
-        <strong>DEMO 演示</strong>：点击「登录」直接进入体验（已预填演示账号）。点击「注册」可体验注册流程。
+        <strong>DEMO 演示</strong>：点击「登录」直接进入体验。
       </div>
       <div class="auth-tabs">
         <div class="auth-tab active" id="tabLogin" onclick="switchAuth('login')">登录</div>
         <div class="auth-tab" id="tabRegister" onclick="switchAuth('register')">注册</div>
       </div>
 
-      <!-- 登录表单 -->
       <div id="loginForm">
         <div class="form-group">
           <label>手机号</label>
@@ -651,10 +677,9 @@ body {
           <label>密码</label>
           <input type="password" id="loginPwd" value="123456" placeholder="请输入密码">
         </div>
-        <button class="btn-primary" onclick="doLogin()">登录进入合伙人后台</button>
+        <button class="btn-primary" onclick="doLogin()">登录</button>
       </div>
 
-      <!-- 注册表单 -->
       <div id="registerForm" style="display:none;">
         <div class="form-group">
           <label>姓名</label>
@@ -686,7 +711,7 @@ body {
       </div>
 
       <div class="auth-footer">
-        <span class="highlight">零入会费 · 零囤货 · 零层级</span> · 合规透明
+        <span class="highlight">零入会费 · 零囤货 · 零层级</span>
       </div>
     </div>
   </div>
@@ -695,142 +720,138 @@ body {
 <!-- ===== Dashboard ===== -->
 <div class="dashboard" id="dashboard">
 
-  <!-- 欢迎栏 -->
   <div class="welcome-bar">
-    <h1>欢迎回来，<span class="name" id="welcomeName">张明</span></h1>
+    <h1>欢迎，<span class="name" id="welcomeName">张明</span></h1>
     <div class="date" id="todayDate"></div>
   </div>
 
   <!-- 统计卡片 -->
   <div class="stats-grid">
     <div class="stat-card s1">
-      <div class="stat-label">累计推荐客户</div>
+      <div class="stat-label">累计推荐</div>
       <div class="stat-value">8<span class="unit">位</span></div>
-      <div class="stat-trend">本季新增 3 位</div>
     </div>
     <div class="stat-card s2">
-      <div class="stat-label">已成交客户</div>
+      <div class="stat-label">已成交</div>
       <div class="stat-value">5<span class="unit">位</span></div>
-      <div class="stat-trend">转化率 62.5%</div>
     </div>
     <div class="stat-card s3">
-      <div class="stat-label">累计成交金额</div>
-      <div class="stat-value">¥18.8<span class="unit">万</span></div>
-      <div class="stat-trend">本季 +¥6.8万</div>
+      <div class="stat-label">累计成交</div>
+      <div class="stat-value">18.8<span class="unit">万</span></div>
     </div>
     <div class="stat-card s4">
-      <div class="stat-label">待结算佣金</div>
+      <div class="stat-label">待结算</div>
       <div class="stat-value">¥9,900</div>
-      <div class="stat-trend">下次打款：6月25日</div>
     </div>
   </div>
 
   <!-- 推荐码 -->
   <div class="section-title">我的推荐码</div>
   <div class="referral-box">
-    <div class="referral-left">
+    <div>
       <div class="label">专属推荐码</div>
       <div class="code">MC880066</div>
-      <div class="link">推荐链接：https://luyimodeng330.github.io/herskill/?ref=MC880066</div>
-    </div>
-    <div class="referral-right">
-      <button class="btn-copy" onclick="copyCode()">复制推荐码</button>
-      <button class="btn-copy" onclick="copyLink()">复制链接</button>
+      <div class="link">https://luyimodeng330.github.io/herskill/?ref=MC880066</div>
     </div>
   </div>
+  <div class="referral-btns">
+    <button class="btn-copy" onclick="copyCode()">复制推荐码</button>
+    <button class="btn-copy" onclick="copyLink()">复制链接</button>
+  </div>
 
-  <!-- Tab 区域 -->
+  <!-- Tab -->
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('clients', this)">客户管理</button>
-    <button class="tab-btn" onclick="switchTab('commission', this)">佣金记录</button>
-    <button class="tab-btn" onclick="switchTab('milestones', this)">里程碑奖励</button>
-    <button class="tab-btn" onclick="switchTab('products', this)">产品与分润</button>
+    <button class="tab-btn active" onclick="switchTab('clients', this)">客户</button>
+    <button class="tab-btn" onclick="switchTab('commission', this)">佣金</button>
+    <button class="tab-btn" onclick="switchTab('milestones', this)">里程碑</button>
+    <button class="tab-btn" onclick="switchTab('products', this)">产品分润</button>
   </div>
 
   <!-- 客户管理 -->
   <div class="tab-panel active" id="panel-clients">
+    <div class="data-table-wrap">
     <div class="data-table">
       <table>
         <thead>
           <tr>
-            <th>客户名称</th>
-            <th>推荐产品</th>
-            <th>客户来源</th>
-            <th>推荐日期</th>
-            <th>当前状态</th>
-            <th>成交金额</th>
-            <th>预计佣金</th>
+            <th>客户</th>
+            <th>产品</th>
+            <th>来源</th>
+            <th>日期</th>
+            <th>状态</th>
+            <th>金额</th>
+            <th>佣金</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>上海明远眼镜</td>
             <td><span class="product-tag tag-herskill">HerSkill</span></td>
-            <td>直接介绍</td>
-            <td>2026-04-12</td>
+            <td>直接</td>
+            <td>04-12</td>
             <td><span class="status-tag status-settled">已结算</span></td>
-            <td>¥19,800</td>
+            <td>¥1.98万</td>
             <td class="amount">¥4,950</td>
           </tr>
           <tr>
             <td>深圳青衿餐饮</td>
-            <td><span class="product-tag tag-marketcraft">MarketCraft</span></td>
-            <td>推荐链接</td>
-            <td>2026-04-28</td>
+            <td><span class="product-tag tag-marketcraft">MC</span></td>
+            <td>链接</td>
+            <td>04-28</td>
             <td><span class="status-tag status-settled">已结算</span></td>
-            <td>¥120,000</td>
-            <td class="amount">¥24,000</td>
+            <td>¥12万</td>
+            <td class="amount">¥2.4万</td>
           </tr>
           <tr>
             <td>杭州云栖科技</td>
             <td><span class="product-tag tag-herskill">HerSkill</span></td>
             <td>推荐码</td>
-            <td>2026-05-10</td>
+            <td>05-10</td>
             <td><span class="status-tag status-settled">已结算</span></td>
-            <td>¥19,800</td>
+            <td>¥1.98万</td>
             <td class="amount">¥4,950</td>
           </tr>
           <tr>
-            <td>北京中盈并购咨询</td>
-            <td><span class="product-tag tag-marketcraft">MarketCraft</span></td>
-            <td>直接介绍</td>
-            <td>2026-05-22</td>
+            <td>北京中盈并购</td>
+            <td><span class="product-tag tag-marketcraft">MC</span></td>
+            <td>直接</td>
+            <td>05-22</td>
             <td><span class="status-tag status-paid">已付款</span></td>
-            <td>¥80,000</td>
-            <td class="amount">¥16,000</td>
+            <td>¥8万</td>
+            <td class="amount">¥1.6万</td>
           </tr>
           <tr>
             <td>广州卓尔服饰</td>
             <td><span class="product-tag tag-herskill">HerSkill</span></td>
-            <td>推荐链接</td>
-            <td>2026-05-30</td>
+            <td>链接</td>
+            <td>05-30</td>
             <td><span class="status-tag status-settled">已结算</span></td>
-            <td>¥19,800</td>
+            <td>¥1.98万</td>
             <td class="amount">¥4,950</td>
           </tr>
           <tr>
-            <td>成都锦程券商营业部</td>
-            <td><span class="product-tag tag-marketcraft">MarketCraft</span></td>
-            <td>直接介绍</td>
-            <td>2026-06-05</td>
+            <td>成都锦程券商</td>
+            <td><span class="product-tag tag-marketcraft">MC</span></td>
+            <td>直接</td>
+            <td>06-05</td>
             <td><span class="status-tag status-contracted">已签约</span></td>
-            <td>¥100,000</td>
-            <td class="amount">¥20,000</td>
+            <td>¥10万</td>
+            <td class="amount">¥2万</td>
           </tr>
           <tr>
             <td>南京新语文化</td>
             <td><span class="product-tag tag-herskill">HerSkill</span></td>
             <td>推荐码</td>
-            <td>2026-06-12</td>
+            <td>06-12</td>
             <td><span class="status-tag status-following">跟进中</span></td>
             <td>—</td>
             <td>—</td>
           </tr>
           <tr>
             <td>武汉博达医疗</td>
-            <td><span class="product-tag tag-marketcraft">MarketCraft</span></td>
-            <td>推荐链接</td>
-            <td>2026-06-15</td>
+            <td><span class="product-tag tag-marketcraft">MC</span></td>
+            <td>链接</td>
+            <td>06-15</td>
             <td><span class="status-tag status-pending">初步接触</span></td>
             <td>—</td>
             <td>—</td>
@@ -838,101 +859,104 @@ body {
         </tbody>
       </table>
     </div>
+    </div>
   </div>
 
   <!-- 佣金记录 -->
   <div class="tab-panel" id="panel-commission">
+    <div class="data-table-wrap">
     <div class="data-table">
       <table>
         <thead>
           <tr>
-            <th>结算编号</th>
-            <th>客户名称</th>
+            <th>结算号</th>
+            <th>客户</th>
             <th>产品</th>
-            <th>成交金额</th>
-            <th>佣金比例</th>
-            <th>佣金金额</th>
-            <th>结算状态</th>
-            <th>结算日期</th>
+            <th>金额</th>
+            <th>比例</th>
+            <th>佣金</th>
+            <th>状态</th>
+            <th>日期</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>CM20260415</td>
-            <td>上海明远眼镜</td>
-            <td>HerSkill</td>
-            <td>¥19,800</td>
+            <td>0415</td>
+            <td>明远眼镜</td>
+            <td>HS</td>
+            <td>¥1.98万</td>
             <td>25%</td>
             <td class="amount">¥4,950</td>
             <td><span class="status-tag status-settled">已打款</span></td>
-            <td>2026-04-25</td>
+            <td>04-25</td>
           </tr>
           <tr>
-            <td>CM20260510</td>
-            <td>深圳青衿餐饮</td>
-            <td>MarketCraft</td>
-            <td>¥120,000</td>
+            <td>0510</td>
+            <td>青衿餐饮</td>
+            <td>MC</td>
+            <td>¥12万</td>
             <td>20%</td>
-            <td class="amount">¥24,000</td>
+            <td class="amount">¥2.4万</td>
             <td><span class="status-tag status-settled">已打款</span></td>
-            <td>2026-05-25</td>
+            <td>05-25</td>
           </tr>
           <tr>
-            <td>CM20260525</td>
-            <td>杭州云栖科技</td>
-            <td>HerSkill</td>
-            <td>¥19,800</td>
+            <td>0525</td>
+            <td>云栖科技</td>
+            <td>HS</td>
+            <td>¥1.98万</td>
             <td>25%</td>
             <td class="amount">¥4,950</td>
             <td><span class="status-tag status-settled">已打款</span></td>
-            <td>2026-06-10</td>
+            <td>06-10</td>
           </tr>
           <tr>
-            <td>CM20260605</td>
-            <td>广州卓尔服饰</td>
-            <td>HerSkill</td>
-            <td>¥19,800</td>
+            <td>0605</td>
+            <td>卓尔服饰</td>
+            <td>HS</td>
+            <td>¥1.98万</td>
             <td>25%</td>
             <td class="amount">¥4,950</td>
             <td><span class="status-tag status-settled">已打款</span></td>
-            <td>2026-06-10</td>
+            <td>06-10</td>
           </tr>
           <tr>
-            <td>CM20260618</td>
-            <td>北京中盈并购咨询</td>
-            <td>MarketCraft</td>
-            <td>¥80,000</td>
+            <td>0618</td>
+            <td>中盈并购</td>
+            <td>MC</td>
+            <td>¥8万</td>
             <td>20%</td>
             <td class="amount">¥8,000</td>
             <td><span class="status-tag status-pending">待结算</span></td>
-            <td>预计 6月25日</td>
+            <td>06-25</td>
           </tr>
           <tr>
-            <td>CM20260620</td>
-            <td>北京中盈并购咨询</td>
-            <td>MarketCraft</td>
-            <td>¥80,000</td>
+            <td>0620</td>
+            <td>中盈并购</td>
+            <td>MC</td>
+            <td>¥8万</td>
             <td>20%</td>
             <td class="amount">¥8,000</td>
             <td><span class="status-tag status-pending">待结算</span></td>
-            <td>项目交付后</td>
+            <td>交付后</td>
           </tr>
           <tr>
-            <td>CM20260615</td>
-            <td>成都锦程券商营业部</td>
-            <td>MarketCraft</td>
-            <td>¥100,000</td>
+            <td>0615</td>
+            <td>锦程券商</td>
+            <td>MC</td>
+            <td>¥10万</td>
             <td>20%</td>
-            <td class="amount">¥10,000</td>
+            <td class="amount">¥1万</td>
             <td><span class="status-tag status-pending">待结算</span></td>
-            <td>首付到账后</td>
+            <td>首付后</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div style="margin-top:14px; padding:14px 18px; background:var(--cream-pure); border-radius:10px; box-shadow:var(--shadow); border:1px solid var(--line-soft); font-size:12px; color:var(--text-muted); line-height:1.7;">
-      <strong style="color:var(--text);">结算说明：</strong>
-      HerSkill 客户全额付款后一次性结算；MarketCraft 首付到账结算 50%，项目交付完成后结算剩余 50%。每月 10 日、25 日集中打款。
+    </div>
+    <div class="note-block">
+      <strong>结算说明：</strong>
+      HerSkill 客户全额付款后一次性结算；MarketCraft 首付到账结算 50%，项目交付完成结算剩余 50%。每月 10 日、25 日集中打款。
     </div>
   </div>
 
@@ -946,7 +970,7 @@ body {
           <div class="ms-reward">¥500 现金</div>
           <div class="ms-desc">第一单成交后发放</div>
           <div class="ms-progress"><div class="bar" style="width:100%; background:var(--cool-gray);"></div></div>
-          <div class="ms-status achieved">✓ 已达成（2026-04-25）</div>
+          <div class="ms-status achieved">✓ 已达成（04-25）</div>
         </div>
       </div>
       <div class="milestone-card">
@@ -956,7 +980,7 @@ body {
           <div class="ms-reward">¥2,000 + 官网展示</div>
           <div class="ms-desc">季度推荐成交金额 Top 3</div>
           <div class="ms-progress"><div class="bar" style="width:75%; background:var(--cool-gray-light);"></div></div>
-          <div class="ms-status">当前排名第 2 · 距 Top 1 还差 ¥2.2万</div>
+          <div class="ms-status">当前排名第 2</div>
         </div>
       </div>
       <div class="milestone-card">
@@ -1040,13 +1064,11 @@ body {
       </div>
     </div>
 
-    <div style="margin-top:18px; padding:18px 22px; background:var(--cream-pure); border-radius:10px; box-shadow:var(--shadow); border:1px solid var(--line-soft);">
-      <div style="font-size:13px; font-weight:500; color:var(--text); margin-bottom:12px; letter-spacing:0.5px;">推荐话术要点</div>
-      <div style="font-size:12px; color:var(--text-soft); line-height:1.9;">
-        <strong>HerSkill</strong>：AI 员工系统，帮企业省人效、提产出。一次购买，永久使用。适合 10-100 人的团队。<br>
-        <strong>MarketCraft</strong>：基于 CORE×JTBD×第一性原理的增长策略系统，33-41 天闭环交付。适合需要突破增长瓶颈的品牌和机构。<br>
-        <strong>合规提醒</strong>：零入会费、零囤货、零层级，只做客户推荐分润。不发展下线，不收取任何费用。
-      </div>
+    <div class="note-block">
+      <strong>推荐话术要点</strong><br>
+      <strong>HerSkill</strong>：AI 员工系统，帮企业省人效、提产出。一次购买，永久使用。适合 10-100 人的团队。<br>
+      <strong>MarketCraft</strong>：基于 CORE×JTBD×第一性原理的增长策略系统，33-41 天闭环交付。适合需要突破增长瓶颈的品牌和机构。<br>
+      <strong>合规提醒</strong>：零入会费、零囤货、零层级，只做客户推荐分润。不发展下线，不收取任何费用。
     </div>
   </div>
 
@@ -1080,9 +1102,7 @@ function doRegister() {
     return;
   }
   showToast('注册申请已提交，审核通过后我们将短信通知您');
-  setTimeout(function() {
-    switchAuth('login');
-  }, 2000);
+  setTimeout(function() { switchAuth('login'); }, 2000);
 }
 
 function showDashboard() {
@@ -1091,10 +1111,9 @@ function showDashboard() {
   document.getElementById('dashboard').classList.add('active');
   document.getElementById('navUserName').textContent = currentUser.name;
   document.getElementById('welcomeName').textContent = currentUser.name;
-
   var now = new Date();
   var dateStr = now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日';
-  document.getElementById('todayDate').textContent = dateStr + ' · 合伙人后台';
+  document.getElementById('todayDate').textContent = dateStr;
 }
 
 function logout() {
@@ -1105,14 +1124,9 @@ function logout() {
 }
 
 function switchTab(panelId, btn) {
-  document.querySelectorAll('.tab-btn').forEach(function(b) {
-    b.classList.remove('active');
-  });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
-
-  document.querySelectorAll('.tab-panel').forEach(function(p) {
-    p.classList.remove('active');
-  });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
   document.getElementById('panel-' + panelId).classList.add('active');
 }
 
@@ -1128,27 +1142,21 @@ function copyLink() {
 }
 
 function copyToClipboard(text) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text);
-  } else {
-    var textarea = document.createElement('textarea');
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
+  if (navigator.clipboard) { navigator.clipboard.writeText(text); }
+  else {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
   }
 }
 
 function showToast(msg) {
-  var toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(function() {
-    toast.classList.remove('show');
-  }, 2500);
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2500);
 }
 </script>
-
 </body>
 </html>
