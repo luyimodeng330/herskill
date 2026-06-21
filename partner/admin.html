@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>管理后台 · 合伙人系统</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --shiraz: #431C1E; --shiraz-deep: #2E1215; --shiraz-soft: #6B3A3E;
+  --cool-gray: #99A0AC; --cool-gray-light: #B8BFC9; --cool-gray-soft: #D4D8DE;
+  --pink-warm: #CEC7BC; --pink-light: #E8E4DC;
+  --cream: #F3F1EE; --cream-warm: #EBE8E3; --cream-pure: #FAF9F7;
+  --text: #2C2826; --text-soft: #5A5550; --text-muted: #89857E; --text-faint: #B5B2AA;
+  --line: #DDD8D0; --line-soft: #E8E4DD;
+  --radius: 9px; --shadow: 0 1px 6px rgba(153,160,172,0.07);
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body { font-family: 'Noto Serif SC', -apple-system, serif; font-weight: 400; background: var(--cream-pure); min-height: 100vh; color: var(--text); line-height: 1.55; font-size: 13px; -webkit-font-smoothing: antialiased; }
+
+.topbar { background: var(--shiraz-deep); color: var(--cool-gray-light); padding: 0 14px; height: 46px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.topbar .logo { font-size: 13px; font-weight: 500; letter-spacing: 1px; }
+.topbar .logo span { color: var(--pink-warm); }
+
+.admin { max-width: 1100px; margin: 0 auto; padding: 14px 14px 36px; }
+
+.welcome-bar { margin-bottom: 16px; }
+.welcome-bar h1 { font-size: 17px; font-weight: 500; color: var(--text); }
+.welcome-bar .date { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+/* 总览卡片 */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+.stat-card { background: var(--cream-pure); border-radius: 8px; padding: 12px; box-shadow: var(--shadow); border: 1px solid var(--line-soft); position: relative; overflow: hidden; }
+.stat-card::before { content:''; position:absolute; top:0; left:0; width:2.5px; height:100%; }
+.stat-card.s1::before { background: var(--cool-gray); } .stat-card.s2::before { background: var(--pink-warm); }
+.stat-card.s3::before { background: var(--shiraz-soft); } .stat-card.s4::before { background: var(--shiraz); }
+.stat-card .stat-label { font-size: 10.5px; color: var(--text-muted); margin-bottom: 3px; }
+.stat-card .stat-value { font-size: 20px; font-weight: 600; color: var(--text); line-height: 1.1; }
+.stat-card .stat-value .unit { font-size: 10.5px; font-weight: 400; color: var(--text-muted); margin-left: 2px; }
+
+/* Tab */
+.tab-bar { display: flex; border-bottom: 1px solid var(--line); margin-bottom: 13px; overflow-x: auto; scrollbar-width: none; }
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn { padding: 8px 13px; cursor: pointer; font-family: inherit; font-size: 12.5px; color: var(--text-muted); border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; flex-shrink: 0; }
+.tab-btn.active { color: var(--shiraz); border-bottom-color: var(--shiraz-soft); font-weight: 500; }
+.tab-panel { display: none; } .tab-panel.active { display: block; }
+
+/* 合伙人卡片 */
+.partner-card { background: var(--cream-pure); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--line-soft); padding: 12px 14px; margin-bottom: 8px; }
+.partner-card .pc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.partner-card .pc-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.partner-card .pc-code { font-size: 11px; color: var(--shiraz-soft); font-weight: 500; }
+.partner-card .pc-stats { display: flex; gap: 16px; font-size: 11px; color: var(--text-muted); }
+.partner-card .pc-stats span strong { color: var(--text); font-weight: 500; }
+
+/* 客户管理行 */
+.referral-row { background: var(--cream-pure); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--line-soft); padding: 12px 14px; margin-bottom: 8px; }
+.referral-row .rr-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.referral-row .rr-left { flex: 1; }
+.referral-row .rr-client { font-size: 13px; font-weight: 500; color: var(--text); }
+.referral-row .rr-meta { font-size: 10.5px; color: var(--text-muted); margin-top: 2px; }
+.referral-row .rr-right { text-align: right; }
+.referral-row .rr-amount { font-size: 13px; font-weight: 500; color: var(--shiraz); }
+.referral-row .rr-commission { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; }
+.referral-row .rr-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line-soft); }
+.referral-row .rr-label { font-size: 10.5px; color: var(--text-muted); }
+.rr-select { padding: 4px 8px; border: 1px solid var(--line); border-radius: 4px; font-family: inherit; font-size: 11px; background: var(--cream); color: var(--text); }
+.rr-input { padding: 4px 8px; border: 1px solid var(--line); border-radius: 4px; font-family: inherit; font-size: 11px; width: 90px; background: var(--cream); color: var(--text); }
+.rr-save { background: var(--shiraz); color: var(--cream-pure); border: none; padding: 5px 12px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer; }
+.rr-save:active { background: var(--shiraz-deep); }
+.rr-saved { font-size: 10px; color: var(--cool-gray); }
+
+/* 添加客户 */
+.add-btn { background: var(--shiraz-soft); color: var(--cream-pure); border: none; padding: 8px 16px; border-radius: 6px; font-family: inherit; font-size: 12px; cursor: pointer; margin-bottom: 12px; }
+.add-form { background: var(--cream); border-radius: var(--radius); border: 1px solid var(--line-soft); padding: 14px; margin-bottom: 12px; display: none; }
+.add-form.active { display: block; }
+.add-form .af-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.add-form .af-field { flex: 1; min-width: 120px; }
+.add-form .af-field label { display: block; font-size: 10.5px; color: var(--text-muted); margin-bottom: 3px; }
+.add-form .af-field input, .add-form .af-field select { width: 100%; padding: 7px 9px; border: 1px solid var(--line); border-radius: 4px; font-family: inherit; font-size: 12px; background: var(--cream-pure); color: var(--text); }
+.add-form .af-submit { background: var(--shiraz); color: var(--cream-pure); border: none; padding: 8px 16px; border-radius: 5px; font-family: inherit; font-size: 12px; cursor: pointer; }
+
+.loading { text-align: center; padding: 30px; color: var(--text-muted); font-size: 12px; }
+.toast { position: fixed; bottom: max(24px, env(safe-area-inset-bottom, 24px)); left: 50%; transform: translateX(-50%) translateY(80px); background: var(--shiraz-deep); color: var(--cream-pure); padding: 9px 20px; border-radius: 6px; font-size: 12px; opacity: 0; transition: all 0.3s; z-index: 999; white-space: nowrap; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (min-width: 769px) {
+  .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat-card { padding: 16px 18px 13px; } .stat-card .stat-value { font-size: 22px; }
+  .admin { padding: 20px 24px 44px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">合伙人系统 · <span>管理后台</span></div>
+</div>
+
+<div class="admin">
+  <div class="welcome-bar">
+    <h1>管理后台</h1>
+    <div class="date" id="todayDate"></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card s1"><div class="stat-label">合伙人总数</div><div class="stat-value" id="statPartners">—<span class="unit">人</span></div></div>
+    <div class="stat-card s2"><div class="stat-label">客户总数</div><div class="stat-value" id="statClients">—<span class="unit">条</span></div></div>
+    <div class="stat-card s3"><div class="stat-label">累计成交</div><div class="stat-value" id="statAmount">—<span class="unit">万</span></div></div>
+    <div class="stat-card s4"><div class="stat-label">已付佣金</div><div class="stat-value" id="statPaid">—</div></div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('referrals', this)">客户管理</button>
+    <button class="tab-btn" onclick="switchTab('partners', this)">合伙人</button>
+  </div>
+
+  <!-- 客户管理 -->
+  <div class="tab-panel active" id="panel-referrals">
+    <button class="add-btn" onclick="toggleAddForm()">+ 添加客户</button>
+    <div class="add-form" id="addForm">
+      <div class="af-row">
+        <div class="af-field"><label>客户名称</label><input type="text" id="afName" placeholder="客户公司名"></div>
+        <div class="af-field"><label>产品</label><select id="afProduct"><option value="herskill">HerSkill</option><option value="marketcraft">MarketCraft</option></select></div>
+        <div class="af-field"><label>归属合伙人</label><select id="afPartner"></select></div>
+      </div>
+      <div class="af-row">
+        <div class="af-field"><label>来源</label><select id="afSource"><option value="直接">直接</option><option value="链接">链接</option><option value="推荐码">推荐码</option></select></div>
+        <div class="af-field"><label>状态</label><select id="afStatus"><option value="pending">初步接触</option><option value="following">跟进中</option><option value="contracted">已签约</option><option value="paid">已付款</option><option value="settled">已结算</option></select></div>
+        <div class="af-field"><label>成交金额</label><input type="number" id="afAmount" placeholder="元"></div>
+        <div class="af-field"><label>佣金</label><input type="number" id="afCommission" placeholder="元"></div>
+      </div>
+      <button class="af-submit" onclick="addReferral()">添加</button>
+    </div>
+    <div id="referralList"><div class="loading">加载中…</div></div>
+  </div>
+
+  <!-- 合伙人 -->
+  <div class="tab-panel" id="panel-partners">
+    <div id="partnerList"><div class="loading">加载中…</div></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SB_URL = "https://uxyznvizccouzcqcgozk.supabase.co/rest/v1";
+const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4eXpudml6Y2NvdXpjcWNnb3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwMzkzNjYsImV4cCI6MjA5NzYxNTM2Nn0.rHUXmwZhh1X8icD_GkQft5NFhrjR1SMXoeMr3U_WqGc";
+
+let allPartners = [];
+let allReferrals = [];
+
+const STATUS_LABELS = { pending: '初步接触', following: '跟进中', contracted: '已签约', paid: '已付款', settled: '已结算' };
+
+function formatDate(d) { if (!d) return ''; const date = new Date(d); return (date.getMonth()+1).toString().padStart(2,'0') + '-' + date.getDate().toString().padStart(2,'0'); }
+function formatAmount(n) { if (!n) return '—'; if (n >= 10000) return '¥' + (n/10000).toFixed(2).replace(/\.?0+$/,'') + '万'; return '¥' + n.toLocaleString(); }
+
+async function sbGet(table, params) {
+  let url = SB_URL + '/' + table; if (params) url += '?' + params;
+  const resp = await fetch(url, { headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY } });
+  if (!resp.ok) throw new Error(resp.status); return resp.json();
+}
+async function sbPost(table, data) {
+  const resp = await fetch(SB_URL + '/' + table, { method: 'POST', headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' }, body: JSON.stringify(data) });
+  if (!resp.ok) throw new Error(resp.status); return resp.json();
+}
+async function sbPatch(table, id, data) {
+  const resp = await fetch(SB_URL + '/' + table + '?id=eq.' + id, { method: 'PATCH', headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify(data) });
+  if (!resp.ok) throw new Error(resp.status); return true;
+}
+
+async function loadData() {
+  allPartners = await sbGet('partners', 'select=*&order=created_at.desc');
+  allReferrals = await sbGet('referrals', 'select=*&order=created_at.desc');
+  renderStats();
+  renderReferrals();
+  renderPartners();
+  populatePartnerSelect();
+}
+
+function renderStats() {
+  document.getElementById('statPartners').innerHTML = allPartners.length + '<span class="unit">人</span>';
+  document.getElementById('statClients').innerHTML = allReferrals.length + '<span class="unit">条</span>';
+  const totalAmount = allReferrals.filter(r => r.amount).reduce((s, r) => s + parseFloat(r.amount), 0);
+  document.getElementById('statAmount').innerHTML = (totalAmount/10000).toFixed(1) + '<span class="unit">万</span>';
+  const paidComm = allReferrals.filter(r => r.status === 'settled' && r.commission).reduce((s, r) => s + parseFloat(r.commission), 0);
+  document.getElementById('statPaid').textContent = '¥' + paidComm.toLocaleString();
+}
+
+function partnerName(id) { const p = allPartners.find(x => x.id === id); return p ? p.name : '未知'; }
+
+function renderReferrals() {
+  const container = document.getElementById('referralList');
+  if (allReferrals.length === 0) { container.innerHTML = '<div class="loading">暂无客户</div>'; return; }
+  container.innerHTML = allReferrals.map(r => {
+    const isHS = r.product === 'herskill';
+    return `<div class="referral-row">
+      <div class="rr-top">
+        <div class="rr-left">
+          <div class="rr-client">${r.client_name} <span style="font-size:10px;color:var(--text-faint);">(${isHS ? 'HS' : 'MC'})</span></div>
+          <div class="rr-meta">合伙人: ${partnerName(r.partner_id)} · ${r.source || ''} · ${formatDate(r.created_at)}</div>
+        </div>
+        <div class="rr-right">
+          <div class="rr-amount">${formatAmount(parseFloat(r.amount))}</div>
+          <div class="rr-commission">佣金 ${r.commission ? '¥' + parseFloat(r.commission).toLocaleString() : '—'}</div>
+        </div>
+      </div>
+      <div class="rr-actions">
+        <span class="rr-label">状态:</span>
+        <select class="rr-select" id="status-${r.id}" onchange="saveField('${r.id}','status')">
+          ${Object.entries(STATUS_LABELS).map(([k,v]) => `<option value="${k}" ${r.status===k?'selected':''}>${v}</option>`).join('')}
+        </select>
+        <span class="rr-label">金额:</span>
+        <input class="rr-input" type="number" id="amount-${r.id}" value="${r.amount || ''}" placeholder="元">
+        <span class="rr-label">佣金:</span>
+        <input class="rr-input" type="number" id="commission-${r.id}" value="${r.commission || ''}" placeholder="元">
+        <button class="rr-save" onclick="saveAll('${r.id}')">保存</button>
+        <span class="rr-saved" id="saved-${r.id}"></span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderPartners() {
+  const container = document.getElementById('partnerList');
+  if (allPartners.length === 0) { container.innerHTML = '<div class="loading">暂无合伙人</div>'; return; }
+  container.innerHTML = allPartners.map(p => {
+    const refs = allReferrals.filter(r => r.partner_id === p.id);
+    const dealt = refs.filter(r => ['settled','paid','contracted'].includes(r.status)).length;
+    const amount = refs.filter(r => r.amount).reduce((s, r) => s + parseFloat(r.amount), 0);
+    const typeMap = { kol: 'KOL/博主', agent: '代理商', consultant: '独立顾问', other: '其他' };
+    return `<div class="partner-card">
+      <div class="pc-header">
+        <div class="pc-name">${p.name} <span style="font-size:10px;color:var(--text-faint);font-weight:400;">· ${typeMap[p.type] || p.type}</span></div>
+        <div class="pc-code">${p.referral_code}</div>
+      </div>
+      <div class="pc-stats">
+        <span>手机: <strong>${p.phone}</strong></span>
+        <span>客户: <strong>${refs.length}</strong></span>
+        <span>成交: <strong>${dealt}</strong></span>
+        <span>金额: <strong>¥${(amount/10000).toFixed(1)}万</strong></span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function populatePartnerSelect() {
+  const sel = document.getElementById('afPartner');
+  sel.innerHTML = allPartners.map(p => `<option value="${p.id}">${p.name} (${p.referral_code})</option>`).join('');
+}
+
+function toggleAddForm() { document.getElementById('addForm').classList.toggle('active'); }
+
+async function addReferral() {
+  const name = document.getElementById('afName').value.trim();
+  if (!name) { showToast('请填写客户名称'); return; }
+  const data = {
+    partner_id: document.getElementById('afPartner').value,
+    client_name: name,
+    product: document.getElementById('afProduct').value,
+    source: document.getElementById('afSource').value,
+    status: document.getElementById('afStatus').value,
+    amount: document.getElementById('afAmount').value || null,
+    commission: document.getElementById('afCommission').value || null
+  };
+  try {
+    await sbPost('referrals', data);
+    showToast('客户添加成功');
+    document.getElementById('afName').value = '';
+    document.getElementById('afAmount').value = '';
+    document.getElementById('afCommission').value = '';
+    document.getElementById('addForm').classList.remove('active');
+    await loadData();
+  } catch (e) { showToast('添加失败'); }
+}
+
+async function saveField(id, field) {
+  const val = document.getElementById(field + '-' + id).value;
+  try {
+    await sbPatch('referrals', id, { [field]: val });
+    document.getElementById('saved-' + id).textContent = '✓ 已保存';
+    setTimeout(() => { document.getElementById('saved-' + id).textContent = ''; }, 2000);
+    await loadData();
+  } catch (e) { showToast('保存失败'); }
+}
+
+async function saveAll(id) {
+  const status = document.getElementById('status-' + id).value;
+  const amount = document.getElementById('amount-' + id).value;
+  const commission = document.getElementById('commission-' + id).value;
+  const data = { status: status };
+  if (amount) data.amount = parseFloat(amount);
+  if (commission) data.commission = parseFloat(commission);
+  try {
+    await sbPatch('referrals', id, data);
+    document.getElementById('saved-' + id).textContent = '✓ 已保存';
+    setTimeout(() => { document.getElementById('saved-' + id).textContent = ''; }, 2000);
+    await loadData();
+  } catch (e) { showToast('保存失败'); }
+}
+
+function switchTab(panelId, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + panelId).classList.add('active');
+}
+
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const now = new Date();
+  document.getElementById('todayDate').textContent = now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日';
+  try { await loadData(); } catch (e) { showToast('数据加载失败'); }
+});
+</script>
+</body>
+</html>
