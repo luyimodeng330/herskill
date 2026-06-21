@@ -127,6 +127,12 @@ body {
 .pi-info-row .value.commission { color: var(--shiraz); font-size: 13px; font-weight: 500; }
 .note-block { margin-top: 12px; padding: 11px 14px; background: var(--cream-pure); border-radius: 7px; box-shadow: var(--shadow); border: 1px solid var(--line-soft); font-size: 11.5px; color: var(--text-soft); line-height: 1.7; }
 .note-block strong { color: var(--text); font-weight: 500; }
+.cross-nav { margin-top: 24px; padding: 20px 14px; text-align: center; border-top: 1px solid var(--line-soft); }
+.cross-nav .cn-title { font-size: 11px; color: var(--text-faint); margin-bottom: 10px; letter-spacing: 0.5px; }
+.cross-nav .cn-links { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.cross-nav .cn-link { display: inline-block; padding: 7px 14px; border-radius: 5px; font-size: 11.5px; text-decoration: none; font-family: inherit; }
+.cross-nav .cn-link-primary { background: var(--shiraz); color: var(--cream-pure); }
+.cross-nav .cn-link-secondary { background: transparent; color: var(--shiraz-soft); border: 1px solid var(--line); }
 .loading { text-align: center; padding: 30px; color: var(--text-muted); font-size: 12px; }
 .toast { position: fixed; bottom: max(24px, env(safe-area-inset-bottom, 24px)); left: 50%; transform: translateX(-50%) translateY(80px); background: var(--shiraz-deep); color: var(--cream-pure); padding: 9px 20px; border-radius: 6px; font-size: 12px; box-shadow: 0 3px 12px rgba(46,18,21,0.18); opacity: 0; transition: all 0.3s; z-index: 999; white-space: nowrap; pointer-events: none; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -183,6 +189,13 @@ body {
         <button class="btn-primary" id="regBtn" onclick="doRegister()">提交注册申请</button>
       </div>
       <div class="auth-footer"><span class="highlight">零入会费 · 零囤货 · 零层级</span></div>
+      <div class="cross-nav">
+        <div class="cn-title">了解我们的产品</div>
+        <div class="cn-links">
+          <a href="/herskill/" class="cn-link cn-link-primary">HerSkill AI 系统</a>
+          <a href="/herskill/marketcraft/" class="cn-link cn-link-secondary">MarketCraft 增长系统</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -257,6 +270,13 @@ body {
       <strong>HerSkill</strong>：AI 员工系统，帮企业省人效、提产出。一次购买，永久使用。适合 10-100 人的团队。<br>
       <strong>MarketCraft</strong>：基于 CORE×JTBD×第一性原理的增长策略系统，33-41 天闭环交付。<br>
       <strong>合规</strong>：零入会费、零囤货、零层级，只做客户推荐分润。
+    </div>
+    <div class="cross-nav">
+      <div class="cn-title">了解产品详情</div>
+      <div class="cn-links">
+        <a href="/herskill/" class="cn-link cn-link-primary">HerSkill AI 系统</a>
+        <a href="/herskill/marketcraft/" class="cn-link cn-link-secondary">MarketCraft 增长系统</a>
+      </div>
     </div>
   </div>
 </div>
