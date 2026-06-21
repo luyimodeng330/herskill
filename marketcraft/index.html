@@ -785,6 +785,108 @@
     .case-tabs { gap: 8px; }
     .case-tab { padding: 8px 16px; font-size: 0.7rem; }
   }
+
+/* ===== 全面移动端适配 ===== */
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+  
+  /* Hero */
+  .hero { padding: 40px 16px; }
+  .hero h1 { font-size: 1.8rem !important; letter-spacing: 4px !important; }
+  .hero .slogan-box { flex-direction: column; gap: 6px; padding: 14px 20px; }
+  .hero .slogan-box .slogan { font-size: 1.1rem; letter-spacing: 3px; }
+  .hero .framework-tag { flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .hero .framework-tag span { padding: 4px 12px; font-size: 0.62rem; }
+  .hero .hero-circle { width: 80px; height: 80px; }
+  .hero .hero-circle-inner { width: 56px; height: 56px; }
+  
+  /* Section 通用 */
+  .section { padding: 40px 16px !important; }
+  .section-header { padding: 0 0 24px 0; }
+  .section-tag { font-size: 0.6rem; padding: 4px 14px; }
+  .section-title { font-size: 1.4rem; }
+  .section-subtitle { font-size: 0.82rem; padding: 0 8px; }
+  .section-divider { width: 28px; margin: 0 auto 24px; }
+  
+  /* 理论底座 */
+  .theory-grid { grid-template-columns: 1fr; gap: 12px; }
+  .theory-card { padding: 24px 18px; }
+  .theory-card .tc-name { font-size: 1.3rem; }
+  .theory-card .tc-full { font-size: 0.78rem; }
+  .theory-card .tc-desc { font-size: 0.78rem; }
+  
+  /* 双轨体系 */
+  .dual-track { grid-template-columns: 1fr; gap: 16px; }
+  .track-card { padding: 28px 18px; }
+  .track-card .track-name { font-size: 1.1rem; }
+  .track-card .track-badge { font-size: 0.58rem; padding: 3px 10px; }
+  .track-card .track-diff-list li { font-size: 0.76rem; }
+  .track-card .track-flow { font-size: 0.72rem; gap: 6px; }
+  .track-card .track-flow span { padding: 4px 8px; }
+  .track-card .track-time { font-size: 0.68rem; }
+  
+  /* 6步增长闭环 */
+  .funnel-step { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .step-num-circle { width: 36px; height: 36px; font-size: 0.75rem; }
+  .step-content { padding-left: 0; }
+  .step-content .step-title { font-size: 1rem; }
+  .step-content .step-desc { font-size: 0.78rem; }
+  
+  /* 案例区 */
+  .case-tabs { gap: 4px; flex-wrap: wrap; justify-content: center; }
+  .case-tab { padding: 6px 12px; font-size: 0.68rem; }
+  .case-panel { padding: 20px 14px; }
+  .case-panel .case-target { font-size: 0.76rem; padding: 14px; }
+  .case-panel .case-flow { gap: 12px; }
+  .case-panel .case-flow .cf-step { font-size: 0.7rem; padding: 4px 8px; }
+  .case-panel .case-data { gap: 12px; }
+  .case-panel .case-data .cd-item { padding: 14px 10px; }
+  .case-panel .case-data .cd-num { font-size: 1.4rem; }
+  .case-panel .case-data .cd-label { font-size: 0.62rem; }
+  .case-panel .case-summary { font-size: 0.78rem; padding: 14px; }
+  
+  /* 定价 */
+  .pricing-grid { grid-template-columns: 1fr; gap: 12px; }
+  .price-card { padding: 28px 20px; }
+  .price-card .price-name { font-size: 1.05rem; }
+  .price-card .price-amount { font-size: 1.7rem; }
+  .price-card .price-desc { font-size: 0.76rem; }
+  
+  /* 时间线 */
+  .tl-container { padding: 0; }
+  .tl-row { grid-template-columns: 60px 1fr; gap: 12px; padding: 14px 0; }
+  .tl-week { font-size: 0.7rem; }
+  .tl-content .tl-phase { font-size: 0.76rem; }
+  .tl-content .tl-tasks { font-size: 0.72rem; }
+  .tl-content .tl-output { font-size: 0.68rem; padding: 6px 10px; }
+  
+  /* CTA */
+  .cta-section { padding: 40px 16px; }
+  .cta-title { font-size: 1.3rem; }
+  .cta-desc { font-size: 0.82rem; }
+  .cta-btn { padding: 12px 32px; font-size: 0.82rem; }
+  
+  /* Footer */
+  footer { padding: 28px 16px; }
+  footer p { font-size: 0.68rem; }
+  footer .cooperate-line { font-size: 0.66rem; padding: 0 8px; }
+  
+  /* 预约按钮 */
+  .book-btn-wrap { padding: 16px 0; }
+  .book-btn { padding: 10px 28px; font-size: 13px; }
+  
+  /* 交叉导航 */
+  .cross-nav { padding: 20px 14px; }
+  .cross-nav .cn-link { padding: 7px 14px; font-size: 11.5px; }
+}
+
+/* 超小屏幕 */
+@media (max-width: 380px) {
+  .hero h1 { font-size: 1.5rem !important; }
+  .section-title { font-size: 1.2rem; }
+  .case-tab { padding: 5px 8px; font-size: 0.62rem; }
+}
+
 </style>
 </head>
 <body>
