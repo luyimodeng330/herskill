@@ -109,11 +109,12 @@ body { font-family: 'Noto Serif SC', -apple-system, serif; font-weight: 400; bac
     <div class="stat-card s1"><div class="stat-label">合伙人总数</div><div class="stat-value" id="statPartners">—<span class="unit">人</span></div></div>
     <div class="stat-card s2"><div class="stat-label">客户总数</div><div class="stat-value" id="statClients">—<span class="unit">条</span></div></div>
     <div class="stat-card s3"><div class="stat-label">累计成交</div><div class="stat-value" id="statAmount">—<span class="unit">万</span></div></div>
-    <div class="stat-card s4"><div class="stat-label">已付佣金</div><div class="stat-value" id="statPaid">—</div></div>
+    <div class="stat-card s4"><div class="stat-label">新预约</div><div class="stat-value" id="statBookings">—<span class="unit">条</span></div></div>
   </div>
 
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('referrals', this)">客户管理</button>
+    <button class="tab-btn" onclick="switchTab('bookings', this)">预约咨询</button>
     <button class="tab-btn" onclick="switchTab('partners', this)">合伙人</button>
   </div>
 
@@ -137,6 +138,11 @@ body { font-family: 'Noto Serif SC', -apple-system, serif; font-weight: 400; bac
     <div id="referralList"><div class="loading">加载中…</div></div>
   </div>
 
+  <!-- 预约咨询 -->
+  <div class="tab-panel" id="panel-bookings">
+    <div id="bookingList"><div class="loading">加载中…</div></div>
+  </div>
+
   <!-- 合伙人 -->
   <div class="tab-panel" id="panel-partners">
     <div id="partnerList"><div class="loading">加载中…</div></div>
@@ -151,6 +157,7 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 
 let allPartners = [];
 let allReferrals = [];
+let allBookings = [];
 
 const STATUS_LABELS = { pending: '初步接触', following: '跟进中', contracted: '已签约', paid: '已付款', settled: '已结算' };
 
@@ -174,9 +181,11 @@ async function sbPatch(table, id, data) {
 async function loadData() {
   allPartners = await sbGet('partners', 'select=*&order=created_at.desc');
   allReferrals = await sbGet('referrals', 'select=*&order=created_at.desc');
+  try { allBookings = await sbGet('bookings', 'select=*&order=created_at.desc'); } catch(e) { allBookings = []; }
   renderStats();
   renderReferrals();
   renderPartners();
+  renderBookings();
   populatePartnerSelect();
 }
 
@@ -185,8 +194,8 @@ function renderStats() {
   document.getElementById('statClients').innerHTML = allReferrals.length + '<span class="unit">条</span>';
   const totalAmount = allReferrals.filter(r => r.amount).reduce((s, r) => s + parseFloat(r.amount), 0);
   document.getElementById('statAmount').innerHTML = (totalAmount/10000).toFixed(1) + '<span class="unit">万</span>';
-  const paidComm = allReferrals.filter(r => r.status === 'settled' && r.commission).reduce((s, r) => s + parseFloat(r.commission), 0);
-  document.getElementById('statPaid').textContent = '¥' + paidComm.toLocaleString();
+  const newBookings = allBookings.filter(b => b.status === 'new').length;
+  document.getElementById('statBookings').innerHTML = newBookings + '<span class="unit">条</span>';
 }
 
 function partnerName(id) { const p = allPartners.find(x => x.id === id); return p ? p.name : '未知'; }
@@ -244,6 +253,43 @@ function renderPartners() {
       </div>
     </div>`;
   }).join('');
+}
+
+function renderBookings() {
+  const container = document.getElementById('bookingList');
+  if (allBookings.length === 0) { container.innerHTML = '<div class="loading">暂无预约</div>'; return; }
+  const statusMap = { new: '新预约', contacted: '已联系', converted: '已转化', closed: '已关闭' };
+  container.innerHTML = allBookings.map(b => {
+    const productLabel = b.product === 'herskill' ? 'HerSkill' : 'MarketCraft';
+    const isHS = b.product === 'herskill';
+    return `<div class="referral-row">
+      <div class="rr-top">
+        <div class="rr-left">
+          <div class="rr-client">${b.name} <span style="font-size:10px;color:var(--text-faint);">(${productLabel})</span></div>
+          <div class="rr-meta">📱 ${b.phone}${b.company ? ' · 🏢 ' + b.company : ''} · ${formatDate(b.created_at)}</div>
+          ${b.need ? `<div class="rr-meta" style="margin-top:4px;color:var(--text-soft);">诉求: ${b.need}</div>` : ''}
+          ${b.referral_code ? `<div class="rr-meta" style="margin-top:2px;">推荐码: ${b.referral_code}</div>` : ''}
+        </div>
+      </div>
+      <div class="rr-actions">
+        <span class="rr-label">状态:</span>
+        <select class="rr-select" id="bk-status-${b.id}" onchange="saveBooking('${b.id}')">
+          ${Object.entries(statusMap).map(([k,v]) => `<option value="${k}" ${b.status===k?'selected':''}>${v}</option>`).join('')}
+        </select>
+        <span class="rr-saved" id="bk-saved-${b.id}"></span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function saveBooking(id) {
+  const status = document.getElementById('bk-status-' + id).value;
+  try {
+    await sbPatch('bookings', id, { status: status });
+    document.getElementById('bk-saved-' + id).textContent = '✓ 已保存';
+    setTimeout(() => { document.getElementById('bk-saved-' + id).textContent = ''; }, 2000);
+    await loadData();
+  } catch (e) { showToast('保存失败'); }
 }
 
 function populatePartnerSelect() {
