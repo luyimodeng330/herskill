@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MarketCraft · AI智能营销增长系统</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --primary: #2E4C8C;
+    --primary-deep: #162660;
+    --primary-light: #D0E6FD;
+    --bg-warm: #FFF3E1;
+    --bg-alt: #F1E4D1;
+    --accent-red: #C0392B;     /* 深红 - 跳色/CTA/高亮，替换原亮红 */
+
+    --text-main: #1A1A2E;
+    --text-body: #2D2D3A;
+    --text-soft: #5A5A6E;
+    --text-muted: #8989A0;
+
+    --line: #D8D0C0;
+    --line-soft: #E5DED0;
+    --shadow: rgba(46,76,140,0.08);
+    --shadow-hover: rgba(46,76,140,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Serif SC', serif;
+    background: var(--bg-warm);
+    color: var(--text-body);
+    line-height: 2;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: linear-gradient(165deg, var(--bg-warm) 0%, #F5EEE0 40%, var(--primary-light) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 8%;
+    right: 10%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0.06;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 12%;
+    left: 8%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--accent-red);
+    opacity: 0.08;
+  }
+
+  .hero .brand-mark {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-weight: 700;
+    color: var(--primary-deep);
+    letter-spacing: 16px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .hero h1 span {
+    color: var(--accent-red);
+  }
+
+  .hero .subtitle {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    letter-spacing: 6px;
+    margin-bottom: 52px;
+    font-weight: 300;
+  }
+
+  .hero .slogan-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 48px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(46,76,140,0.12);
+    margin-bottom: 48px;
+  }
+
+  .hero .slogan-box .slogan {
+    font-size: 1.7rem;
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 8px;
+  }
+
+  .hero .slogan-box .slogan-en {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    font-style: italic;
+    opacity: 0.7;
+  }
+
+  .hero .framework-tag {
+    display: inline-flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero .framework-tag .tag {
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .hero .framework-tag .tag-core { background: var(--primary); color: #fff; }
+  .hero .framework-tag .tag-jtbd { background: var(--primary-light); color: var(--primary-deep); }
+  .hero .framework-tag .tag-theory { background: #fff; color: var(--primary-deep); border: 1px solid var(--primary); }
+
+  .hero .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    animation: float 2s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)}
+  }
+
+  /* ===== Section通用 ===== */
+  .section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 96px 28px;
+  }
+
+  .section-alt {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 96px 28px;
+    background: var(--bg-alt);
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 0.66rem;
+    color: var(--primary);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    color: var(--primary-deep);
+    text-align: center;
+    margin-bottom: 18px;
+    letter-spacing: 8px;
+    font-weight: 600;
+  }
+
+  .section-desc {
+    text-align: center;
+    color: var(--text-soft);
+    font-size: 0.9rem;
+    margin-bottom: 56px;
+    letter-spacing: 1.5px;
+    line-height: 2.2;
+  }
+
+  .divider {
+    width: 32px;
+    height: 2px;
+    background: var(--accent-red);
+    margin: 0 auto 48px;
+    border-radius: 1px;
+  }
+
+  /* ===== 核心心法 ===== */
+  .credo-section {
+    background: var(--primary-deep);
+    color: #fff;
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .credo-section .credo-text {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.35rem;
+    font-weight: 300;
+    line-height: 2.2;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.92);
+  }
+  .credo-section .credo-text strong {
+    color: var(--accent-red);
+    font-weight: 600;
+  }
+
+  /* ===== 理论背景 ===== */
+  .theory-section {
+    background: #fff;
+  }
+  .theory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+  @media (max-width: 750px) {
+    .theory-grid { grid-template-columns: 1fr; }
+  }
+  .theory-card {
+    padding: 36px 28px;
+    border: 1px solid var(--line-soft);
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .theory-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px var(--shadow-hover);
+  }
+  .theory-card .theory-icon {
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .theory-card h4 {
+    font-size: 1.05rem;
+    color: var(--primary-deep);
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+  .theory-card p {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    line-height: 1.9;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== 双轨差异对比 ===== */
+  .dual-track {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  @media (max-width: 800px) {
+    .dual-track { grid-template-columns: 1fr; }
+  }
+
+  .track-card {
+    background: #fff;
+    padding: 44px 36px;
+    border: 1px solid var(--line-soft);
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .track-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px var(--shadow-hover);
+  }
+
+  .track-card .track-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+
+  .track-card .track-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+  }
+  .track-card.track-fmcg .track-name { color: #C0392B; }
+  .track-card.track-finance .track-name { color: var(--primary); }
+
+  .track-card .track-badge {
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .track-card.track-fmcg .track-badge { background: rgba(192,57,43,0.08); color: #C0392B; }
+  .track-card.track-finance .track-badge { background: var(--primary-light); color: var(--primary); }
+
+  .track-card .track-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+
+  .track-diff-list {
+    list-style: none;
+  }
+  .track-diff-list li {
+    padding: 10px 0;
+    font-size: 0.84rem;
+    color: var(--text-body);
+    border-bottom: 1px dashed var(--line-soft);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .track-diff-list li:last-child { border: none; }
+  .track-diff-list li .diff-label {
+    min-width: 90px;
+    font-weight: 500;
+    color: var(--text-soft);
+    font-size: 0.78rem;
+    flex-shrink: 0;
+  }
+  .track-diff-list li .diff-value {
+    color: var(--text-body);
+  }
+  .track-fmcg .track-diff-list li .diff-value em { color: #C0392B; font-style: normal; font-weight: 500; }
+  .track-finance .track-diff-list li .diff-value em { color: var(--primary); font-style: normal; font-weight: 500; }
+
+  /* ===== 6步闭环 ===== */
+  .funnel-section {
+    background: #fff;
+    padding: 96px 24px;
+  }
+
+  .funnel-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .funnel-step {
+    display: flex;
+    gap: 28px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .funnel-step:last-child { border: none; }
+  .funnel-step:hover { background: rgba(46,76,140,0.02); }
+
+  .step-num-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .funnel-step:not(:last-child) .step-num-circle::after {
+    content: '';
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% + 26px);
+    background: var(--line-soft);
+    z-index: 1;
+  }
+
+  .step-content { flex: 1; }
+  .step-content h4 {
+    font-size: 1.05rem;
+    color: var(--primary-deep);
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+  .step-content .step-subtitle {
+    font-size: 0.75rem;
+    color: var(--primary);
+    letter-spacing: 2px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .step-content p {
+    font-size: 0.84rem;
+    color: var(--text-soft);
+    line-height: 2;
+  }
+
+  .step-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .step-tags .stag {
+    font-size: 0.68rem;
+    padding: 3px 12px;
+    border-radius: 12px;
+    background: var(--primary-light);
+    color: var(--primary-deep);
+    letter-spacing: 1px;
+  }
+
+  /* ===== 三层定价 ===== */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  @media (max-width: 750px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+
+  .price-card {
+    background: #fff;
+    padding: 44px 30px;
+    border: 1px solid var(--line-soft);
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .price-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px var(--shadow-hover);
+  }
+  .price-card.featured {
+    border: 2px solid var(--accent-red);
+  }
+  .price-card.featured::before {
+    content: '核心产品';
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-red);
+    color: #fff;
+    font-size: 0.62rem;
+    padding: 5px 20px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    border-radius: 2px;
+  }
+
+  .price-tier {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .price-name {
+    font-size: 1.2rem;
+    color: var(--primary-deep);
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+
+  .price-amount {
+    font-size: 2rem;
+    color: var(--accent-red);
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .price-amount .unit {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .price-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+  }
+
+  .price-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 32px;
+  }
+  .price-features li {
+    font-size: 0.82rem;
+    color: var(--text-body);
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    letter-spacing: 0.5px;
+  }
+  .price-features li::before {
+    content: '·';
+    position: absolute;
+    left: 8px;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .price-deliver {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    letter-spacing: 1px;
+  }
+
+  /* ===== 案例展示 ===== */
+  .case-section {
+    background: var(--bg-alt);
+  }
+
+  .case-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .case-tab {
+    font-size: 0.76rem;
+    padding: 9px 22px;
+    border: 1px solid var(--line);
+    background: transparent;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-weight: 500;
+    font-family: inherit;
+    transition: all 0.3s;
+    border-radius: 2px;
+    color: var(--text-soft);
+  }
+  .case-tab:hover { border-color: var(--primary); color: var(--primary); }
+  .case-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+  .case-panel {
+    display: none;
+    animation: fadeIn 0.5s ease;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .case-panel.active { display: block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+  .case-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .case-title-area h3 {
+    font-size: 1.3rem;
+    color: var(--primary-deep);
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+  .case-title-area .case-client {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+  }
+  .case-result {
+    text-align: right;
+  }
+  .case-result .result-num {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-red);
+    letter-spacing: 2px;
+  }
+  .case-result .result-label {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+  }
+
+  .case-steps {
+    background: #fff;
+    border: 1px solid var(--line-soft);
+    padding: 36px 32px;
+  }
+  .case-step-item {
+    display: flex;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .case-step-item:last-child { border: none; }
+  .cs-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.74rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .cs-content { flex: 1; }
+  .cs-content h5 {
+    font-size: 0.88rem;
+    color: var(--primary-deep);
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .cs-content p {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    line-height: 1.9;
+  }
+
+  .case-quote {
+    margin-top: 32px;
+    padding: 24px 28px;
+    background: var(--primary-deep);
+    color: rgba(255,255,255,0.88);
+    font-size: 0.86rem;
+    line-height: 2;
+    letter-spacing: 1px;
+    font-style: italic;
+    border-left: 3px solid var(--accent-red);
+  }
+
+  /* ===== 时间线 ===== */
+  .timeline-section {
+    background: #fff;
+  }
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: center;
+    font-size: 0.84rem;
+  }
+  .tl-row:last-child { border: none; }
+  .tl-week { font-weight: 600; color: var(--primary); letter-spacing: 1px; font-size: 0.78rem; }
+  .tl-task { color: var(--text-body); letter-spacing: 0.5px; }
+  .tl-milestone {
+    font-size: 0.72rem;
+    color: var(--accent-red);
+    font-weight: 600;
+    white-space: nowrap;
+    letter-spacing: 1px;
+  }
+
+  /* ===== Footer CTA ===== */
+  .cta-section {
+    background: var(--primary-deep);
+    color: #fff;
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .cta-section .cta-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 6px;
+    margin-bottom: 16px;
+  }
+  .cta-section .cta-desc {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 2px;
+    margin-bottom: 36px;
+  }
+  .cta-section .cta-btn {
+    display: inline-block;
+    padding: 16px 52px;
+    background: var(--accent-red);
+    color: #fff;
+    font-size: 0.88rem;
+    letter-spacing: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s;
+  }
+  .cta-section .cta-btn:hover {
+    background: #E02717;
+    transform: translateY(-2px);
+  }
+
+  footer {
+    background: var(--bg-alt);
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    line-height: 2.2;
+  }
+  footer a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  footer .cooperate-line {
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    color: var(--text-soft);
+    font-size: 0.72rem;
+  }
+  footer .cooperate-line a {
+    color: var(--accent-red);
+    font-weight: 500;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 650px) {
+    .hero h1 { letter-spacing: 6px; font-size: 2.2rem; }
+    .hero .slogan-box { flex-direction: column; gap: 8px; padding: 16px 28px; }
+    .hero .slogan-box .slogan { font-size: 1.3rem; letter-spacing: 4px; }
+    .framework-tag { flex-wrap: wrap; justify-content: center; }
+    .funnel-step { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .step-num-circle { width: 40px; height: 40px; font-size: 0.8rem; }
+    .tl-row { grid-template-columns: 70px 1fr; }
+    .tl-milestone { display: none; }
+    .case-header { flex-direction: column; }
+    .case-result { text-align: left; }
+    .case-tabs { gap: 8px; }
+    .case-tab { padding: 8px 16px; font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="brand-mark">AI Marketing Growth System</div>
+  <h1>Market<span>Craft</span></h1>
+  <p class="subtitle">AI 智能营销增长系统</p>
+  <div class="slogan-box">
+    <span class="slogan">增效，是算得出来的</span>
+    <span class="slogan-en">Growth is Calculable</span>
+  </div>
+  <div class="framework-tag">
+    <span class="tag tag-core">CORE 框架</span>
+    <span class="tag tag-jtbd">JTBD 理论</span>
+    <span class="tag tag-theory">第一性原理</span>
+  </div>
+  <div class="scroll-hint">向下探索 ↓</div>
+</section>
+
+
+<!-- ========== 心法 ========== -->
+<section class="credo-section">
+  <p class="credo-text">
+    "不做<strong>无增长</strong>的方法论<br>不做<strong>无方法论</strong>的增长"
+  </p>
+</section>
+
+
+<!-- ========== 理论背景 ========== -->
+<section class="section theory-section">
+  <div class="section-label">Methodology</div>
+  <h2 class="section-title">理论底座</h2>
+  <div class="divider"></div>
+  <p class="section-desc">
+    MarketCraft 的方法论融合了营销学底层理论，从第一性原理出发，让每一步增长决策都有据可依
+  </p>
+
+  <div class="theory-grid">
+    <div class="theory-card">
+      <span class="theory-icon">◇</span>
+      <h4>第一性原理</h4>
+      <p>不从"竞品做了什么"出发，而从"用户真正想要完成什么Job"出发，拆解增长的最基本单元，重新构建营销逻辑。</p>
+    </div>
+    <div class="theory-card">
+      <span class="theory-icon">○</span>
+      <h4>Jobs-to-be-Done</h4>
+      <p>哈佛商学院 Clayton Christensen 提出的理论：用户"雇佣"产品是为了在特定情境下完成特定任务。以 Job 为锚点倒推定位、内容与触达。</p>
+    </div>
+    <div class="theory-card">
+      <span class="theory-icon">△</span>
+      <h4>CORE 增长框架</h4>
+      <p>Circumstances（情境）→ Offerings（方案）→ Route（路径）→ Execution（执行）。四层结构确保增长从洞察到归因全链路闭环。</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== 什么是 MarketCraft ========== -->
+<section class="section-alt">
+  <div class="section-label">About</div>
+  <h2 class="section-title">什么是 MarketCraft</h2>
+  <div class="divider"></div>
+  <p class="section-desc">
+    基于 <strong style="color:var(--primary)">第一性原理 × JTBD × CORE 框架</strong> 构建的 AI 智能营销增长系统。<br>
+    将营销增长的底层逻辑拆解为可执行、可量化、可迭代的 6 步闭环。
+  </p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;">
+    <div style="background:#fff;padding:32px 24px;border:1px solid var(--line-soft);text-align:center;">
+      <div style="font-size:1.4rem;font-weight:700;color:var(--primary);margin-bottom:12px;">CORE</div>
+      <div style="font-size:0.78rem;color:var(--text-muted);letter-spacing:1px;line-height:1.8;">增长的骨架<br>Circumstances → Offerings → Route → Execution</div>
+    </div>
+    <div style="background:#fff;padding:32px 24px;border:1px solid var(--line-soft);text-align:center;">
+      <div style="font-size:1.4rem;font-weight:700;color:var(--primary);margin-bottom:12px;">JTBD</div>
+      <div style="font-size:0.78rem;color:var(--text-muted);letter-spacing:1px;line-height:1.8;">增长的灵魂<br>为谁 · 在什么情境下 · 完成什么Job</div>
+    </div>
+    <div style="background:#fff;padding:32px 24px;border:1px solid var(--line-soft);text-align:center;">
+      <div style="font-size:1.4rem;font-weight:700;color:var(--accent-red);margin-bottom:12px;">6步闭环</div>
+      <div style="font-size:0.78rem;color:var(--text-muted);letter-spacing:1px;line-height:1.8;">增长的执行引擎<br>洞察→分析→倒推→设计→触达→归因</div>
+    </div>
+  </div>
+
+  <p style="margin-top:40px;text-align:center;font-size:0.84rem;color:var(--text-soft);letter-spacing:1px;line-height:2;">
+    CORE = 增长的骨架（做什么环节）<br>
+    JTBD = 增长的灵魂（为谁做什么）<br>
+    6步闭环 = 增长的执行引擎（怎么做、做多快）<br>
+    <strong style="color:var(--primary-deep)">三者融合 = 有灵魂、有结构、可迭代的增长系统</strong>
+  </p>
+</section>
+
+
+<!-- ========== 双轨体系 ========== -->
+<section class="section" style="background:#fff;">
+  <div class="section-label">Dual Track</div>
+  <h2 class="section-title">快消版 × 金融版</h2>
+  <div class="divider"></div>
+  <p class="section-desc">
+    MarketCraft 不是快消版的简单改名，而是从<strong style="color:var(--primary)">决策链路、合规约束、触达时机</strong>三个维度的根本重构
+  </p>
+
+  <div class="dual-track">
+    <!-- 快消版 -->
+    <div class="track-card track-fmcg">
+      <div class="track-header">
+        <div>
+          <div class="track-name">快消版 FMCG</div>
+          <div class="track-subtitle">品牌 · 消费 · 出海 · 本地生活</div>
+        </div>
+        <span class="track-badge">AIPL 4阶段</span>
+      </div>
+      <ul class="track-diff-list">
+        <li><span class="diff-label">决策链路</span><span class="diff-value"><em>AIPL</em> 认知→兴趣→购买→忠诚</span></li>
+        <li><span class="diff-label">需求金字塔</span><span class="diff-value">体验/保障/功能/人群/<em>场景</em>/<em>成分</em>/作用</span></li>
+        <li><span class="diff-label">定位驱动</span><span class="diff-value">STP × JTBD 双驱动</span></li>
+        <li><span class="diff-label">触达路径</span><span class="diff-value"><em>人群反漏斗</em> 核心→关联→泛人群涟漪扩散</span></li>
+        <li><span class="diff-label">效果归因</span><span class="diff-value">GMV / ROI / 内容互动率</span></li>
+        <li><span class="diff-label">博主体系</span><span class="diff-value">KOL + KOC + 素人（体验感）</span></li>
+        <li><span class="diff-label">合规要求</span><span class="diff-value">无强制合规约束</span></li>
+        <li><span class="diff-label">首轮闭环</span><span class="diff-value"><em>33天</em> / 极速版本 7 天</span></li>
+      </ul>
+    </div>
+
+    <!-- 金融版 -->
+    <div class="track-card track-finance">
+      <div class="track-header">
+        <div>
+          <div class="track-name">金融版 Finance</div>
+          <div class="track-subtitle">券商 · 银行 · AMC · 企业服务</div>
+        </div>
+        <span class="track-badge">AIPL+T 6阶段</span>
+      </div>
+      <ul class="track-diff-list">
+        <li><span class="diff-label">决策链路</span><span class="diff-value"><em>AIPL+T</em> +信任积累+留存+扩展</span></li>
+        <li><span class="diff-label">需求金字塔</span><span class="diff-value">体验/保障/功能/人群/<em>触发情境</em>/作用/<em>策略成分</em></span></li>
+        <li><span class="diff-label">定位驱动</span><span class="diff-value"><em>纯 JTBD 驱动</em>（按 Job 定位）</span></li>
+        <li><span class="diff-label">触达路径</span><span class="diff-value"><em>时机触发式投流</em> 行情日/政策日追投</span></li>
+        <li><span class="diff-label">效果归因</span><span class="diff-value">开户数 / AUM / 留存率 / 信任指数</span></li>
+        <li><span class="diff-label">博主体系</span><span class="diff-value">财经大V + 专业内容（信任×专业度）</span></li>
+        <li><span class="diff-label">合规要求</span><span class="diff-value"><em>广告法+金融监管+平台规则</em> 强制检查</span></li>
+        <li><span class="diff-label">首轮闭环</span><span class="diff-value"><em>41天</em> / 极速版本 14 天</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== 6步闭环 ========== -->
+<section class="funnel-section">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-label">Execution</div>
+    <h2 class="section-title">6 步增长闭环</h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      从洞察到归因的完整链路 — 每一步都有锚点、每一步都可归因、每一步都可迭代
+    </p>
+  </div>
+
+  <div class="funnel-container">
+    <!-- Step1 -->
+    <div class="funnel-step">
+      <div class="step-num-circle">1</div>
+      <div class="step-content">
+        <h4>人群洞察 Circumstances</h4>
+        <div class="step-subtitle">找到触发真实需求的情境</div>
+        <p>识别消费者在什么情境下产生什么 Job。快消版关注消费场景与代际迁移；金融版额外关注行情日/政策日等时机触发点。</p>
+        <div class="step-tags">
+          <span class="stag">角色演变分析</span>
+          <span class="stag">场景/时机梳理</span>
+          <span class="stag">核心 Job 识别</span>
+          <span class="stag">紧迫度评估（金融版特有）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step2 -->
+    <div class="funnel-step">
+      <div class="step-num-circle">2</div>
+      <div class="step-content">
+        <h4>人群分析 Quantification</h4>
+        <div class="step-subtitle">用数据量化每一层需求</div>
+        <p>全域平台采集讨论数据，归类到 7 维需求金字塔。购前购后交叉校验区分真需求与伪需求，输出优先级梯队。</p>
+        <div class="step-tags">
+          <span class="stag">全域数据采集</span>
+          <span class="stag">7 维频次金字塔</span>
+          <span class="stag">购前购后校验</span>
+          <span class="stag">真/伪/隐藏需求分类</span>
+          <span class="stag">信任缺口识别（金融版）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step3 -->
+    <div class="funnel-step">
+      <div class="step-num-circle">3</div>
+      <div class="step-content">
+        <h4>需求倒推 Jobs Map</h4>
+        <div class="step-subtitle">从需求反推客户心理步骤</div>
+        <p>提炼 1-3 个核心 Job，拆解为完整的心理/行为步骤地图。识别期望结果的最大化和最小化方向，定位差异化锚点。</p>
+        <div class="step-tags">
+          <span class="stag">核心 Job 提炼</span>
+          <span class="stag">6 步任务拆解</span>
+          <span class="stag">期望结果矩阵</span>
+          <span class="stag">情感层分析</span>
+          <span class="stag">竞争错配识别</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step4 -->
+    <div class="funnel-step">
+      <div class="step-num-circle">4</div>
+      <div class="step-content">
+        <h4>定位与内容设计 Offerings</h4>
+        <div class="step-subtitle">生成差异化方案与全矩阵内容</div>
+        <p>基于 JTBD 生成定位方案，规划 AIPL/AIPL+T 内容矩阵，AI 批量生成图文+视频脚本，金融版嵌入合规自动检查。</p>
+        <div class="step-tags">
+          <span class="stag">JTBD 定位方案</span>
+          <span class="stag">内容矩阵规划</span>
+          <span class="stag">AI 图文批量生成</span>
+          <span class="stag">视频脚本生成</span>
+          <span class="stag">合规自动检查（金融版）</span>
+          <span class="stag">预算分配方案</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step5 -->
+    <div class="funnel-step">
+      <div class="step-num-circle">5</div>
+      <div class="step-content">
+        <h4>触达路径 Route to Consumer</h4>
+        <div class="step-subtitle">在正确的时间到达对的人</div>
+        <p>搭建博主金字塔，精准圈层或时机触发式投流。建立每日监控+每周调价+每月策略的三层优化节奏。</p>
+        <div class="step-tags">
+          <span class="stag">博主金字塔搭建</span>
+          <span class="stag">KOL 匹配评分</span>
+          <span class="stag">人群反漏斗投流（快消）</span>
+          <span class="stag">时机触发投流（金融）</span>
+          <span class="stag">投流智能优化</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step6 -->
+    <div class="funnel-step">
+      <div class="step-num-circle">6</div>
+      <div class="step-content">
+        <h4>效果归因与迭代 Execution</h4>
+        <div class="step-subtitle">从结果反推每个环节的优化方向</div>
+        <p>搭建全链路归因看板，追踪内容效果排名与人群资产变化。每月策略复盘，每季度深度复盘+定位迭代判断。</p>
+        <div class="step-tags">
+          <span class="stag">全链路归因</span>
+          <span class="stag">内容效果排名</span>
+          <span class="stag">月度/季度复盘</span>
+          <span class="stag">定位迭代机制</span>
+          <span class="stag">触发时机日历更新（金融）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== 定价体系 ========== -->
+<section class="section" style="background:var(--bg-alt);">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">三层产品体系</h2>
+  <div class="divider"></div>
+  <p class="section-desc">
+    从诊断到部署再到增效分佣 — 与客户的利益深度绑定
+  </p>
+
+  <div class="pricing-grid">
+    <!-- 第一层 -->
+    <div class="price-card">
+      <div class="price-tier">Layer 01</div>
+      <div class="price-name">诊断报告</div>
+      <div class="price-amount"><span class="unit">¥</span>8,000 起</div>
+      <div class="price-note">单次交付 · 无后续绑定</div>
+      <ul class="price-features">
+        <li>行业品类现状扫描</li>
+        <li>竞品内容与错配分析</li>
+        <li>核心机会点识别报告</li>
+        <li>初步增效路径建议</li>
+        <li>1 对 1 解读会议</li>
+      </ul>
+      <div class="price-deliver">交付周期：5-7 个工作日</div>
+    </div>
+
+    <!-- 第二层 -->
+    <div class="price-card featured">
+      <div class="price-tier">Layer 02</div>
+      <div class="price-name">场景定制 + 部署</div>
+      <div class="price-amount">前置费用 + 分佣</div>
+      <div class="price-note">具体金额线下约定</div>
+      <ul class="price-features">
+        <li>完整 6 步闭环交付</li>
+        <li>AI 内容工厂持续产出</li>
+        <li>博主合作全流程管理</li>
+        <li>投流优化与实时监控</li>
+        <li>每月复盘报告</li>
+        <li>专属运营对接</li>
+      </ul>
+      <div class="price-deliver">交付周期：首月启动 + 持续运营</div>
+    </div>
+
+    <!-- 第三层 -->
+    <div class="price-card">
+      <div class="price-tier">Layer 03</div>
+      <div class="price-name">增效分佣合伙</div>
+      <div class="price-amount">增量分成模式</div>
+      <div class="price-note">分成比例线下约定</div>
+      <ul class="price-features">
+        <li>基础年费 + 增量阶梯分成</li>
+        <li>以实际增量结算</li>
+        <li>长期战略合作关系</li>
+        <li>季度深度复盘 + 策略迭代</li>
+        <li>新场景/新品类优先支持</li>
+      </ul>
+      <div class="price-deliver">推荐合作周期：1-3 年</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== 案例展示 ========== -->
+<section class="case-section">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-label">Case Study</div>
+    <h2 class="section-title">实战案例</h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      覆盖快消、出海、本地生活、金融获客、资产运营五大场景
+    </p>
+
+    <div class="case-tabs">
+      <button class="case-tab active" data-type="case1" onclick="switchCase('case1')">蔡司眼镜</button>
+      <button class="case-tab" data-type="case2" onclick="switchCase('case2')">国货护肤出海</button>
+      <button class="case-tab" data-type="case3" onclick="switchCase('case3')">新中式餐饮</button>
+      <button class="case-tab" data-type="case4" onclick="switchCase('case4')">券商营业部</button>
+      <button class="case-tab" data-type="case5" onclick="switchCase('case5')">AMC资产运营</button>
+    </div>
+
+    <!-- Case 1: 蔡司眼镜 -->
+    <div class="case-panel active" id="panel-case1">
+      <div class="case-header">
+        <div class="case-title-area">
+          <h3>蔡司眼镜 · 圈定有效客户</h3>
+          <div class="case-client">高端光学眼镜代理 | 小红书精准投放 + 场景打造</div>
+        </div>
+        <div class="case-result">
+          <div class="result-num">3.2×</div>
+          <div class="result-label">到店转化率提升</div>
+        </div>
+      </div>
+
+      <div class="case-steps">
+        <div class="case-step-item">
+          <div class="cs-num">1</div>
+          <div class="cs-content">
+            <h5>Step 1 人群洞察</h5>
+            <p>全域社媒数据分析发现：蔡司的核心客群不是泛泛的"戴眼镜的人"，而是 <strong>30-45岁女性专业人士</strong>——她们关注视觉健康、注重品质生活、有明确购买力。代际扫描发现 Z 世代"社交可展示的护肤仪式感"式消费正在向眼镜品类迁移。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">2</div>
+          <div class="cs-content">
+            <h5>Step 2 人群分析</h5>
+            <p>7 维频次金字塔显示：<strong>保障维度（35%）+ 成分维度（28%）</strong> 占比异常高——用户最关心"镜片技术是否真正有效"和"品牌是否值得信赖"。体验维度仅占 2%——巨大的体验创新空间。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">3</div>
+          <div class="cs-content">
+            <h5>Step 3 需求倒推</h5>
+            <p>核心 Job："当职场形象需要升级时，我想要一副既专业又有品味的眼镜，这样我就能在商务场合展现自信。"情感轴：从"担心眼镜影响气质的不安"到"专业造型加持后的自信"。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">4</div>
+          <div class="cs-content">
+            <h5>Step 4 场景打造 & 内容设计</h5>
+            <p>锁定三大场景：「加班后深夜办公室」「周末艺术展览」「重要商务会议」。AI 批量生成 80+ 条小红书笔记，覆盖 A/I/P/L 四阶段。标题含场景关键词如"职场女性眼镜推荐""开会必备单品"。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">5</div>
+          <div class="cs-content">
+            <h5>Step 5 智能投放 & 触达</h5>
+            <p>人群反漏斗投流：第 1 轮核心圈层（30-45 女性专业+品质生活兴趣）→ 第 2 轮关联扩展 → 第 3 轮泛人群声量。腰部生活方式博主 8 人种草 + KOC 真实分享 20 人口碑积累。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">6</div>
+          <div class="cs-content">
+            <h5>Step 6 效果归因 & 迭代</h5>
+            <p>到店转化率从行业均值 2.1% 提升至 <strong style="color:var(--accent-red)">6.7%</strong>（3.2 倍）。月度复盘发现"商务会议"场景内容转化率最高（CTR 8.2%），次月加大该场景内容占比 40%。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-quote">
+        "以前我们撒网式投放，钱花了但不知道谁会买。MarketCraft帮我们找到了'那群一定会买的人'，然后把她们经常出没的场景打透。增效是算出来的，这话我信了。"
+      </div>
+    </div>
+
+        <!-- Case 2: 瑜伽袜出海 -->
+    <div class="case-panel" id="panel-case2">
+      <div class="case-header">
+        <div class="case-title-area">
+          <h3>瑜伽袜品牌 · 欧美出海</h3>
+          <div class="case-client">中国新锐运动配饰品牌 | TikTok + Instagram 博主营销</div>
+        </div>
+        <div class="case-result">
+          <div class="result-num">12×</div>
+          <div class="result-label">首月社媒互动增长</div>
+        </div>
+      </div>
+
+      <div class="case-steps">
+        <div class="case-step-item">
+          <div class="cs-num">1</div>
+          <div class="cs-content">
+            <h5>Step 1 人群洞察（出海版）</h5>
+            <p>目标市场：美国+英国。社媒数据分析发现：Lululemon 用户高频讨论"yoga socks"（防滑/美观/替代裸脚），但 Lululemon 本身不出袜子——这是一个<strong>被头部品牌忽略的细分配件市场</strong>。核心 Job："我想要一双既防滑又好看的瑜伽袜，这样我不用裸脚练瑜伽，又不影响动作。"</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">2</div>
+          <div class="cs-content">
+            <h5>Step 2 人群分析（出海版）</h5>
+            <p>7 维频次金字塔发现：<strong>功能维度（防滑/支撑，38%）+ 体验维度（美观/不尴尬，31%）</strong> 是最高频讨论。竞品分析发现：Amazon 上的瑜伽袜大多是"功能性优先、丑陋"，"好看的功能性瑜伽袜"是空白锚点。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">3</div>
+          <div class="cs-content">
+            <h5>Step 3 需求倒推（出海版）</h5>
+            <p>核心 Job Map：①想练瑜伽但不想裸脚 ②搜索 yoga socks ③对比 Amazon 普通款 ④被"好看"款吸引 ⑤下单试用 ⑥社媒晒单。差异化锚点："Lululemon 风格的美学 + 专业防滑功能"——用 Lululemon 的审美打 Lululemon 不做的市场。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">4</div>
+          <div class="cs-content">
+            <h5>Step 4 内容矩阵（出海版）</h5>
+            <p>A（认知）：TikTok "yoga socks vs bare feet" 对比短视频；I（兴趣）：Instagram 瑜伽博主"OOTD+瑜伽袜"穿搭内容；P（购买）：TikTok Shop + 独立站联动；L（忠诚）：用户 UGC 激励计划。AI 批量生成"瑜伽动作+袜子特写"短视频脚本，本地化英语文案。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">5</div>
+          <div class="cs-content">
+            <h5>Step 5 博主金字塔投放</h5>
+            <p>TikTok/Instagram 博主金字塔：头部瑜伽博主（10-50万粉）2 人做品牌背书 + 腰部瑜伽教练（1-10万粉）8 人做场景植入 + 微型 KOC（<1万粉）30 人做真实测评。Spark Ads 放大优质自然内容，首月预算 $15K。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">6</div>
+          <div class="cs-content">
+            <h5>Step 6 归因 & 迭代</h5>
+            <p>首月社媒互动量增长 <strong style="color:var(--accent-red)">12×</strong>，TikTok 单条最高播放 180 万。独立站转化率 3.8%（行业均值 1.2%）。发现"yoga socks + lululemon"关联内容的 CTR 最高，次月内容策略全面倾斜"Lululemon 替代穿搭"方向。首月 GMV $52K，ROI 4.6。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-quote">
+        "我们以前觉得袜子这种小东西没法做品牌。MarketCraft 帮我们找到了 Lululemon 用户的一个真实痛点——她们想要好看的瑜伽袜但买不到。首月打平，第三个月开始稳定盈利。"
+      </div>
+    </div>
+
+    <!-- Case 3: 新中式餐饮 -->
+    <div class="case-panel" id="panel-case3">
+      <div class="case-header">
+        <div class="case-title-area">
+          <h3>某新中式餐饮连锁 · 本地生活投放</h3>
+          <div class="case-client">新中式茶饮+轻食 | 抖音本地推 + 大众点评运营</div>
+        </div>
+        <div class="case-result">
+          <div class="result-num">420%</div>
+          <div class="result-label">团购 GMV 环比增长</div>
+        </div>
+      </div>
+
+      <div class="case-steps">
+        <div class="case-step-item">
+          <div class="cs-num">1</div>
+          <div class="cs-content">
+            <h5>Step 1 人群洞察（本地生活版）</h5>
+            <p>门店位于一线城市核心商圈。数据分析发现：核心客群是 <strong>22-35岁女性</strong>，Job 不是"吃饱"，而是"找到一个适合拍照、有文化感、价格不贵的下午茶地点"。新中式视觉风格是核心差异化。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">2</div>
+          <div class="cs-content">
+            <h5>Step 2 人群分析（本地生活版）</h5>
+            <p>本地生活 7 维分析：<strong>场景维度（下午茶/闺蜜聚会/商务轻聊，48%）+ 体验维度（出片率/服务感，32%</strong>）压倒性占比。价格敏感度低，但"排队太长"是高频负向讨论——需要平衡热度与体验。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">3</div>
+          <div class="cs-content">
+            <h5>Step 3 需求倒推（本地生活版）</h5>
+            <p>核心 Job："当我和朋友需要找个地方聊天拍照时，我想要一个既有文化感又不会太贵的地方，这样我们都能发朋友圈。"情感轴：从"担心普通奶茶店没特色"到"新中式空间带来的文化认同感"。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">4</div>
+          <div class="cs-content">
+            <h5>Step 4 内容设计（本地生活版）</h5>
+            <p>AI 生成"门店打卡动线"图文模板，指导顾客如何拍照最有"新中式感"。抖音内容矩阵：A（商圈3km内曝光）→ I（团购点击）→ P（到店核销）。大众点评"文化感"关键词优化，提升搜索排名。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">5</div>
+          <div class="cs-content">
+            <h5>Step 5 本地推投放</h5>
+            <p>抖音本地推：定向门店周边 3km，22-35 岁女性，兴趣标签"下午茶/探店/国风"。日预算 ¥800，分两个时段（11:00-14:00 午市 + 17:00-21:00 晚市）。KOC 探店 15 人，真实评价铺量。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">6</div>
+          <div class="cs-content">
+            <h5>Step 6 归因 & 迭代</h5>
+            <p>团购 GMV 月环比增长 <strong style="color:var(--accent-red)">420%</strong>。到店核销率 68%（行业均值 42%）。发现"周末下午茶时段"转化率最高，次月增加该时段 KOC 投放密度。大众点评搜索"新中式茶饮"排名从 P12 提升至 P3。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-quote">
+        "餐饮本地生活投放，最难的不是花钱，是花对钱。MarketCraft 帮我们把'谁来、在什么时段、想干什么'算得清清楚楚，本地推的 ROI 从 1.8 做到了 5.6。"
+      </div>
+    </div>
+
+    <!-- Case 4: 券商营业部 -->
+    <div class="case-panel" id="panel-case4">
+      <div class="case-header">
+        <div class="case-title-area">
+          <h3>券商营业部 · 高净值客户获取</h3>
+          <div class="case-client">头部券商区域营业部 | 行情触发式获客 + 信任建设</div>
+        </div>
+        <div class="case-result">
+          <div class="result-num">+186%</div>
+          <div class="result-label">开户数月环比增长</div>
+        </div>
+      </div>
+
+      <div class="case-steps">
+        <div class="case-step-item">
+          <div class="cs-num">1</div>
+          <div class="cs-content">
+            <h5>Step 1 人群洞察（金融版）</h5>
+            <p>需求迁移分析发现：券商客户主流正在从"好不好"（佣金比价）向"<strong>合不合</strong>"（投顾适配）迁移，新兴关键词增速 180%/年。触发时机梳理：A股涨跌>3% 日开户量暴增 300%；政策发布日咨询量暴增 200%。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">2</div>
+          <div class="cs-content">
+            <h5>Step 2 人群分析（金融版）</h5>
+            <p>7 维金融频次金字塔严重向<strong>保障层（30%）+ 策略成分层（25%）</strong>倾斜——用户还在"信不信+含什么"阶段。购前购后校验发现最大<strong style="color:var(--accent-red)">信任缺口</strong>："资金安全吗"讨论量极高但购后信任崩塌案例频发。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">3</div>
+          <div class="cs-content">
+            <h5>Step 3 需求倒推（金融版）</h5>
+            <p>核心 Job："当市场大涨时，我想要快速找到适合新手的开户指引和入门方案，这样我就能不错过行情又不盲目操作。"金融 Job Map 6 步中<strong>"信任积累"</strong>是关键瓶颈。情感轴：从"被割韭菜焦虑"到"有专业指引的安心"。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">4</div>
+          <div class="cs-content">
+            <h5>Step 4 定位 & 信任内容（金融版）</h5>
+            <p>JTBD 定位："<strong>新手放心开户的专业伙伴</strong>"。AIPL+T 内容矩阵重点投入 T 阶段（信任积累）：合规认证内容 + 投顾观点 + 新手真实案例 + 社群口碑。所有内容经过金融合规自动检查。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">5</div>
+          <div class="cs-content">
+            <h5>Step 5 时机触发式投流（金融版）</h5>
+            <p>日常投流覆盖 A+I+T 阶段；<strong style="color:var(--accent-red)">行情日自动触发</strong>：A股单日涨跌>3% → 3小时内上线 P 阶段开户引导投流；政策日 24 小时内上线 I+T 内容追投。财经大V 1 人做信任背书 + 理财博主 6 人做开户推动。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">6</div>
+          <div class="cs-content">
+            <h5>Step 6 归因 & 迭代（金融版）</h5>
+            <p>AIPL+T 全链路归因发现：T→P（信任→开户）转化率从 3.2% 提升至 <strong style="color:var(--accent-red)">9.1%</strong>。开户数月环比增长 186%。行情日触发投流的 CPA 比日常低 62%，次月加大行情日储备预算。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-quote">
+        "金融营销最难的是信任建设。MarketCraft 的 T 阶段专项设计和时机触发投流，让我们第一次把'行情窗口期'变成了'获客黄金时间'。开户数的增长是真实的、可持续的。"
+      </div>
+    </div>
+
+        <!-- Case 5: 收并购咨询 -->
+    <div class="case-panel" id="panel-case5">
+      <div class="case-header">
+        <div class="case-title-area">
+          <h3>收并购咨询机构 · 机构线索增长</h3>
+          <div class="case-client">精品投行业务 | 内容品牌 + 机构圈层触达</div>
+        </div>
+        <div class="case-result">
+          <div class="result-num">+240%</div>
+          <div class="result-label">有效机构线索环比增长</div>
+        </div>
+      </div>
+
+      <div class="case-steps">
+        <div class="case-step-item">
+          <div class="cs-num">1</div>
+          <div class="cs-content">
+            <h5>Step 1 人群洞察（收并购版）</h5>
+            <p>目标客户：年营收 5-50 亿的中型上市公司实控人、董事会办公室、战略投资部。核心 Job："当公司需要寻找并购标的/出售资产/引入战略投资人时，我想要找到有成功案例、懂行业、能保密的专业合作伙伴，这样我就能完成资本动作又不引起市场过度关注。"</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">2</div>
+          <div class="cs-content">
+            <h5>Step 2 人群分析（收并购版）</h5>
+            <p>B端决策链分析：实控人（最终决策者）→ 董办/战略部（项目发起者）→ 法务/财务（合规把关）→ 董事会（审批者）。7 维分析发现：<strong>保障维度（保密记录/成功案例/行业口碑，52%）+ 功能维度（标的匹配效率/交易结构设计，28%）</strong> 是核心决策因素。"信任+专业"缺一不可。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">3</div>
+          <div class="cs-content">
+            <h5>Step 3 需求倒推（收并购版）</h5>
+            <p>核心 Job Map：①资本动作需求产生 ②私下询问圈内口碑 ③定向接触 2-3 家机构 ④比价+比案例+比行业理解 ⑤选定合作伙伴 ⑥签约启动。差异化锚点："行业专注度最高 + 已完成案例最多"——用数据和案例建立信任，而非主动推销。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">4</div>
+          <div class="cs-content">
+            <h5>Step 4 内容品牌打造（收并购版）</h5>
+            <p>定位："<strong>专注中高端并购的专业合作伙伴</strong>"。内容矩阵：微信公众号（行业洞察/政策解读/案例复盘，不提客户名）+ 领英（机构品牌/团队专业度）+ 行业峰会演讲（线下信任加速）。AI 辅助生成行业报告初稿，人工审核确保专业度与保密边界。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">5</div>
+          <div class="cs-content">
+            <h5>Step 5 机构圈层触达（收并购版）</h5>
+            <p>不是投放，而是<strong>内容触达 + 圈层渗透</strong>：①行业白皮书/案例研究报告下载（获客线索）②精品沙龙邀请（CEO/CFO 闭门会，深度触达）③案例库定向推送（信任建设）。财经/法律类垂直媒体投稿，建立行业话语权。线下峰会演讲 + 私密晚宴，face-to-face 信任加速。</p>
+          </div>
+        </div>
+        <div class="case-step-item">
+          <div class="cs-num">6</div>
+          <div class="cs-content">
+            <h5>Step 6 归因 & 迭代（收并购版）</h5>
+            <p>有效机构线索（定义：年营收>5亿、有真实资本动作需求的上市公司联系人）月环比增长 <strong style="color:var(--accent-red)">240%</strong>。白皮书下载量 860+，其中 21% 转化为深度洽谈线索。发现"政策解读+真实案例（脱敏）"组合内容的线索转化率最高（14.7%），持续优化该内容方向。季度复盘：内容资产积累 → 自然搜索排名提升 → 被动线索占比从 12% 提升至 38%。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-quote">
+        "投行业务，信任是慢慢建立的，但一旦建立就很难被替代。MarketCraft 帮我们把'专业度'变成可持续产出的内容资产，而不是直接推销。线索质量比以前高了很多，而且都是主动找上门的。"
+      </div>
+    </div>
+
+    <!-- ========== 交付时间线 ========== -->
+<section class="timeline-section">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-label">Timeline</div>
+    <h2 class="section-title">交付节奏</h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      以标准版为例 — 首轮闭环完成后进入持续运营阶段
+    </p>
+
+    <div class="timeline">
+      <div class="tl-row"><span class="tl-week">Week 1</span><span class="tl-task">项目启动 + 品类关键词确认 + 数据采集启动 + 合规规则加载（金融版）</span><span class="tl-milestone">Kickoff ✓</span></div>
+      <div class="tl-row"><span class="tl-week">Wk 2-3</span><span class="tl-task">Step 1 人群洞察完成：迁移/演变/趋势/时机梳理 + 核心Job确认</span><span class="tl-milestone">核心Job确认 ✓</span></div>
+      <div class="tl-row"><span class="tl-week">Wk 4-5</span><span class="tl-task">Step 2 人群分析完成：7维频次金字塔 + 购前购后量化 + 闭环校验 + 优先级梯队</span><span class="tl-milestone">优先级梯队 ✓</span></div>
+      <div class="tl-row"><span class="tl-week">Wk 6</span><span class="tl-task">Step 3 需求倒推完成：Job Map + 期望结果 + 差异化锚点 + 竞争错配矩阵</span><span class="tl-milestone">差异化锚点 ✓</span></div>
+      <div class="tl-row"><span class="tl-week">Wk 7-8</span><span class="tl-task">Step 4 启动：定位方案选定 + 内容矩阵规划 + 首批 AI 内容生成 + 合规检查</span><span class="tl-milestone">首批内容就绪 ✓</span></div>
+      <div class="tl-row"><span class="tl-week">Wk 9-10</span><span class="tl-task">Step 5 触达路径：博主金字塔搭建 + 首轮投流上线 + 时机触发机制激活</span><span class="tl-milestone">首轮投流上线 ✓</span></div>
+      <div class="tl-row"><span class="tl-week">Wk 11-12</span><span class="tl-task">Step 6 归因搭建：全链路归因看板 + 内容效果排名 + 首月数据汇总</span><span class="tl-milestone">首轮闭环验证 ✓</span></div>
+      <div class="tl-row"><span class="tl-week">Wk 12+</span><span class="tl-task">持续运营：每日监控 + 每周调价 + 月度复盘 + 季度深度复盘 + 定位迭代</span><span class="tl-milestone">长效增长引擎</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== CTA ========== -->
+<section class="cta-section">
+  <div class="cta-title">让增长有据可依</div>
+  <div class="cta-desc">从诊断开始 · 用数据说话 · 以增效为终</div>
+  <a href="mailto:contact@marketcraft.ai" class="cta-btn">预约诊断咨询</a>
+</section>
+
+
+<!-- ========== Footer ========== -->
+<footer>
+  <p>MarketCraft © 2025 · AI 智能营销增长系统</p>
+  <p>第一性原理 × JTBD × CORE 增长框架</p>
+  <p>不做无增长的方法论 · 不做无方法论的增长</p>
+  <div class="cooperate-line">
+    如您拥有企业资源（上市公司 / 年利润3000万+规模企业 / 金融机构 / AMC / 地方国资平台），欢迎洽谈合作 · <a href="mailto:cooperate@marketcraft.ai">cooperate@marketcraft.ai</a>
+  </div>
+</footer>
+
+
+<script>
+function switchCase(type) {
+  document.querySelectorAll('.case-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.type === type);
+  });
+  document.querySelectorAll('.case-panel').forEach(panel => {
+    panel.classList.toggle('active', panel.id === 'panel-' + type);
+  });
+}
+</script>
+
+</body>
+</html>
