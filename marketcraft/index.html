@@ -77,19 +77,21 @@
   .hero .brand-mark {
     font-size: 0.7rem;
     color: var(--text-muted);
-    letter-spacing: 10px;
+    letter-spacing: 8px;
     text-transform: uppercase;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
     font-weight: 400;
   }
 
   .hero h1 {
-    font-size: clamp(2.6rem, 6vw, 4.2rem);
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 600;
     color: var(--primary-deep);
-    letter-spacing: 16px;
-    margin-bottom: 20px;
+    letter-spacing: 14px;
+    margin-bottom: 18px;
     position: relative;
+    z-index: 1;
+    padding-left: 14px;
   }
 
   .hero h1 span {
@@ -97,10 +99,10 @@
   }
 
   .hero .subtitle {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     color: var(--text-soft);
-    letter-spacing: 6px;
-    margin-bottom: 52px;
+    letter-spacing: 5px;
+    margin-bottom: 48px;
     font-weight: 300;
   }
 
@@ -108,26 +110,25 @@
     display: inline-flex;
     align-items: center;
     gap: 16px;
-    padding: 22px 48px;
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(46,76,140,0.12);
+    padding: 18px 44px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.55);
     margin-bottom: 48px;
   }
 
   .hero .slogan-box .slogan {
-    font-size: 1.7rem;
-    color: var(--primary);
-    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--text);
+    font-weight: 500;
     letter-spacing: 8px;
+    padding-left: 8px;
   }
 
   .hero .slogan-box .slogan-en {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    letter-spacing: 2px;
-    font-style: italic;
-    opacity: 0.7;
+    letter-spacing: 4px;
+    font-weight: 400;
   }
 
   .hero .framework-tag {
@@ -139,10 +140,9 @@
   }
 
   .hero .framework-tag .tag {
-    font-size: 0.72rem;
+    font-size: 0.66rem;
     letter-spacing: 3px;
-    padding: 6px 18px;
-    border-radius: 20px;
+    padding: 4px 14px;
     font-weight: 500;
   }
   .hero .framework-tag .tag-core { background: var(--primary); color: #fff; }
@@ -165,68 +165,70 @@
 
   /* ===== Section通用 ===== */
   .section {
-    max-width: 960px;
+    max-width: 840px;
     margin: 0 auto;
-    padding: 96px 28px;
+    padding: 96px 24px;
   }
 
   .section-alt {
-    max-width: 960px;
+    max-width: 840px;
     margin: 0 auto;
-    padding: 96px 28px;
+    padding: 96px 24px;
     background: var(--bg-alt);
   }
 
   .section-label {
     text-align: center;
-    font-size: 0.66rem;
+    font-size: 0.68rem;
     color: var(--primary);
     letter-spacing: 6px;
     text-transform: uppercase;
-    margin-bottom: 14px;
-    font-weight: 600;
+    margin-bottom: 16px;
+    font-weight: 500;
   }
 
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
     color: var(--primary-deep);
     text-align: center;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     letter-spacing: 8px;
     font-weight: 600;
+    padding-left: 8px;
   }
 
   .section-desc {
     text-align: center;
     color: var(--text-soft);
-    font-size: 0.9rem;
-    margin-bottom: 56px;
+    font-size: 0.92rem;
+    margin-bottom: 60px;
     letter-spacing: 1.5px;
-    line-height: 2.2;
+    font-weight: 400;
+    line-height: 2.4;
   }
 
   .divider {
-    width: 32px;
-    height: 2px;
+    width: 28px;
+    height: 1px;
     background: var(--accent-red);
     margin: 0 auto 48px;
-    border-radius: 1px;
+    opacity: 0.5;
   }
 
   /* ===== 核心心法 ===== */
   .credo-section {
     background: var(--primary-deep);
     color: #fff;
-    padding: 80px 24px;
+    padding: 96px 24px;
     text-align: center;
   }
 
   .credo-section .credo-text {
     max-width: 720px;
     margin: 0 auto;
-    font-size: 1.35rem;
+    font-size: 1.1rem;
     font-weight: 300;
-    line-height: 2.2;
+    line-height: 2.4;
     letter-spacing: 3px;
     color: rgba(255,255,255,0.92);
   }
@@ -249,31 +251,31 @@
     .theory-grid { grid-template-columns: 1fr; }
   }
   .theory-card {
-    padding: 36px 28px;
+    padding: 48px 36px;
     border: 1px solid var(--line-soft);
     text-align: center;
     transition: all 0.3s;
   }
   .theory-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px var(--shadow-hover);
+    box-shadow: 0 12px 32px rgba(46,76,140,0.08);
   }
   .theory-card .theory-icon {
-    font-size: 1.6rem;
-    margin-bottom: 16px;
+    font-size: 1.4rem;
+    margin-bottom: 14px;
     display: block;
   }
   .theory-card h4 {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: var(--primary-deep);
     font-weight: 600;
     letter-spacing: 3px;
     margin-bottom: 12px;
   }
   .theory-card p {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--text-soft);
-    line-height: 1.9;
+    line-height: 2;
     letter-spacing: 0.5px;
   }
 
@@ -291,27 +293,27 @@
 
   .track-card {
     background: #fff;
-    padding: 44px 36px;
+    padding: 48px 36px;
     border: 1px solid var(--line-soft);
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s;
   }
   .track-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px var(--shadow-hover);
+    box-shadow: 0 12px 32px rgba(46,76,140,0.08);
   }
 
   .track-card .track-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
   }
 
   .track-card .track-name {
     font-size: 1.25rem;
     font-weight: 600;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
   }
   .track-card.track-fmcg .track-name { color: #C0392B; }
   .track-card.track-finance .track-name { color: var(--primary); }
@@ -319,17 +321,16 @@
   .track-card .track-badge {
     font-size: 0.62rem;
     letter-spacing: 2px;
-    padding: 4px 14px;
-    border-radius: 12px;
-    font-weight: 600;
+    padding: 3px 12px;
+    font-weight: 500;
   }
   .track-card.track-fmcg .track-badge { background: rgba(192,57,43,0.08); color: #C0392B; }
   .track-card.track-finance .track-badge { background: var(--primary-light); color: var(--primary); }
 
   .track-card .track-subtitle {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     letter-spacing: 1px;
   }
 
@@ -338,12 +339,13 @@
   }
   .track-diff-list li {
     padding: 10px 0;
-    font-size: 0.84rem;
+    font-size: 0.88rem;
     color: var(--text-body);
-    border-bottom: 1px dashed var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
     display: flex;
     align-items: baseline;
     gap: 10px;
+    line-height: 2;
   }
   .track-diff-list li:last-child { border: none; }
   .track-diff-list li .diff-label {
@@ -373,8 +375,8 @@
 
   .funnel-step {
     display: flex;
-    gap: 28px;
-    padding: 32px 0;
+    gap: 24px;
+    padding: 24px 0;
     border-bottom: 1px solid var(--line-soft);
     position: relative;
     transition: background 0.3s;
@@ -383,16 +385,16 @@
   .funnel-step:hover { background: rgba(46,76,140,0.02); }
 
   .step-num-circle {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: var(--primary);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.9rem;
-    font-weight: 700;
+    font-size: 0.88rem;
+    font-weight: 600;
     flex-shrink: 0;
     position: relative;
     z-index: 2;
@@ -401,32 +403,32 @@
   .funnel-step:not(:last-child) .step-num-circle::after {
     content: '';
     position: absolute;
-    top: 54px;
+    top: 50px;
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
-    height: calc(100% + 26px);
+    width: 1px;
+    height: calc(100% + 18px);
     background: var(--line-soft);
     z-index: 1;
   }
 
   .step-content { flex: 1; }
   .step-content h4 {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: var(--primary-deep);
     font-weight: 600;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     margin-bottom: 6px;
   }
   .step-content .step-subtitle {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--primary);
     letter-spacing: 2px;
     font-weight: 500;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .step-content p {
-    font-size: 0.84rem;
+    font-size: 0.85rem;
     color: var(--text-soft);
     line-height: 2;
   }
@@ -434,16 +436,16 @@
   .step-tags {
     display: flex;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 10px;
     flex-wrap: wrap;
   }
   .step-tags .stag {
-    font-size: 0.68rem;
-    padding: 3px 12px;
-    border-radius: 12px;
+    font-size: 0.66rem;
+    padding: 2px 10px;
     background: var(--primary-light);
     color: var(--primary-deep);
     letter-spacing: 1px;
+    font-weight: 500;
   }
 
   /* ===== 三层定价 ===== */
@@ -460,15 +462,15 @@
 
   .price-card {
     background: #fff;
-    padding: 44px 30px;
+    padding: 40px 28px;
     border: 1px solid var(--line-soft);
     text-align: center;
     transition: all 0.3s;
     position: relative;
   }
   .price-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 48px var(--shadow-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(46,76,140,0.08);
   }
   .price-card.featured {
     border: 2px solid var(--accent-red);
@@ -481,34 +483,33 @@
     transform: translateX(-50%);
     background: var(--accent-red);
     color: #fff;
-    font-size: 0.62rem;
-    padding: 5px 20px;
+    font-size: 0.66rem;
+    padding: 5px 18px;
     letter-spacing: 3px;
-    font-weight: 600;
-    border-radius: 2px;
+    font-weight: 500;
   }
 
   .price-tier {
     font-size: 0.68rem;
     color: var(--text-muted);
     letter-spacing: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     font-weight: 500;
   }
 
   .price-name {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     color: var(--primary-deep);
     font-weight: 600;
-    letter-spacing: 4px;
-    margin-bottom: 20px;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
   }
 
   .price-amount {
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: var(--accent-red);
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-weight: 600;
+    letter-spacing: 1px;
     margin-bottom: 8px;
   }
   .price-amount .unit {
@@ -517,24 +518,25 @@
   }
 
   .price-note {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--text-muted);
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     letter-spacing: 1px;
   }
 
   .price-features {
     list-style: none;
     text-align: left;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
   .price-features li {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--text-body);
     padding: 8px 0;
     padding-left: 24px;
     position: relative;
     letter-spacing: 0.5px;
+    line-height: 2;
   }
   .price-features li::before {
     content: '·';
@@ -546,9 +548,9 @@
   }
 
   .price-deliver {
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     color: var(--text-muted);
-    padding-top: 16px;
+    padding-top: 14px;
     border-top: 1px solid var(--line-soft);
     letter-spacing: 1px;
   }
@@ -566,8 +568,8 @@
     flex-wrap: wrap;
   }
   .case-tab {
-    font-size: 0.76rem;
-    padding: 9px 22px;
+    font-size: 0.78rem;
+    padding: 8px 20px;
     border: 1px solid var(--line);
     background: transparent;
     cursor: pointer;
@@ -575,7 +577,6 @@
     font-weight: 500;
     font-family: inherit;
     transition: all 0.3s;
-    border-radius: 2px;
     color: var(--text-soft);
   }
   .case-tab:hover { border-color: var(--primary); color: var(--primary); }
@@ -584,7 +585,7 @@
   .case-panel {
     display: none;
     animation: fadeIn 0.5s ease;
-    max-width: 860px;
+    max-width: 760px;
     margin: 0 auto;
   }
   .case-panel.active { display: block; }
@@ -594,33 +595,33 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
     flex-wrap: wrap;
     gap: 16px;
   }
   .case-title-area h3 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     color: var(--primary-deep);
     font-weight: 600;
-    letter-spacing: 4px;
-    margin-bottom: 8px;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
   }
   .case-title-area .case-client {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
   }
   .case-result {
     text-align: right;
   }
   .case-result .result-num {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 600;
     color: var(--accent-red);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
   }
   .case-result .result-label {
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     letter-spacing: 2px;
   }
@@ -628,13 +629,13 @@
   .case-steps {
     background: #fff;
     border: 1px solid var(--line-soft);
-    padding: 36px 32px;
+    padding: 24px 36px;
   }
   .case-step-item {
     display: flex;
     gap: 20px;
     padding: 18px 0;
-    border-bottom: 1px dashed var(--line);
+    border-bottom: 1px solid var(--line-soft);
   }
   .case-step-item:last-child { border: none; }
   .cs-num {
@@ -647,32 +648,32 @@
     align-items: center;
     justify-content: center;
     font-size: 0.74rem;
-    font-weight: 700;
+    font-weight: 600;
     flex-shrink: 0;
   }
   .cs-content { flex: 1; }
   .cs-content h5 {
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     color: var(--primary-deep);
     font-weight: 600;
     letter-spacing: 2px;
     margin-bottom: 4px;
   }
   .cs-content p {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--text-soft);
-    line-height: 1.9;
+    line-height: 2;
   }
 
   .case-quote {
-    margin-top: 32px;
-    padding: 24px 28px;
+    margin-top: 28px;
+    padding: 22px 28px;
     background: var(--primary-deep);
     color: rgba(255,255,255,0.88);
-    font-size: 0.86rem;
-    line-height: 2;
+    font-size: 0.85rem;
+    line-height: 2.2;
     letter-spacing: 1px;
-    font-style: italic;
+    font-style: normal;
     border-left: 3px solid var(--accent-red);
   }
 
@@ -691,18 +692,18 @@
     display: grid;
     grid-template-columns: 100px 1fr auto;
     gap: 24px;
-    padding: 20px 0;
+    padding: 18px 0;
     border-bottom: 1px solid var(--line-soft);
     align-items: center;
-    font-size: 0.84rem;
+    font-size: 0.85rem;
   }
   .tl-row:last-child { border: none; }
-  .tl-week { font-weight: 600; color: var(--primary); letter-spacing: 1px; font-size: 0.78rem; }
-  .tl-task { color: var(--text-body); letter-spacing: 0.5px; }
+  .tl-week { font-weight: 500; color: var(--primary); letter-spacing: 1px; font-size: 0.82rem; }
+  .tl-task { color: var(--text-body); letter-spacing: 0.5px; line-height: 2; }
   .tl-milestone {
     font-size: 0.72rem;
     color: var(--accent-red);
-    font-weight: 600;
+    font-weight: 500;
     white-space: nowrap;
     letter-spacing: 1px;
   }
@@ -711,29 +712,30 @@
   .cta-section {
     background: var(--primary-deep);
     color: #fff;
-    padding: 80px 24px;
+    padding: 96px 24px;
     text-align: center;
   }
   .cta-section .cta-title {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+    padding-left: 6px;
   }
   .cta-section .cta-desc {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: rgba(255,255,255,0.65);
     letter-spacing: 2px;
     margin-bottom: 36px;
   }
   .cta-section .cta-btn {
     display: inline-block;
-    padding: 16px 52px;
+    padding: 14px 44px;
     background: var(--accent-red);
     color: #fff;
-    font-size: 0.88rem;
-    letter-spacing: 4px;
-    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    font-weight: 500;
     text-decoration: none;
     border: none;
     cursor: pointer;
@@ -748,7 +750,7 @@
   footer {
     background: var(--bg-alt);
     text-align: center;
-    padding: 40px 24px;
+    padding: 48px 24px;
     font-size: 0.76rem;
     color: var(--text-muted);
     letter-spacing: 1.5px;
@@ -791,98 +793,98 @@
   .hero::before, .hero::after { display: none !important; }
 
   /* ===== Section 通用 ===== */
-  .section, .section-alt { padding: 28px 14px !important; max-width: 100% !important; }
-  .section-label { font-size: 0.56rem !important; letter-spacing: 3px !important; margin-bottom: 8px !important; }
-  .section-title { font-size: 1.2rem !important; letter-spacing: 4px !important; margin-bottom: 10px !important; }
-  .section-desc { font-size: 0.72rem !important; margin-bottom: 20px !important; line-height: 1.7 !important; letter-spacing: 0.5px !important; }
-  .divider { width: 24px !important; margin: 0 auto 18px !important; }
+  .section, .section-alt { padding: 56px 20px !important; max-width: 100% !important; }
+  .section-label { font-size: 0.6rem !important; letter-spacing: 4px !important; margin-bottom: 10px !important; }
+  .section-title { font-size: 1.3rem !important; letter-spacing: 6px !important; margin-bottom: 14px !important; padding-left: 6px !important; }
+  .section-desc { font-size: 0.82rem !important; margin-bottom: 32px !important; line-height: 2 !important; letter-spacing: 1px !important; }
+  .divider { width: 24px !important; margin: 0 auto 28px !important; }
 
   /* ===== 心法 ===== */
-  .credo-section { padding: 24px 16px !important; }
-  .credo-section .credo-text { font-size: 0.92rem !important; line-height: 1.8 !important; letter-spacing: 1px !important; }
+  .credo-section { padding: 48px 20px !important; }
+  .credo-section .credo-text { font-size: 0.92rem !important; line-height: 2 !important; letter-spacing: 2px !important; }
 
   /* ===== 理论底座 ===== */
-  .theory-grid { grid-template-columns: 1fr !important; gap: 10px !important; margin-top: 16px !important; }
-  .theory-card { padding: 18px 14px !important; }
-  .theory-card .theory-icon { font-size: 1.1rem !important; margin-bottom: 8px !important; }
-  .theory-card h4 { font-size: 0.92rem !important; letter-spacing: 2px !important; margin-bottom: 6px !important; }
-  .theory-card p { font-size: 0.72rem !important; line-height: 1.7 !important; }
+  .theory-grid { grid-template-columns: 1fr !important; gap: 14px !important; margin-top: 24px !important; }
+  .theory-card { padding: 32px 24px !important; }
+  .theory-card .theory-icon { font-size: 1.2rem !important; margin-bottom: 10px !important; }
+  .theory-card h4 { font-size: 1rem !important; letter-spacing: 2px !important; margin-bottom: 8px !important; }
+  .theory-card p { font-size: 0.8rem !important; line-height: 1.9 !important; }
 
   /* ===== 什么是 MarketCraft（内联grid覆盖） ===== */
-  .section-alt > div[style*="grid"] { grid-template-columns: 1fr !important; gap: 10px !important; margin-top: 16px !important; }
-  .section-alt > div[style*="grid"] > div { padding: 18px 14px !important; }
-  .section-alt > div[style*="grid"] > div > div:first-child { font-size: 1.1rem !important; margin-bottom: 6px !important; }
-  .section-alt > div[style*="grid"] > div > div:last-child { font-size: 0.68rem !important; line-height: 1.6 !important; }
-  .section-alt > p[style*="text-align:center"] { margin-top: 16px !important; font-size: 0.72rem !important; line-height: 1.8 !important; }
+  .section-alt > div[style*="grid"] { grid-template-columns: 1fr !important; gap: 14px !important; margin-top: 24px !important; }
+  .section-alt > div[style*="grid"] > div { padding: 32px 24px !important; }
+  .section-alt > div[style*="grid"] > div > div:first-child { font-size: 1rem !important; margin-bottom: 8px !important; }
+  .section-alt > div[style*="grid"] > div > div:last-child { font-size: 0.8rem !important; line-height: 1.9 !important; }
+  .section-alt > p[style*="text-align:center"] { margin-top: 24px !important; font-size: 0.8rem !important; line-height: 2 !important; }
 
   /* ===== 双轨体系 ===== */
-  .dual-track { grid-template-columns: 1fr !important; gap: 12px !important; margin-top: 16px !important; }
-  .track-card { padding: 20px 14px !important; }
-  .track-card .track-header { margin-bottom: 14px !important; }
-  .track-card .track-name { font-size: 1rem !important; letter-spacing: 2px !important; }
-  .track-card .track-badge { font-size: 0.55rem !important; padding: 3px 8px !important; }
-  .track-card .track-subtitle { font-size: 0.7rem !important; margin-bottom: 12px !important; }
-  .track-diff-list li { padding: 6px 0 !important; font-size: 0.72rem !important; gap: 6px !important; line-height: 1.6 !important; }
-  .track-diff-list li .diff-label { min-width: 64px !important; font-size: 0.68rem !important; }
+  .dual-track { grid-template-columns: 1fr !important; gap: 16px !important; margin-top: 24px !important; }
+  .track-card { padding: 32px 24px !important; }
+  .track-card .track-header { margin-bottom: 18px !important; }
+  .track-card .track-name { font-size: 1.1rem !important; letter-spacing: 2px !important; }
+  .track-card .track-badge { font-size: 0.58rem !important; padding: 3px 10px !important; }
+  .track-card .track-subtitle { font-size: 0.78rem !important; margin-bottom: 16px !important; }
+  .track-diff-list li { padding: 8px 0 !important; font-size: 0.82rem !important; gap: 8px !important; line-height: 1.8 !important; }
+  .track-diff-list li .diff-label { min-width: 72px !important; font-size: 0.74rem !important; }
 
   /* ===== 6步闭环 ===== */
-  .funnel-section { padding: 28px 14px !important; }
+  .funnel-section { padding: 56px 20px !important; }
   .funnel-container { max-width: 100% !important; }
-  .funnel-step { flex-direction: row !important; gap: 12px !important; padding: 14px 0 !important; }
-  .step-num-circle { width: 32px !important; height: 32px !important; font-size: 0.72rem !important; }
-  .funnel-step:not(:last-child) .step-num-circle::after { top: 38px !important; height: calc(100% + 6px) !important; }
-  .step-content h4 { font-size: 0.88rem !important; letter-spacing: 1px !important; margin-bottom: 3px !important; }
-  .step-content .step-subtitle { font-size: 0.66rem !important; letter-spacing: 1px !important; margin-bottom: 6px !important; }
-  .step-content p { font-size: 0.7rem !important; line-height: 1.65 !important; }
-  .step-tags { gap: 5px !important; margin-top: 8px !important; }
-  .step-tags .stag { font-size: 0.6rem !important; padding: 2px 8px !important; letter-spacing: 0.5px !important; }
+  .funnel-step { flex-direction: row !important; gap: 14px !important; padding: 18px 0 !important; }
+  .step-num-circle { width: 36px !important; height: 36px !important; font-size: 0.78rem !important; }
+  .funnel-step:not(:last-child) .step-num-circle::after { top: 42px !important; height: calc(100% + 10px) !important; }
+  .step-content h4 { font-size: 0.92rem !important; letter-spacing: 1px !important; margin-bottom: 4px !important; }
+  .step-content .step-subtitle { font-size: 0.72rem !important; letter-spacing: 1px !important; margin-bottom: 8px !important; }
+  .step-content p { font-size: 0.8rem !important; line-height: 1.9 !important; }
+  .step-tags { gap: 6px !important; margin-top: 10px !important; }
+  .step-tags .stag { font-size: 0.64rem !important; padding: 2px 10px !important; letter-spacing: 1px !important; }
 
   /* ===== 定价 ===== */
-  .pricing-grid { grid-template-columns: 1fr !important; gap: 10px !important; margin-top: 16px !important; }
-  .price-card { padding: 22px 16px !important; }
-  .price-tier { font-size: 0.58rem !important; letter-spacing: 2px !important; margin-bottom: 8px !important; }
-  .price-name { font-size: 1rem !important; letter-spacing: 2px !important; margin-bottom: 12px !important; }
-  .price-amount { font-size: 1.5rem !important; margin-bottom: 4px !important; }
-  .price-note { font-size: 0.68rem !important; margin-bottom: 14px !important; }
-  .price-features { margin-bottom: 14px !important; }
-  .price-features li { font-size: 0.72rem !important; padding: 5px 0 !important; padding-left: 18px !important; line-height: 1.5 !important; }
-  .price-deliver { font-size: 0.66rem !important; padding-top: 10px !important; }
+  .pricing-grid { grid-template-columns: 1fr !important; gap: 14px !important; margin-top: 24px !important; }
+  .price-card { padding: 32px 24px !important; }
+  .price-tier { font-size: 0.62rem !important; letter-spacing: 3px !important; margin-bottom: 10px !important; }
+  .price-name { font-size: 1.05rem !important; letter-spacing: 2px !important; margin-bottom: 14px !important; }
+  .price-amount { font-size: 1.5rem !important; margin-bottom: 6px !important; }
+  .price-note { font-size: 0.74rem !important; margin-bottom: 18px !important; }
+  .price-features { margin-bottom: 18px !important; }
+  .price-features li { font-size: 0.8rem !important; padding: 6px 0 !important; padding-left: 20px !important; line-height: 1.8 !important; }
+  .price-deliver { font-size: 0.72rem !important; padding-top: 12px !important; }
 
   /* ===== 案例展示 ===== */
-  .case-section .section { padding: 0 14px !important; }
-  .case-tabs { gap: 4px !important; margin-bottom: 18px !important; }
-  .case-tab { padding: 5px 10px !important; font-size: 0.64rem !important; letter-spacing: 1px !important; }
+  .case-section .section { padding: 0 20px !important; }
+  .case-tabs { gap: 6px !important; margin-bottom: 28px !important; }
+  .case-tab { padding: 6px 14px !important; font-size: 0.72rem !important; letter-spacing: 1px !important; }
   .case-panel { max-width: 100% !important; }
-  .case-header { margin-bottom: 14px !important; gap: 8px !important; flex-direction: column !important; }
-  .case-title-area h3 { font-size: 1rem !important; letter-spacing: 2px !important; margin-bottom: 4px !important; }
-  .case-title-area .case-client { font-size: 0.68rem !important; letter-spacing: 1px !important; }
+  .case-header { margin-bottom: 20px !important; gap: 10px !important; flex-direction: column !important; }
+  .case-title-area h3 { font-size: 1.1rem !important; letter-spacing: 2px !important; margin-bottom: 4px !important; }
+  .case-title-area .case-client { font-size: 0.74rem !important; letter-spacing: 1px !important; }
   .case-result { text-align: left !important; }
-  .case-result .result-num { font-size: 1.4rem !important; }
-  .case-result .result-label { font-size: 0.64rem !important; }
-  .case-steps { padding: 16px 14px !important; }
-  .case-step-item { gap: 10px !important; padding: 10px 0 !important; }
-  .cs-num { width: 22px !important; height: 22px !important; font-size: 0.62rem !important; }
-  .cs-content h5 { font-size: 0.76rem !important; letter-spacing: 1px !important; margin-bottom: 3px !important; }
-  .cs-content p { font-size: 0.7rem !important; line-height: 1.65 !important; }
-  .case-quote { margin-top: 14px !important; padding: 14px 16px !important; font-size: 0.74rem !important; line-height: 1.7 !important; }
+  .case-result .result-num { font-size: 1.5rem !important; }
+  .case-result .result-label { font-size: 0.68rem !important; }
+  .case-steps { padding: 20px 20px !important; }
+  .case-step-item { gap: 12px !important; padding: 14px 0 !important; }
+  .cs-num { width: 24px !important; height: 24px !important; font-size: 0.68rem !important; }
+  .cs-content h5 { font-size: 0.85rem !important; letter-spacing: 1px !important; margin-bottom: 4px !important; }
+  .cs-content p { font-size: 0.8rem !important; line-height: 1.9 !important; }
+  .case-quote { margin-top: 20px !important; padding: 18px 20px !important; font-size: 0.8rem !important; line-height: 2 !important; }
 
   /* ===== 时间线 ===== */
-  .timeline-section .section { padding: 0 14px !important; }
+  .timeline-section .section { padding: 0 20px !important; }
   .timeline { max-width: 100% !important; }
-  .tl-row { grid-template-columns: 48px 1fr !important; gap: 8px !important; padding: 8px 0 !important; font-size: 0.7rem !important; line-height: 1.5 !important; }
-  .tl-week { font-size: 0.62rem !important; letter-spacing: 0.5px !important; }
-  .tl-task { font-size: 0.68rem !important; letter-spacing: 0 !important; line-height: 1.5 !important; }
+  .tl-row { grid-template-columns: 56px 1fr !important; gap: 10px !important; padding: 12px 0 !important; font-size: 0.8rem !important; line-height: 1.8 !important; }
+  .tl-week { font-size: 0.74rem !important; letter-spacing: 0.5px !important; }
+  .tl-task { font-size: 0.78rem !important; letter-spacing: 0 !important; line-height: 1.8 !important; }
   .tl-milestone { display: none !important; }
 
   /* ===== CTA ===== */
-  .cta-section { padding: 28px 16px !important; }
-  .cta-section .cta-title { font-size: 1.15rem !important; letter-spacing: 3px !important; margin-bottom: 8px !important; }
-  .cta-section .cta-desc { font-size: 0.72rem !important; letter-spacing: 1px !important; margin-bottom: 18px !important; }
-  .cta-section .cta-btn { padding: 10px 28px !important; font-size: 0.78rem !important; letter-spacing: 2px !important; }
+  .cta-section { padding: 48px 20px !important; }
+  .cta-section .cta-title { font-size: 1.2rem !important; letter-spacing: 4px !important; margin-bottom: 10px !important; }
+  .cta-section .cta-desc { font-size: 0.78rem !important; letter-spacing: 1px !important; margin-bottom: 24px !important; }
+  .cta-section .cta-btn { padding: 12px 32px !important; font-size: 0.8rem !important; letter-spacing: 2px !important; }
 
   /* ===== Footer ===== */
-  footer { padding: 20px 14px !important; font-size: 0.64rem !important; line-height: 1.8 !important; letter-spacing: 0.5px !important; }
-  footer .cooperate-line { margin-top: 8px !important; padding-top: 10px !important; font-size: 0.62rem !important; line-height: 1.7 !important; }
+  footer { padding: 32px 20px !important; font-size: 0.72rem !important; line-height: 2 !important; letter-spacing: 1px !important; }
+  footer .cooperate-line { margin-top: 10px !important; padding-top: 12px !important; font-size: 0.7rem !important; line-height: 1.9 !important; }
 
   /* ===== 预约按钮 ===== */
   .book-btn-wrap { padding: 12px 0 !important; }
@@ -897,10 +899,10 @@
 
 /* 超小屏幕 */
 @media (max-width: 380px) {
-  .hero h1 { font-size: 1.4rem !important; }
-  .section-title { font-size: 1.05rem !important; }
-  .case-tab { padding: 4px 7px !important; font-size: 0.58rem !important; }
-  .step-tags .stag { font-size: 0.56rem !important; }
+  .hero h1 { font-size: 1.6rem !important; letter-spacing: 8px !important; }
+  .section-title { font-size: 1.15rem !important; }
+  .case-tab { padding: 5px 10px !important; font-size: 0.66rem !important; }
+  .step-tags .stag { font-size: 0.6rem !important; }
 }
 
 </style>
@@ -972,22 +974,22 @@
     将营销增长的底层逻辑拆解为可执行、可量化、可迭代的 6 步闭环。
   </p>
 
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;">
-    <div style="background:#fff;padding:32px 24px;border:1px solid var(--line-soft);text-align:center;">
-      <div style="font-size:1.4rem;font-weight:700;color:var(--primary);margin-bottom:12px;">CORE</div>
-      <div style="font-size:0.78rem;color:var(--text-muted);letter-spacing:1px;line-height:1.8;">增长的骨架<br>Circumstances → Offerings → Route → Execution</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;">
+    <div style="background:#fff;padding:48px 36px;border:1px solid var(--line-soft);text-align:center;">
+      <div style="font-size:1.15rem;font-weight:600;color:var(--primary);margin-bottom:12px;letter-spacing:2px;">CORE</div>
+      <div style="font-size:0.85rem;color:var(--text-muted);letter-spacing:1px;line-height:2;">增长的骨架<br>Circumstances → Offerings → Route → Execution</div>
     </div>
-    <div style="background:#fff;padding:32px 24px;border:1px solid var(--line-soft);text-align:center;">
-      <div style="font-size:1.4rem;font-weight:700;color:var(--primary);margin-bottom:12px;">JTBD</div>
-      <div style="font-size:0.78rem;color:var(--text-muted);letter-spacing:1px;line-height:1.8;">增长的灵魂<br>为谁 · 在什么情境下 · 完成什么Job</div>
+    <div style="background:#fff;padding:48px 36px;border:1px solid var(--line-soft);text-align:center;">
+      <div style="font-size:1.15rem;font-weight:600;color:var(--primary);margin-bottom:12px;letter-spacing:2px;">JTBD</div>
+      <div style="font-size:0.85rem;color:var(--text-muted);letter-spacing:1px;line-height:2;">增长的灵魂<br>为谁 · 在什么情境下 · 完成什么Job</div>
     </div>
-    <div style="background:#fff;padding:32px 24px;border:1px solid var(--line-soft);text-align:center;">
-      <div style="font-size:1.4rem;font-weight:700;color:var(--accent-red);margin-bottom:12px;">6步闭环</div>
-      <div style="font-size:0.78rem;color:var(--text-muted);letter-spacing:1px;line-height:1.8;">增长的执行引擎<br>洞察→分析→倒推→设计→触达→归因</div>
+    <div style="background:#fff;padding:48px 36px;border:1px solid var(--line-soft);text-align:center;">
+      <div style="font-size:1.15rem;font-weight:600;color:var(--accent-red);margin-bottom:12px;letter-spacing:2px;">6步闭环</div>
+      <div style="font-size:0.85rem;color:var(--text-muted);letter-spacing:1px;line-height:2;">增长的执行引擎<br>洞察→分析→倒推→设计→触达→归因</div>
     </div>
   </div>
 
-  <p style="margin-top:40px;text-align:center;font-size:0.84rem;color:var(--text-soft);letter-spacing:1px;line-height:2;">
+  <p style="margin-top:40px;text-align:center;font-size:0.85rem;color:var(--text-soft);letter-spacing:1px;line-height:2.4;">
     CORE = 增长的骨架（做什么环节）<br>
     JTBD = 增长的灵魂（为谁做什么）<br>
     6步闭环 = 增长的执行引擎（怎么做、做多快）<br>
@@ -1609,14 +1611,14 @@
 .cross-nav { background: rgba(46,18,21,0.03); border-top: 1px solid #E8E4DD; padding: 28px 20px; text-align: center; }
 .cross-nav .cn-title { font-size: 13px; color: #89857E; margin-bottom: 14px; letter-spacing: 1px; }
 .cross-nav .cn-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.cross-nav .cn-link { display: inline-block; padding: 8px 18px; border-radius: 6px; font-size: 12px; text-decoration: none; transition: all 0.2s; font-family: 'Noto Serif SC', serif; }
+.cross-nav .cn-link { display: inline-block; padding: 8px 18px; font-size: 12px; text-decoration: none; transition: all 0.2s; font-family: 'Noto Serif SC', serif; }
 .cross-nav .cn-link-primary { background: #431C1E; color: #FAF9F7; }
 .cross-nav .cn-link-primary:active { background: #2E1215; }
 .cross-nav .cn-link-secondary { background: transparent; color: #6B3A3E; border: 1px solid #DDD8D0; }
 .cross-nav .cn-link-secondary:active { background: #F3F1EE; }
 @media (min-width: 769px) { .cross-nav { padding: 36px 24px; } .cross-nav .cn-title { font-size: 14px; } .cross-nav .cn-link { font-size: 13px; padding: 10px 24px; } }
 </style>
-<style>.book-btn-wrap { text-align:center; padding:20px 0; } .book-btn { display:inline-block; padding:12px 36px; background:#431C1E; color:#FAF9F7; border-radius:8px; font-size:14px; font-weight:500; text-decoration:none; font-family:'Noto Serif SC',serif; letter-spacing:1px; transition:all 0.2s; } .book-btn:active { background:#2E1215; }</style>
+<style>.book-btn-wrap { text-align:center; padding:20px 0; } .book-btn { display:inline-block; padding:12px 36px; background:#431C1E; color:#FAF9F7; font-size:14px; font-weight:500; text-decoration:none; font-family:'Noto Serif SC',serif; letter-spacing:1px; transition:all 0.2s; } .book-btn:active { background:#2E1215; }</style>
 <div class="book-btn-wrap"><a href="https://luyimodeng330.github.io/herskill/partner/booking.html?product=marketcraft" class="book-btn">立即预约咨询</a></div>
 
 <section class="cross-nav"><div class="cn-title">探索更多服务</div><div class="cn-links"><a href="https://luyimodeng330.github.io/herskill/" class="cn-link cn-link-primary">了解 HerSkill AI 陪伴系统</a><a href="https://luyimodeng330.github.io/herskill/partner/" class="cn-link cn-link-secondary">成为合伙人</a></div></section>
