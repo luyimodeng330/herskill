@@ -251,6 +251,11 @@ function renderPartners() {
         <span>成交: <strong>${dealt}</strong></span>
         <span>金额: <strong>¥${(amount/10000).toFixed(1)}万</strong></span>
       </div>
+      <div style="margin-top:5px;font-size:10px;color:${p.agreed_at ? 'var(--cool-gray)' : '#C0392B'};">
+        ${p.agreed_at
+          ? '✓ 协议已签署 · ' + new Date(p.agreed_at).toLocaleString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})
+          : '⚠ 协议未签署（旧账号）'}
+      </div>
     </div>`;
   }).join('');
 }
