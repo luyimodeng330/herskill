@@ -127,6 +127,134 @@ body {
 .pi-info-row .value.commission { color: var(--shiraz); font-size: 13px; font-weight: 500; }
 .note-block { margin-top: 12px; padding: 11px 14px; background: var(--cream-pure); border-radius: 7px; box-shadow: var(--shadow); border: 1px solid var(--line-soft); font-size: 11.5px; color: var(--text-soft); line-height: 1.7; }
 .note-block strong { color: var(--text); font-weight: 500; }
+
+/* ===== 协议阅读框 ===== */
+.agreement-box {
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.agreement-box .ag-header {
+  background: var(--cream-warm);
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.agreement-box .ag-header .ag-title {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.agreement-box .ag-header .ag-title::before {
+  content: '📄';
+  font-size: 13px;
+}
+.agreement-box .ag-header .ag-toggle {
+  font-size: 10px;
+  color: var(--text-muted);
+  background: var(--cream-pure);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.agreement-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  background: var(--cream-pure);
+}
+.agreement-body.open {
+  max-height: 320px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.agreement-body .ag-content {
+  padding: 14px 14px 16px;
+  font-size: 11.5px;
+  color: var(--text-soft);
+  line-height: 1.85;
+}
+.agreement-body .ag-content h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 14px 0 4px;
+  letter-spacing: 0.5px;
+}
+.agreement-body .ag-content h3:first-child { margin-top: 0; }
+.agreement-body .ag-content p { margin-bottom: 6px; }
+.agreement-body .ag-content strong { color: var(--text); font-weight: 500; }
+.agreement-body .ag-content .ag-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0;
+  font-size: 11px;
+}
+.agreement-body .ag-content .ag-table th {
+  background: var(--cream-warm);
+  border: 1px solid var(--line);
+  padding: 5px 7px;
+  font-weight: 500;
+  color: var(--text);
+}
+.agreement-body .ag-content .ag-table td {
+  border: 1px solid var(--line-soft);
+  padding: 5px 7px;
+  color: var(--text-soft);
+}
+/* 已读提示 */
+.agreement-body .ag-read-tip {
+  background: var(--cream-warm);
+  border-top: 1px solid var(--line-soft);
+  padding: 8px 14px;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* 同意勾选框 */
+.agree-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: var(--cream);
+  border-radius: 6px;
+  border: 1px solid var(--line-soft);
+}
+.agree-check-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  accent-color: var(--shiraz);
+  cursor: pointer;
+}
+.agree-check-row label {
+  font-size: 11.5px;
+  color: var(--text-soft);
+  line-height: 1.6;
+  cursor: pointer;
+}
+.agree-check-row label .ag-link {
+  color: var(--shiraz-soft);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
 .cross-nav { margin-top: 24px; padding: 20px 14px; text-align: center; border-top: 1px solid var(--line-soft); }
 .cross-nav .cn-title { font-size: 11px; color: var(--text-faint); margin-bottom: 10px; letter-spacing: 0.5px; }
 .cross-nav .cn-links { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
@@ -186,7 +314,75 @@ body {
         <div class="form-group"><label>身份类型</label><select id="regType"><option value="">请选择</option><option value="kol">行业KOL / 博主</option><option value="agent">企业服务代理商</option><option value="consultant">独立顾问</option><option value="other">其他</option></select></div>
         <div class="form-group"><label>推荐码（选填）</label><input type="text" id="regReferral" placeholder="如有推荐人请填写"></div>
         <div class="form-group"><label>密码</label><input type="password" id="regPwd" placeholder="设置登录密码"></div>
-        <button class="btn-primary" id="regBtn" onclick="doRegister()">提交注册申请</button>
+
+        <!-- ===== 合伙人协议 ===== -->
+        <div class="agreement-box" id="agreementBox">
+          <div class="ag-header" onclick="toggleAgreement()">
+            <div class="ag-title">合伙人推荐合作协议</div>
+            <button class="ag-toggle" id="agToggleBtn" onclick="event.stopPropagation(); toggleAgreement()">展开阅读</button>
+          </div>
+          <div class="agreement-body" id="agreementBody">
+            <div class="ag-content">
+
+              <p>本协议由甲方（以下简称"公司"）与乙方（注册合伙人，以下简称"您"）签订，自您完成注册并勾选同意之日起生效。</p>
+
+              <h3>第一条 合作性质</h3>
+              <p>您的角色为<strong>客户推荐人</strong>，不是公司的经销商、代理商或员工。<strong>零入会费、零囤货、零层级</strong>——加入无需缴纳任何费用，不设多级分销，不要求购买产品名额。</p>
+
+              <h3>第二条 产品与佣金</h3>
+              <table class="ag-table">
+                <tr><th>产品</th><th>客单价</th><th>佣金比例</th><th>结算方式</th></tr>
+                <tr><td>HerSkill</td><td>¥19,800/套</td><td><strong>25%</strong></td><td>客户全额付款后一次性结算</td></tr>
+                <tr><td>MarketCraft</td><td>¥5~15万/项目</td><td><strong>20%</strong></td><td>首付到账结算50%，交付完成结算50%</td></tr>
+              </table>
+              <p>佣金按客户实际签约并支付的金额计算。</p>
+
+              <h3>第三条 客户归属与保护期</h3>
+              <p>通过推荐码/专属链接/直接引荐绑定的客户，归属您名下，享有 <strong>90天保护期</strong>。同一客户被多人推荐时，以首次提交记录时间为准。保护期届满未成交的客户将自动释放。</p>
+
+              <h3>第四条 佣金结算</h3>
+              <p>每月 <strong>10日和25日</strong> 集中打款至您绑定的银行账户。佣金性质为劳务报酬，公司依法代扣代缴个人所得税。</p>
+
+              <h3>第五条 里程碑奖励</h3>
+              <p>首单成交得<strong>¥500</strong>；季度推荐额 Top 3 得<strong>¥2,000</strong>；年度累计≥3单得<strong>¥5,000 + 年会邀请</strong>；年度累计≥¥50万可获<strong>产品共创权</strong>。奖励与佣金可叠加。</p>
+
+              <h3>第六条 您的义务</h3>
+              <p>① 提供真实身份和银行信息；② 不夸大产品功能，不虚假承诺；③ 不泄露客户隐私；④ 不绕过公司与客户私下交易；⑤ <strong>不得发展下线</strong>，不得构建多级分销网络。</p>
+
+              <h3>第七条 禁止行为与违约</h3>
+              <table class="ag-table">
+                <tr><th>违约行为</th><th>后果</th></tr>
+                <tr><td>发展下线/收取入会费</td><td>立即取消资格，追回佣金</td></tr>
+                <tr><td>虚假宣传</td><td>警告→取消资格</td></tr>
+                <tr><td>泄露客户隐私</td><td>法律责任</td></tr>
+                <tr><td>绕单/引流至竞品</td><td>取消资格，追回佣金</td></tr>
+              </table>
+
+              <h3>第八条 退出机制</h3>
+              <p>您可随时退出，无需承担违约责任。退出后5个工作日内结清已产生佣金。已绑定客户在退出后60日内成交的，仍享有佣金。</p>
+
+              <h3>第九条 合规声明</h3>
+              <p>本合作模式<strong>不构成《禁止传销条例》规定的传销行为</strong>：无入会费、无层级、无囤货、佣金来源于真实客户成交、所有合伙人实名登记。</p>
+
+              <h3>第十条 其他</h3>
+              <p>本协议适用中华人民共和国法律。因协议产生的争议，双方协商解决；协商不成，提交公司所在地法院诉讼。本协议有效期一年，自动续展。</p>
+
+              <p style="margin-top:12px; color:var(--text-muted); font-size:10.5px;">协议版本：V1.0 · 2026年6月</p>
+            </div>
+            <div class="ag-read-tip">↑ 请滚动阅读完整协议内容</div>
+          </div>
+        </div>
+
+        <!-- 同意勾选 -->
+        <div class="agree-check-row">
+          <input type="checkbox" id="agreeCheck" onchange="onAgreeChange()">
+          <label for="agreeCheck">
+            我已阅读并同意<span class="ag-link" onclick="expandAgreement()">《合伙人推荐合作协议》</span>，
+            了解合伙人权利义务，承诺遵守协议条款。本次勾选确认具有电子签署效力，签署时间将被记录。
+          </label>
+        </div>
+
+        <button class="btn-primary" id="regBtn" onclick="doRegister()" disabled>请先阅读并同意协议</button>
       </div>
       <div class="auth-footer"><span class="highlight">零入会费 · 零囤货 · 零层级</span></div>
       <div class="cross-nav">
@@ -344,6 +540,26 @@ function switchAuth(type) {
   document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
 }
 
+// ===== 协议展开/收起 =====
+let agreementExpanded = false;
+function toggleAgreement() {
+  agreementExpanded = !agreementExpanded;
+  const body = document.getElementById('agreementBody');
+  const btn = document.getElementById('agToggleBtn');
+  body.classList.toggle('open', agreementExpanded);
+  btn.textContent = agreementExpanded ? '收起' : '展开阅读';
+}
+function expandAgreement() {
+  if (!agreementExpanded) toggleAgreement();
+  document.getElementById('agreementBody').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function onAgreeChange() {
+  const checked = document.getElementById('agreeCheck').checked;
+  const btn = document.getElementById('regBtn');
+  btn.disabled = !checked;
+  btn.textContent = checked ? '提交注册申请' : '请先阅读并同意协议';
+}
+
 async function doLogin() {
   const phone = document.getElementById('loginPhone').value.trim();
   const pwd = document.getElementById('loginPwd').value.trim();
@@ -373,19 +589,33 @@ async function doRegister() {
   const phone = document.getElementById('regPhone').value.trim();
   const pwd = document.getElementById('regPwd').value.trim();
   const type = document.getElementById('regType').value;
+  const agreed = document.getElementById('agreeCheck').checked;
+
   if (!name || !phone || !pwd) { showToast('请填写完整信息'); return; }
+  if (!agreed) { showToast('请先阅读并同意合伙人协议'); return; }
 
   document.getElementById('regBtn').disabled = true;
   document.getElementById('regBtn').textContent = '提交中…';
 
   try {
     const code = 'P' + Date.now().toString().slice(-6);
+    const agreedAt = new Date().toISOString(); // 记录电子签署时间
     const result = await sbPost('partners', {
-      name: name, phone: phone, password: pwd, type: type || 'other', referral_code: code
+      name: name,
+      phone: phone,
+      password: pwd,
+      type: type || 'other',
+      referral_code: code,
+      agreed_at: agreedAt  // 协议签署时间戳
     });
     showToast('注册成功！请登录');
     setTimeout(() => {
       document.getElementById('loginPhone').value = phone;
+      // 重置协议勾选状态
+      document.getElementById('agreeCheck').checked = false;
+      document.getElementById('agreementBody').classList.remove('open');
+      document.getElementById('agToggleBtn').textContent = '展开阅读';
+      agreementExpanded = false;
       switchAuth('login');
     }, 1500);
   } catch (e) {
